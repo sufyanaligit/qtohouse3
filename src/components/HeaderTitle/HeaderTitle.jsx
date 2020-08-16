@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from '../../images/logo.png'
+import Logo from "../../images/logo.png";
 
 const HeaderTitle = () => {
   return (
@@ -51,11 +51,7 @@ const HeaderTitle = () => {
               <div className="logo">
                 <h1 className="mb-0">
                   <a href="index.html" title="Logo">
-                    <img
-                      className="img-fluid"
-                      src={Logo}
-                      alt="Logo"
-                    />
+                    <img className="img-fluid" src={Logo} alt="Logo" />
                   </a>
                 </h1>
               </div>
@@ -68,11 +64,7 @@ const HeaderTitle = () => {
                 <div className="logo">
                   <h1 className="mb-0">
                     <a href="index.html" title="Logo">
-                      <img
-                        className="img-fluid"
-                        src={Logo}
-                        alt="Logo"
-                      />
+                      <img className="img-fluid" src={Logo} alt="Logo" />
                     </a>
                   </h1>
                 </div>
@@ -117,11 +109,7 @@ const HeaderTitle = () => {
                           </a>
                         </li>
                       </ul>
-                      <a
-                        className="thm-btn blue-btn-bg"
-                        href="#"
-                        title=""
-                      >
+                      <a className="thm-btn gold-btn-bg" href="#" title="">
                         Register
                       </a>
                     </nav>
@@ -136,4 +124,4 @@ const HeaderTitle = () => {
   );
 };
 
-export default HeaderTitle
+export default HeaderTitle;

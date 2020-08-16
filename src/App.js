@@ -6,6 +6,8 @@ import CountsAndSliders from "./components/CountsAndSliders";
 import QuantityTakeOff from "./components/QuantityTakeOff";
 import ListYourSelf from "./components/ListYourSelf";
 import WhyChooseQTO from "./components/WhyChooseQTO";
+import FourStageProcess from "./components/FourStageProcess";
+import FeatureProjects from "./components/FeatureProjects";
 import Footer from "./components/Footer";
 
 function App() {
@@ -15,8 +17,10 @@ function App() {
       <HeaderTitle />
       <EasiestBidSection />
       <CountsAndSliders />
-      <WhyChooseQTO />
       <QuantityTakeOff />
+      <WhyChooseQTO />
+      <FourStageProcess />
+      <FeatureProjects />
       <ListYourSelf />
       <Footer />
     </>

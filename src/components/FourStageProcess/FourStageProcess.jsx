@@ -1,54 +1,57 @@
 import React from "react";
-import One from "../../images/one.png";
-import Two from "../../images/two.png";
-import Three from "../../images/three.png";
+import Mail from "../../images/mail.png";
+import Two from "../../images/edit.png";
+import Three from "../../images/money-back.png";
+import "./FourStageProcess.scss";
 
-const WhyChooseQTO = (props) => {
+const FourStageProcess = (props) => {
   return (
-    <section>
-      <div className="listyourself w-100 pt-80 pb-80 position-relative">
+    <section className="four-stage-process-container">
+      <div className="w-100 pt-80 pb-80 position-relative">
         <div className="container">
           <div className="sec-title position-relative text-center w-100">
             <h2 className="mb-0">
-              Why Choose <strong>QTO House</strong>
+              OUR 3 STAGE PROCESS MAKES OUR <br />
+              <strong>ESTIMATION SERVICE SIMPLE</strong>
             </h2>
           </div>
           <div className="serv-wrap w-100">
             <div className="row">
               <div className="col-md-6 col-sm-6 col-lg-4">
                 <div className="serv-box text-center w-100">
-                  <img className="img-fluid" src={One} alt="Service Image 1" />
-                  <h3 className="mb-0">TRUSTWORTHY</h3>
+                  <span className="four-stage-process-label">Initial Stage</span>
+                  <img className="img-fluid" src={Mail} alt="Service Image 1" />
+                  <h3 className="mb-0">SEND PLANS</h3>
                   <p className="mb-0">
-                    Our Construction Estimating service is based on an open,
-                    honest approach to all projects that we are engaged in.
+                    Its easy simply E mail or post your plans and any other
+                    relevant project documents to us.
                   </p>
                 </div>
               </div>
               <div className="col-md-6 col-sm-6 col-lg-4">
                 <div className="serv-box text-center w-100">
+                  <span className="four-stage-process-label">Second Stage</span>
                   <img className="img-fluid" src={Two} alt="Service Image 2" />
                   <div className="mb-0">
-                    <h3>EXPERIENCED</h3>
+                    <h3>RECEIVE QUOTATION</h3>
                   </div>
                   <p className="mb-0">
-                    With over 10 years combined experience as Quantity Surveyors
-                    and Building Estimators, you can trust you are in safe
-                    hands.
+                    On receipt of your plans we will provide you with a fixed
+                    priced quotation for producing your estimate .
                   </p>
                 </div>
               </div>
               <div className="col-md-6 col-sm-6 col-lg-4">
                 <div className="serv-box text-center w-100">
+                  <span className="four-stage-process-label">Third Stage</span>
                   <img className="img-fluid" src={Three} alt="Service Image 3" />
                   <div className="mb-0">
-                    <h3>GUARANTEED</h3>
+                    <h3>MAKE PAYMENT</h3>
                   </div>
 
                   <p className="mb-0">
-                    We are yet to miss a client deadline in over 3 years of
-                    producing Building Estimates, so rest assured we will always
-                    meet your deadlines.
+                    Using our simple and secure payment system, make payment for
+                    your estimate.
                   </p>
                 </div>
               </div>
@@ -60,4 +63,4 @@ const WhyChooseQTO = (props) => {
   );
 };
 
-export default WhyChooseQTO;
+export default FourStageProcess;

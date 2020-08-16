@@ -6,73 +6,73 @@ import ServiceImage3 from "../../images/resources/serv-img1-3.png"
 const QuantityTakeOff = (props) => {
   return (
     <section>
-      <div class="quantitytakseoff w-100 pt-80 shape-left-pattern position-relative">
-        <div class="container">
-          <div class="sec-title position-relative text-center w-100">
-            <h2 class="mb-0">
+      <div className="quantitytakseoff w-100 pt-80 shape-left-pattern position-relative">
+        <div className="container">
+          <div className="sec-title position-relative text-center w-100">
+            <h2 className="mb-0">
               Get <strong>Quantity Takeoffs</strong>
             </h2>
           </div>
-          <div class="serv-wrap w-100">
-            <div class="row">
-              <div class="col-md-6 col-sm-6 col-lg-4">
-                <div class="serv-box text-center w-100">
+          <div className="serv-wrap w-100">
+            <div className="row">
+              <div className="col-md-6 col-sm-6 col-lg-4">
+                <div className="serv-box text-center w-100">
                   <img
-                    class="img-fluid"
+                    className="img-fluid"
                     src={ServiceImage1}
                     alt="Service Image 1"
                   />
-                  <h3 class="mb-0">Buy Project TakeOff</h3>
-                  <p class="mb-0">No Subscription Required</p>
+                  <h3 className="mb-0">Buy Project TakeOff</h3>
+                  <p className="mb-0">No Subscription Required</p>
                   <a
-                    class="thm-btn gold-btn-bg"
+                    className="thm-btn gold-btn-bg"
                     href="#"
                     title=""
                   >
-                    Buy TakeOff<i class="fas fa-arrow-right"></i>
+                    Buy TakeOff<i className="fas fa-arrow-right"></i>
                   </a>
                 </div>
               </div>
-              <div class="col-md-6 col-sm-6 col-lg-4">
-                <div class="serv-box text-center bg-color2 border-0 w-100">
-                  <span class="d-block">Recommended</span>
+              <div className="col-md-6 col-sm-6 col-lg-4">
+                <div className="serv-box text-center bg-color2 border-0 w-100">
+                  <span className="d-block">Recommended</span>
                   <img
-                    class="img-fluid"
+                    className="img-fluid"
                     src={ServiceImage2}
                     alt="Service Image 2"
                   />
-                  <p class="mb-0">
+                  <p className="mb-0">
                     Check Out Our <strong>Convenient</strong> Subscription Plans
                   </p>
                   <a
-                    class="thm-btn orange-btn-bg"
+                    className="thm-btn orange-btn-bg"
                     href="#"
                     title=""
                   >
-                    Subscription Plans<i class="fas fa-arrow-right"></i>
+                    Subscription Plans<i className="fas fa-arrow-right"></i>
                   </a>
                 </div>
               </div>
-              <div class="col-md-6 col-sm-6 col-lg-4">
-                <div class="serv-box text-center w-100">
-                  <span class="d-block">
+              <div className="col-md-6 col-sm-6 col-lg-4">
+                <div className="serv-box text-center w-100">
+                  <span className="d-block">
                     TakeOff On Demand <i>(TOD)</i>
                   </span>
                   <img
-                    class="img-fluid"
+                    className="img-fluid"
                     src={ServiceImage3}
                     alt="Service Image 3"
                   />
-                  <p class="mb-0">
+                  <p className="mb-0">
                     Submit Your Plans & Specs to Get <strong>Free</strong> Quote
                     Today
                   </p>
                   <a
-                    class="thm-btn blue-btn-bg"
+                    className="thm-btn blue-btn-bg"
                     href="#"
                     title=""
                   >
-                    Get Quote<i class="fas fa-arrow-right"></i>
+                    Get Quote<i className="fas fa-arrow-right"></i>
                   </a>
                 </div>
               </div>
