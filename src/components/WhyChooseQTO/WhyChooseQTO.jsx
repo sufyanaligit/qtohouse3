@@ -17,7 +17,7 @@ const WhyChooseQTO = (props) => {
             <div className="row">
               <div className="col-md-6 col-sm-6 col-lg-4">
                 <div className="serv-box text-center w-100">
-                  <img className="img-fluid" src={One} alt="Service Image 1" />
+                  {/* <img className="img-fluid" src={One} alt="Service Image 1" /> */}
                   <h3 className="mb-0">TRUSTWORTHY</h3>
                   <p className="mb-0">
                     Our Construction Estimating service is based on an open,
@@ -27,7 +27,7 @@ const WhyChooseQTO = (props) => {
               </div>
               <div className="col-md-6 col-sm-6 col-lg-4">
                 <div className="serv-box text-center w-100">
-                  <img className="img-fluid" src={Two} alt="Service Image 2" />
+                  {/* <img className="img-fluid" src={Two} alt="Service Image 2" /> */}
                   <div className="mb-0">
                     <h3>EXPERIENCED</h3>
                   </div>
@@ -40,7 +40,7 @@ const WhyChooseQTO = (props) => {
               </div>
               <div className="col-md-6 col-sm-6 col-lg-4">
                 <div className="serv-box text-center w-100">
-                  <img className="img-fluid" src={Three} alt="Service Image 3" />
+                  {/* <img className="img-fluid" src={Three} alt="Service Image 3" /> */}
                   <div className="mb-0">
                     <h3>GUARANTEED</h3>
                   </div>

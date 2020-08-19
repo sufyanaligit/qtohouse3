@@ -85,22 +85,22 @@ const HeaderTitle = () => {
                       <ul className="d-inline-flex mb-0 list-unstyled">
                         <li>
                           <a href="#" title="">
-                            Sample Project
+                            Current Projects
                           </a>
                         </li>
                         <li>
                           <a href="#" title="">
-                            Plans
+                            Previous Projects
                           </a>
                         </li>
-                        <li>
+                        {/* <li>
                           <a href="#" title="">
                             Coverage Area
                           </a>
-                        </li>
+                        </li> */}
                         <li>
                           <a href="#" title="">
-                            Why Us
+                            About Us
                           </a>
                         </li>
                         <li>
