@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Logo from "../../images/logo.png";
 
 const HeaderTitle = () => {
@@ -50,9 +51,9 @@ const HeaderTitle = () => {
             <div className="col-md-2 col-sm-2">
               <div className="logo">
                 <h1 className="mb-0">
-                  <a href="index.html" title="Logo">
+                  <NavLink className="nav-link" activeClassName="active" to="/">
                     <img className="img-fluid" src={Logo} alt="Logo" />
-                  </a>
+                  </NavLink>
                 </h1>
               </div>
               <span className="menu-btn">
@@ -63,9 +64,13 @@ const HeaderTitle = () => {
               <div className="menu-wrap">
                 <div className="logo">
                   <h1 className="mb-0">
-                    <a href="index.html" title="Logo">
+                    <NavLink
+                      className="nav-link"
+                      activeClassName="active"
+                      to="/HomePage"
+                    >
                       <img className="img-fluid" src={Logo} alt="Logo" />
-                    </a>
+                    </NavLink>
                   </h1>
                 </div>
                 <span className="close-btn">
@@ -84,14 +89,22 @@ const HeaderTitle = () => {
                     <nav>
                       <ul className="d-inline-flex mb-0 list-unstyled">
                         <li>
-                          <a href="#" title="">
+                          <NavLink
+                            className="nav-link"
+                            activeClassName="active"
+                            to="/currentProjects"
+                          >
                             Current Projects
-                          </a>
+                          </NavLink>
                         </li>
                         <li>
-                          <a href="#" title="">
+                          <NavLink
+                            className="nav-link"
+                            activeClassName="active"
+                            to="/previousProjects"
+                          >
                             Previous Projects
-                          </a>
+                          </NavLink>
                         </li>
                         {/* <li>
                           <a href="#" title="">
@@ -99,14 +112,22 @@ const HeaderTitle = () => {
                           </a>
                         </li> */}
                         <li>
-                          <a href="#" title="">
+                          <NavLink
+                            className="nav-link"
+                            activeClassName="active"
+                            to="/aboutUs"
+                          >
                             About Us
-                          </a>
+                          </NavLink>
                         </li>
                         <li>
-                          <a href="#" title="">
+                          <NavLink
+                            className="nav-link"
+                            activeClassName="active"
+                            to="/contactUs"
+                          >
                             Contact Us
-                          </a>
+                          </NavLink>
                         </li>
                       </ul>
                       <a className="thm-btn gold-btn-bg" href="#" title="">
