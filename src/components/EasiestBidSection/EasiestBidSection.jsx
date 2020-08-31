@@ -1,8 +1,6 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import FreeTag from "../../images/free-tag.png";
-import Project1 from "../../images/dashboard/BackgroundImage1.jpg";
 import Project2 from "../../images/dashboard/BackgroundImage2.jpg";
 import Project3 from "../../images/dashboard/BackgroundImage3.jpg";
 import "./EasiestBidSection.scss";
@@ -10,7 +8,7 @@ import "./EasiestBidSection.scss";
 const EasiestBidSection = (props) => {
   return (
     <section>
-      <div className="intro-video-wrap shape-right-pattern shape-right-top pt-30 pb-90 position-relative w-100">
+      <div className="shape-right-top pt-30 pb-90 position-relative easiest-bid-section">
         <div className="container">
           <div className="row align-items-center">
             <div className="">
@@ -20,10 +18,6 @@ const EasiestBidSection = (props) => {
                     <strong>Fastest and Easiest</strong> way to Bid
                   </h3>
                   <Carousel>
-                    {/* <div>
-                      <img src={Project1} />
-                      <p className="legend">Project 1</p>
-                    </div> */}
                     <div>
                       <img src={Project2} />
                       <p className="legend">Project 2</p>

@@ -94,16 +94,25 @@ const HeaderTitle = () => {
                             activeClassName="active"
                             to="/currentProjects"
                           >
-                            Current Projects
+                            Projects
                           </NavLink>
                         </li>
                         <li>
                           <NavLink
                             className="nav-link"
                             activeClassName="active"
-                            to="/previousProjects"
+                            to="/Clients"
                           >
-                            Previous Projects
+                            Clients
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink
+                            className="nav-link"
+                            activeClassName="active"
+                            to="/sampleProjects"
+                          >
+                            Sample Projects
                           </NavLink>
                         </li>
                         {/* <li>
