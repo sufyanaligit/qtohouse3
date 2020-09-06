@@ -1,61 +1,45 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import Project2 from "../../images/dashboard/BackgroundImage2.jpg";
+import Project1 from "../../images/dashboard/BackgroundImage1.jpg";
 import Project3 from "../../images/dashboard/BackgroundImage3.jpg";
 import "./EasiestBidSection.scss";
 
-const EasiestBidSection = (props) => {
+const EasiestBidSection = () => {
   return (
     <section>
-      <div className="shape-right-top pt-30 pb-90 position-relative easiest-bid-section">
+      <div className="shape-right-top position-relative easiest-bid-section">
         <div className="container">
           <div className="row align-items-center">
             <div className="">
               <div className="col-md-6 col-sm-12 col-lg-12">
                 <div className="intro-desc w-100">
-                  <h3 className="mb-0">
-                    <strong>Fastest and Easiest</strong> way to Bid
-                  </h3>
-                  <Carousel>
-                    <div>
-                      <img src={Project2} />
-                      <p className="legend">Project 2</p>
+                  <Carousel dynamicHeight={true}>
+                    <div className="carousel-container">
+                      <img src={Project1} />
+                      <div class="top-left">
+                        <h1>
+                          Some Description is to <br /> be displayed here. When
+                          <br /> given by the client. So
+                          <br /> we are waiting for now
+                        </h1>
+                      </div>
                     </div>
                     <div>
                       <img src={Project3} />
-                      <p>Legend 3</p>
-                      {/* <ul className="mb-0 list-unstyled w-100">
-                        <li>
-                          <i className="fas fa-check"></i>Takeoff by Division{" "}
-                          <span>(Subcontractors)</span>
-                        </li>
-                        <li>
-                          <i className="fas fa-check"></i>Full Project Takeoff
-                        </li>
-                        <li>
-                          <i className="fas fa-check"></i>Takeoff on Demand
-                        </li>
-                        <li>
-                          <i className="fas fa-check"></i>Takeoff Subscription
-                          Plans
-                        </li>
-                        <li>
-                          <i className="fas fa-check"></i>Project Leads, Plans
-                          and Specs
-                          <img
-                            className="img-fluid"
-                            src={FreeTag}
-                            alt="Free Tag"
-                          />
-                        </li>
-                      </ul> */}
+                      <div class="top-left">
+                        <h1>
+                          Some Description is to <br /> be displayed here. When
+                          <br /> given by the client. So
+                          <br /> we are waiting for now
+                        </h1>
+                      </div>
                     </div>
                   </Carousel>
 
                   {/* <a className="thm-btn orange-btn-bg" href="#" title="">
                     Explore More<i className="fas fa-arrow-right"></i>
-                  </a> */}
+                </a>*/}
                 </div>
               </div>
             </div>

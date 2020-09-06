@@ -17,8 +17,9 @@ const WhyChooseQTO = (props) => {
             <div className="row">
               <div className="col-md-6 col-sm-6 col-lg-4">
                 <div className="serv-box text-center w-100">
-                  {/* <img className="img-fluid" src={One} alt="Service Image 1" /> */}
-                  <h3 className="mb-0">TRUSTWORTHY</h3>
+                  <div className="mb-0">
+                    <h3>TRUSTWORTHY</h3>
+                  </div>
                   <p className="mb-0">
                     Our Construction Estimating service is based on an open,
                     honest approach to all projects that we are engaged in.

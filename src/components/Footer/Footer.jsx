@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from '../../images/logo.png'
+import Logo from "../../images/logo.png";
 
 const Footer = (props) => {
   return (
@@ -10,7 +10,7 @@ const Footer = (props) => {
             <div className="row">
               <div className="col-md-6 col-sm-12 col-lg-6">
                 <div className="footer-logo">
-                  <a href="index.html" title="Home">
+                  <a title="Home">
                     <img src={Logo} alt="Logo" />
                   </a>
                 </div>
@@ -21,22 +21,22 @@ const Footer = (props) => {
                       src="assets/images/truebid-icon.png"
                       alt="True Bid Icon"
                     />
-                    True Bid Data Inc.
+                    Qto Inc.
                   </li>
-                  <li>
-                    <i className="fas fa-map-marker-alt"></i>99 Wall Street, Suite
-                    556 New York, NY, 10005
-                  </li>
+                  {/* <li>
+                    <i className="fas fa-map-marker-alt"></i>99 Wall Street,
+                    Suite 556 New York, NY, 10005
+                  </li> */}
                   <li>
                     <i className="fas fa-mobile-alt"></i>
                     <a href="#" title="">
-                      1-718-717-2601
+                      (571)-748-4366
                     </a>
                   </li>
                   <li>
                     <i className="far fa-envelope"></i>
                     <a href="#" title="">
-                      sales@truebiddata.com
+                      info@qtohouse.com
                     </a>
                   </li>
                 </ul>
@@ -71,10 +71,7 @@ const Footer = (props) => {
             </div>
           </div>
           <div className="copyright text-center w-100">
-            <p className="mb-0">
-              &copy; Copyright 2020 True Bid Data Inc. All rights reserved.
-              Version 1.0.0.2
-            </p>
+            <p className="mb-0">© 2020 QTO HOUSE - ALL RIGHTS RESERVED. </p>
           </div>
         </div>
       </div>

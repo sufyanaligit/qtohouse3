@@ -2,4 +2,18 @@
   .container {
     max-width: 100% !important;
   }
+  .slider-wrapper {
+    max-height: 500px;
+    width: auto;
+  }
+  .carousel-container {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  .top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+  }
 }

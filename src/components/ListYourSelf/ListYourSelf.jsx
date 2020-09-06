@@ -26,14 +26,14 @@ const ListYourSelf = (props) => {
                       href="#"
                       title=""
                     >
-                      Enlist<i className="fas fa-arrow-right"></i>
+                      See More<i className="fas fa-arrow-right"></i>
                     </a>
                   </div>
                 </div>
               </div>
               <div className="col-md-4 col-sm-6 col-lg-4">
                 <div className="list-box w-100">
-                  <div className="list-box-inner bg-color3 d-inline-block">
+                  <div className="list-box-inner bg-color2 d-inline-block">
                     <h4 className="mb-0">
                       <strong>SubContractor</strong> <br /> Listing
                     </h4>
@@ -42,14 +42,14 @@ const ListYourSelf = (props) => {
                       href="#"
                       title=""
                     >
-                      Enlist<i className="fas fa-arrow-right"></i>
+                      See More<i className="fas fa-arrow-right"></i>
                     </a>
                   </div>
                 </div>
               </div>
               <div className="col-md-4 col-sm-6 col-lg-4">
                 <div className="list-box w-100">
-                  <div className="list-box-inner bg-color4 d-inline-block">
+                  <div className="list-box-inner bg-color2 d-inline-block">
                     <h4 className="mb-0">
                       <strong>Trade </strong>
                       <br /> Contractor
@@ -60,7 +60,7 @@ const ListYourSelf = (props) => {
                       href="#"
                       title=""
                     >
-                      Enlist<i className="fas fa-arrow-right"></i>
+                      See More<i className="fas fa-arrow-right"></i>
                     </a>
                   </div>
                 </div>
