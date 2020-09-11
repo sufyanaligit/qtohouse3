@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
 import Page404 from "./components/PageNotFound";
-// import "antd/dist/antd.css";
+import "./antd.css";
 
 function App() {
   return (

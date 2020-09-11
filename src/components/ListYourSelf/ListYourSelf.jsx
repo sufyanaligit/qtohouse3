@@ -21,11 +21,7 @@ const ListYourSelf = (props) => {
                       </strong>{" "}
                       <br /> Listing
                     </h4>
-                    <a
-                      className="thm-btn orange-btn-bg"
-                      href="#"
-                      title=""
-                    >
+                    <a className="thm-btn orange-btn-bg" href="#" title="">
                       See More<i className="fas fa-arrow-right"></i>
                     </a>
                   </div>
@@ -35,13 +31,13 @@ const ListYourSelf = (props) => {
                 <div className="list-box w-100">
                   <div className="list-box-inner bg-color2 d-inline-block">
                     <h4 className="mb-0">
-                      <strong>SubContractor</strong> <br /> Listing
+                      <strong>
+                        Sub <br />
+                        Contractor
+                      </strong>{" "}
+                      <br /> Listing
                     </h4>
-                    <a
-                      className="thm-btn orange-btn-bg"
-                      href="#"
-                      title=""
-                    >
+                    <a className="thm-btn orange-btn-bg" href="#" title="">
                       See More<i className="fas fa-arrow-right"></i>
                     </a>
                   </div>
@@ -55,11 +51,7 @@ const ListYourSelf = (props) => {
                       <br /> Contractor
                       <br /> Listing
                     </h4>
-                    <a
-                      className="thm-btn orange-btn-bg"
-                      href="#"
-                      title=""
-                    >
+                    <a className="thm-btn orange-btn-bg" href="#" title="">
                       See More<i className="fas fa-arrow-right"></i>
                     </a>
                   </div>

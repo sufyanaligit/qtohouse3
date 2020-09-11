@@ -12,9 +12,9 @@ const EasiestBidSection = () => {
         <div className="container">
           <div className="row align-items-center">
             <div className="">
-              <div className="col-md-6 col-sm-12 col-lg-12">
+              <div className="mb">
                 <div className="intro-desc w-100">
-                  <Carousel dynamicHeight={true}>
+                  <Carousel showThumbs={false} dynamicHeight={true}>
                     <div className="carousel-container">
                       <img src={Project1} />
                       <div class="top-left">

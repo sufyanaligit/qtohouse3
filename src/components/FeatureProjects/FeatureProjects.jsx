@@ -5,7 +5,7 @@ import Project4 from "../../images/feature-projects/project4.jpg";
 const FeatureProjects = (props) => {
   return (
     <section>
-      <div className="quantitytakseoff w-100 pt-80 shape-left-pattern position-relative">
+      <div className="quantitytakseoff w-100 shape-left-pattern position-relative">
         <div className="container">
           <div className="sec-title position-relative text-center w-100">
             <h2 className="mb-0">
@@ -15,52 +15,34 @@ const FeatureProjects = (props) => {
           <div className="serv-wrap w-100">
             <div className="row">
               <div className="col-md-6 col-sm-6 col-lg-4">
-                <div className="serv-box text-center w-100">
+                <div className="col-lg-12">
                   <img
                     className="img-fluid"
                     src={Project1}
                     alt="Service Image 1"
+                    style={{ height: "350px" }}
                   />
-                  <h3 className="mb-0">Buy Project TakeOff</h3>
-                  <p className="mb-0">No Subscription Required</p>
-                  {/* <a className="thm-btn gold-btn-bg" href="#" title="">
-                    Buy TakeOff<i className="fas fa-arrow-right"></i>
-                  </a> */}
                 </div>
               </div>
               <div className="col-md-6 col-sm-6 col-lg-4">
-                <div className="serv-box text-center bg-color2 border-0 w-100">
-                  <span className="d-block">Recommended</span>
+                <div className="col-lg-12">
+                  {/* <span className="d-block">Recommended</span> */}
                   <img
                     className="img-fluid"
                     src={Project2}
                     alt="Service Image 2"
+                    style={{ height: "350px" }}
                   />
-                  <p className="mb-0">
-                    Check Out Our <strong>Convenient</strong> Subscription Plans
-                  </p>
-                  {/* <a className="thm-btn orange-btn-bg" href="#" title="">
-                    Subscription Plans<i className="fas fa-arrow-right"></i>
-                  </a> */}
                 </div>
               </div>
               <div className="col-md-6 col-sm-6 col-lg-4">
-                <div className="serv-box text-center w-100">
-                  <span className="d-block">
-                    TakeOff On Demand <i>(TOD)</i>
-                  </span>
+                <div className="col-lg-12">
                   <img
                     className="img-fluid"
                     src={Project4}
                     alt="Service Image 3"
+                    style={{ height: "350px" }}
                   />
-                  <p className="mb-0">
-                    Submit Your Plans & Specs to Get <strong>Free</strong> Quote
-                    Today
-                  </p>
-                  {/* <a className="thm-btn blue-btn-bg" href="#" title="">
-                    Get Quote<i className="fas fa-arrow-right"></i>
-                  </a> */}
                 </div>
               </div>
             </div>
