@@ -2,7 +2,7 @@ import React from "react";
 import Mail from "../../images/mail.png";
 import Two from "../../images/edit.png";
 import Three from "../../images/money-back.png";
-import Like from "../../images/like.png"
+import Like from "../../images/like.png";
 import "./FourStageProcess.scss";
 
 const FourStageProcess = (props) => {
@@ -45,9 +45,9 @@ const FourStageProcess = (props) => {
                     alt="Service Image 2"
                     style={{ width: "100px" }}
                   />
-                  <div className="mb-0">
-                    <h3>RECEIVE QUOTATION</h3>
-                  </div>
+
+                  <h3 className="mb-0">RECEIVE QUOTATION</h3>
+
                   <p className="mb-0">
                     On receipt of your plans we will provide you with a fixed
                     priced quotation for producing your estimate .
@@ -63,9 +63,8 @@ const FourStageProcess = (props) => {
                     alt="Service Image 3"
                     style={{ width: "100px" }}
                   />
-                  <div className="mb-0">
-                    <h3>MAKE PAYMENT</h3>
-                  </div>
+
+                  <h3 className="mb-0">MAKE PAYMENT</h3>
 
                   <p className="mb-0">
                     Using our simple and secure payment system, make payment for
@@ -82,9 +81,7 @@ const FourStageProcess = (props) => {
                     alt="Service Image 3"
                     style={{ width: "100px" }}
                   />
-                  <div className="mb-0">
-                    <h3>RECEIVE ESTIMATE</h3>
-                  </div>
+                  <h3 className="mb-0">RECEIVE ESTIMATE</h3>
 
                   <p className="mb-0">
                     Within 5 working days your estimate report will be e mailed

@@ -92,7 +92,7 @@ const HeaderTitle = () => {
                           <NavLink
                             className="nav-link"
                             activeClassName="active"
-                            to="/currentProjects"
+                            to="/projects"
                           >
                             Projects
                           </NavLink>
