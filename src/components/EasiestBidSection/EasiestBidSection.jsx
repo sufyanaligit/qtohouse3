@@ -27,7 +27,7 @@ const EasiestBidSection = () => {
                     </div>
                     <div>
                       <img src={Project3} />
-                      <div class="top-left">
+                      <div className="top-left">
                         <h1>
                           Some Description is to <br /> be displayed here. When
                           <br /> given by the client. So

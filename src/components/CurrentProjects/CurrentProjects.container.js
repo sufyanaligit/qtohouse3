@@ -1,9 +1,17 @@
 import { connect } from "react-redux";
 import CurrentProjects from "./CurrentProjects";
+import { getCurrentProjectsListBegin } from "../../store/actions/currentProject.actions";
+import {
+  getCurrentProjectList,
+  getCurrentProjectStatus,
+} from "../../store/selectors/currentProject.selectors";
 
 const mapStateToProps = (state) => {
-  //return your store data here
-  return {};
+  const currentProjectList = getCurrentProjectList(state);
+  const isLoading = !!getCurrentProjectStatus(state);
+  return { currentProjectList, isLoading };
 };
-
-export default connect(mapStateToProps, {})(CurrentProjects);
+const mapDispatchToProps = {
+  getCurrentProjectsListBegin,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentProjects);

@@ -8,13 +8,16 @@ import "./CurrentProjects.scss";
 const fakeDataUrl =
   "https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo";
 
-const InfiniteListExample = () => {
-  let [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+const CurrentProjects = (props) => {
+  const { getCurrentProjectsListBegin, currentProjectList, isLoading } = props;
+  console.log(isLoading);
+  const [data, setData] = useState(props.currentProjectList);
+  const [loading, setLoading] = useState(isLoading);
   const [hasMore, setHasMore] = useState(true);
   const history = useHistory();
   useEffect(() => {
-    fetchData();
+    setLoading(isLoading);
+    getCurrentProjectsListBegin();
   }, []);
 
   const fetchData = () => {
@@ -58,10 +61,15 @@ const InfiniteListExample = () => {
           hasMore={hasMore}
           useWindow={false}
         >
+          {loading && hasMore && (
+            <div className="demo-loading-container">
+              <Spin />
+            </div>
+          )}
           <List
             itemLayout="vertical"
             size="large"
-            dataSource={data}
+            dataSource={currentProjectList}
             renderItem={(item) => (
               <List.Item
                 key={item.title}
@@ -75,30 +83,22 @@ const InfiniteListExample = () => {
               >
                 <List.Item.Meta
                   title={
-                    <a target="_blank" onClick={() => handleOnClick(item.nat)}>
-                      {item.name.last}
+                    <a
+                      target="_blank"
+                      onClick={() => handleOnClick(item.PRJT_ID)}
+                    >
+                      {item.NME}
                     </a>
                   }
                   description={item.email}
                 />
-                <div>
-                  We supply a series of design principles, practical patterns
-                  and high quality design resources (Sketch and Axure), to help
-                  people create their product prototypes beautifully and
-                  efficiently.
-                </div>
+                <div>{item.DSCR}</div>
               </List.Item>
             )}
-          >
-            {loading && hasMore && (
-              <div className="demo-loading-container">
-                <Spin />
-              </div>
-            )}
-          </List>
+          ></List>
         </InfiniteScroll>
       </div>
     </div>
   );
 };
-export default InfiniteListExample;
+export default CurrentProjects;
