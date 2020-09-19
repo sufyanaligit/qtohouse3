@@ -19,7 +19,11 @@ function App() {
         <Route path="/aboutUs" component={AboutUs} />
         <Route path="/contactUs" component={ContactUs} />
         <Route exact path="/projects" component={Projects} />
-        <Route path="/projects/:id" component={ProjectDetails} />
+        <Route
+          exact
+          path="/projects/:id"
+          render={(props) => <ProjectDetails {...props} />}
+        />
         <Route component={Page404} />
       </Switch>
       <Footer />

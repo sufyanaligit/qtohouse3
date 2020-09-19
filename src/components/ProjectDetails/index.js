@@ -1,2 +1,2 @@
-import ProjectDetails from './ProjectDetails'
+import ProjectDetails from './ProjectDetails.container'
 export default ProjectDetails;

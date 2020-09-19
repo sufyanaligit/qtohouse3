@@ -13,4 +13,24 @@
     width: 100%;
     text-align: center;
   }
+  .icons {
+    font-size: 25px !important;
+    color: #8a8a8a;
+  }
+  .label {
+    font-weight: bold;
+    vertical-align: bottom;
+  }
+  .value {
+    vertical-align: bottom;
+  }
+  .custom-button {
+    background-color: transparent;
+    cursor: pointer;
+  }
+  .heading {
+    font-weight: bolder;
+    font-size: xx-large;
+    color: #414141;
+  }
 }

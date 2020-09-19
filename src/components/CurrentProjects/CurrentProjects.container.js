@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 import CurrentProjects from "./CurrentProjects";
-import { getCurrentProjectsListBegin } from "../../store/actions/currentProject.actions";
+import { getCurrentProjectsListBegin } from "../../store/actions/project.actions";
 import {
   getCurrentProjectList,
   getCurrentProjectStatus,
-} from "../../store/selectors/currentProject.selectors";
+} from "../../store/selectors/project.selectors";
 
 const mapStateToProps = (state) => {
   const currentProjectList = getCurrentProjectList(state);

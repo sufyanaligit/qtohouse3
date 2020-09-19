@@ -1,6 +1,6 @@
 import {spawn, all} from "redux-saga/effects";
-import currentProjectSagas from "./currentProjects.saga";
+import projectSagas from "./project.sagas";
 
 export default function* rootSaga() {
-    yield all([spawn(currentProjectSagas)]);
+    yield all([spawn(projectSagas)]);
 }

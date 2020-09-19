@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router";
-import { List, message, Spin } from "antd";
+import { useHistory } from "react-router-dom";
+import { List, message, Spin, Button } from "antd";
+import {
+  HomeFilled,
+  DollarCircleFilled,
+  ArrowRightOutlined,
+} from "@ant-design/icons";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroller";
 import "./CurrentProjects.scss";
@@ -10,14 +15,16 @@ const fakeDataUrl =
 
 const CurrentProjects = (props) => {
   const { getCurrentProjectsListBegin, currentProjectList, isLoading } = props;
-  console.log(isLoading);
   const [data, setData] = useState(props.currentProjectList);
   const [loading, setLoading] = useState(isLoading);
   const [hasMore, setHasMore] = useState(true);
   const history = useHistory();
+
   useEffect(() => {
-    setLoading(isLoading);
-    getCurrentProjectsListBegin();
+    if (!currentProjectList.length) {
+      getCurrentProjectsListBegin();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchData = () => {
@@ -42,7 +49,7 @@ const CurrentProjects = (props) => {
       setHasMore(false);
       return;
     } else {
-      fetchData();
+      //  getCurrentProjectsListBegin()
       setHasMore(true);
     }
   };
@@ -83,15 +90,56 @@ const CurrentProjects = (props) => {
               >
                 <List.Item.Meta
                   title={
-                    <a
+                    <button
+                      className="custom-button"
                       target="_blank"
                       onClick={() => handleOnClick(item.PRJT_ID)}
                     >
-                      {item.NME}
-                    </a>
+                      <span className="heading">{item.NME}</span>
+                    </button>
                   }
                   description={item.email}
                 />
+                <div style={{ display: "flex" }}>
+                  <div style={{ paddingRight: 10 }}>
+                    <HomeFilled
+                      className="icons"
+                      theme="outlined"
+                      label="Location"
+                    />
+                    <span className="label">&nbsp;Location</span>
+                    <span className="value">&nbsp;{item.LOC}</span>
+                  </div>
+                  <div style={{ paddingRight: 10 }}>
+                    <DollarCircleFilled
+                      className="icons"
+                      theme="outlined"
+                      label="Location"
+                    />
+
+                    <span className="label">&nbsp;Bid Amount</span>
+                    <span className="value">&nbsp; {item.AMNT}</span>
+                  </div>
+                  <div style={{ paddingRight: 10 }}>
+                    <DollarCircleFilled
+                      className="icons"
+                      theme="outlined"
+                      label="Location"
+                    />
+
+                    <span className="label">&nbsp;Bid Date</span>
+                    <span className="value">&nbsp; {"01-01-2020"}</span>
+                  </div>
+                  <div>
+                    <Button
+                      type="primary"
+                      onClick={() => handleOnClick(item.PRJT_ID)}
+                    >
+                      <ArrowRightOutlined /> See Details
+                    </Button>
+                  </div>
+                </div>
+                <hr />
                 <div>{item.DSCR}</div>
               </List.Item>
             )}

@@ -1,8 +1,8 @@
 import { List } from "immutable";
 import createSelector from "../../utils/reselect";
 export const getCurrentProject = (state) => {
-  const { currentProjects } = state;
-  return currentProjects || List();
+  const { projects } = state;
+  return projects || List();
 };
 export const getCurrentProjectList = createSelector(
   getCurrentProject,
@@ -15,5 +15,13 @@ export const getCurrentProjectStatus = createSelector(
   getCurrentProject,
   (currentProjectsList) => {
     return currentProjectsList.get("loading");
+  }
+);
+
+//Project Details
+export const getCurrentProjectDetails = createSelector(
+  getCurrentProject,
+  (currentProjectsList) => {
+    return currentProjectsList.get("projectDetails") || List();
   }
 );

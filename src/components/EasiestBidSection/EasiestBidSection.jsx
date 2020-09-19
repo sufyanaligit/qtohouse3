@@ -16,8 +16,8 @@ const EasiestBidSection = () => {
                 <div className="intro-desc w-100">
                   <Carousel showThumbs={false} dynamicHeight={true}>
                     <div className="carousel-container">
-                      <img src={Project1} />
-                      <div class="top-left">
+                      <img src={Project1} alt="" />
+                      <div className="top-left">
                         <h1>
                           Some Description is to <br /> be displayed here. When
                           <br /> given by the client. So
@@ -26,7 +26,7 @@ const EasiestBidSection = () => {
                       </div>
                     </div>
                     <div>
-                      <img src={Project3} />
+                      <img src={Project3} alt="" />
                       <div className="top-left">
                         <h1>
                           Some Description is to <br /> be displayed here. When

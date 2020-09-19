@@ -1,2 +1,2 @@
-import * as currentProjectActions from "./currentProject.actions";
-export { currentProjectActions };
+import * as projectActions from "./project.actions";
+export { projectActions };
