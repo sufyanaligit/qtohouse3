@@ -304,7 +304,7 @@ const AddProject = (props) => {
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type='primary' htmlType='submit'>
-            Register
+            Registers
           </Button>
         </Form.Item>
       </Form>
