@@ -1,5 +1,5 @@
-import { List } from "immutable";
-import createSelector from "../../utils/reselect";
+import { List } from 'immutable';
+import createSelector from '../../utils/reselect';
 export const getCurrentProject = (state) => {
   const { projects } = state;
   return projects || List();
@@ -7,14 +7,14 @@ export const getCurrentProject = (state) => {
 export const getCurrentProjectList = createSelector(
   getCurrentProject,
   (currentProjectsList) => {
-    return currentProjectsList.get("data") || List();
+    return currentProjectsList.get('data') || List();
   }
 );
 
 export const getCurrentProjectStatus = createSelector(
   getCurrentProject,
   (currentProjectsList) => {
-    return currentProjectsList.get("loading");
+    return currentProjectsList.get('loading');
   }
 );
 
@@ -22,6 +22,6 @@ export const getCurrentProjectStatus = createSelector(
 export const getCurrentProjectDetails = createSelector(
   getCurrentProject,
   (currentProjectsList) => {
-    return currentProjectsList.get("projectDetails") || List();
+    return currentProjectsList.get('projectDetails') || List();
   }
 );

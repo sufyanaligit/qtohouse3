@@ -58,12 +58,12 @@ const ProjectDetails = (props) => {
           </Descriptions.Item>
 
           <Descriptions.Item label="CSI Division">
-            {projectDetails.CsiDivision.map((csiDivision) => {
+            {projectDetails.CsiDivision.map((csiDivision, index) => {
               return (
-                <>
+                <span key={index}>
                   {`${csiDivision.DVSN_NO} - ${csiDivision.NME}`}
                   <br />
-                </>
+                </span>
               );
             })}
           </Descriptions.Item>

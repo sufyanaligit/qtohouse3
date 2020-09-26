@@ -1,7 +1,7 @@
-import { all, call, put, takeEvery } from "redux-saga/effects";
-import ACTIONS from "../qto.constants";
-import { projectActions } from "../actions";
-import API from "../services";
+import { all, call, put, takeEvery } from 'redux-saga/effects';
+import ACTIONS from '../qto.constants';
+import { projectActions } from '../actions';
+import API from '../services';
 
 //const delay = (time) => new Promise((resolve) => setTimeout(resolve, time));
 function* getCurrentProjects() {

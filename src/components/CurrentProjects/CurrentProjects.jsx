@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { List, message, Spin, Button } from "antd";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { List, message, Spin, Button } from 'antd';
 import {
   HomeFilled,
   DollarCircleFilled,
   ArrowRightOutlined,
-} from "@ant-design/icons";
-import axios from "axios";
-import InfiniteScroll from "react-infinite-scroller";
-import "./CurrentProjects.scss";
+} from '@ant-design/icons';
+import axios from 'axios';
+import InfiniteScroll from 'react-infinite-scroller';
+import './CurrentProjects.scss';
+import Loader from '../Loader';
 
 const fakeDataUrl =
-  "https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo";
+  'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
 
 const CurrentProjects = (props) => {
   const { getCurrentProjectsListBegin, currentProjectList, isLoading } = props;
@@ -44,7 +45,7 @@ const CurrentProjects = (props) => {
   const handleInfiniteOnLoad = () => {
     setLoading(true);
     if (data.length > 14) {
-      message.warning("Infinite List loaded all");
+      message.warning('Infinite List loaded all');
       setLoading(false);
       setHasMore(false);
       return;
@@ -59,8 +60,9 @@ const CurrentProjects = (props) => {
   };
 
   return (
-    <div className="current-projects-container">
-      <div className="demo-infinite-container">
+    <div className='current-projects-container'>
+      {isLoading && <Loader />}
+      <div className='demo-infinite-container'>
         <InfiniteScroll
           initialLoad={false}
           pageStart={0}
@@ -69,13 +71,13 @@ const CurrentProjects = (props) => {
           useWindow={false}
         >
           {loading && hasMore && (
-            <div className="demo-loading-container">
+            <div className='demo-loading-container'>
               <Spin />
             </div>
           )}
           <List
-            itemLayout="vertical"
-            size="large"
+            itemLayout='vertical'
+            size='large'
             dataSource={currentProjectList}
             renderItem={(item) => (
               <List.Item
@@ -83,56 +85,56 @@ const CurrentProjects = (props) => {
                 extra={
                   <img
                     width={272}
-                    alt="logo"
-                    src="https://embed.widencdn.net/img/lendlease/oizi70yizs/x650px/1000%20South%20Clark_0001_PL.jpeg?u=94eilc"
+                    alt='logo'
+                    src='https://embed.widencdn.net/img/lendlease/oizi70yizs/x650px/1000%20South%20Clark_0001_PL.jpeg?u=94eilc'
                   />
                 }
               >
                 <List.Item.Meta
                   title={
                     <button
-                      className="custom-button"
-                      target="_blank"
+                      className='custom-button'
+                      target='_blank'
                       onClick={() => handleOnClick(item.PRJT_ID)}
                     >
-                      <span className="heading">{item.NME}</span>
+                      <span className='heading'>{item.NME}</span>
                     </button>
                   }
                   description={item.email}
                 />
-                <div style={{ display: "flex" }}>
+                <div style={{ display: 'flex' }}>
                   <div style={{ paddingRight: 10 }}>
                     <HomeFilled
-                      className="icons"
-                      theme="outlined"
-                      label="Location"
+                      className='icons'
+                      theme='outlined'
+                      label='Location'
                     />
-                    <span className="label">&nbsp;Location</span>
-                    <span className="value">&nbsp;{item.LOC}</span>
+                    <span className='label'>&nbsp;Location</span>
+                    <span className='value'>&nbsp;{item.LOC}</span>
                   </div>
                   <div style={{ paddingRight: 10 }}>
                     <DollarCircleFilled
-                      className="icons"
-                      theme="outlined"
-                      label="Location"
+                      className='icons'
+                      theme='outlined'
+                      label='Location'
                     />
 
-                    <span className="label">&nbsp;Bid Amount</span>
-                    <span className="value">&nbsp; {item.AMNT}</span>
+                    <span className='label'>&nbsp;Bid Amount</span>
+                    <span className='value'>&nbsp; {item.AMNT}</span>
                   </div>
                   <div style={{ paddingRight: 10 }}>
                     <DollarCircleFilled
-                      className="icons"
-                      theme="outlined"
-                      label="Location"
+                      className='icons'
+                      theme='outlined'
+                      label='Location'
                     />
 
-                    <span className="label">&nbsp;Bid Date</span>
-                    <span className="value">&nbsp; {"01-01-2020"}</span>
+                    <span className='label'>&nbsp;Bid Date</span>
+                    <span className='value'>&nbsp; {'01-01-2020'}</span>
                   </div>
                   <div>
                     <Button
-                      type="primary"
+                      type='primary'
                       onClick={() => handleOnClick(item.PRJT_ID)}
                     >
                       <ArrowRightOutlined /> See Details
