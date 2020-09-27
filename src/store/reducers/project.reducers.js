@@ -24,10 +24,15 @@ export default (
       return state.setIn(['currentProjects', 'loading'], false);
     }
     case ACTIONS.GET_CURRENT_PROJECTS_DETAILS.PENDING: {
-      return state.set('loading', action.status === 'LOADING' ? true : false);
+      return state.setIn(
+        ['currentProjects', 'loading'],
+        action.status === 'LOADING' ? true : false
+      );
     }
     case ACTIONS.GET_CURRENT_PROJECTS_DETAILS.SUCCESS: {
-      return state.set('loading', false).set('projectDetails', action.data);
+      return state
+        .setIn(['currentProjects', 'loading'], false)
+        .setIn(['currentProjects', 'projectDetails'], action.data);
     }
     case ACTIONS.ADD_PROJECT.PENDING: {
       return state.set('loading', action.status === 'LOADING' ? true : false);

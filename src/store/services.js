@@ -1,5 +1,7 @@
 import axios from 'axios';
-const BASE_URL = 'http://qtohousemvcweb.qto.house/Qtohouse';
+import qs from 'qs';
+const BASE_URL = 'http://localhost/DFW.WEBFRONTEND/qtohouse';
+
 const API = {
   getCurrentProjects: () => {
     return axios.get(`${BASE_URL}/GetProject`);
@@ -7,11 +9,14 @@ const API = {
   getCurrentProjectDetails: (id) => {
     return axios.get(`${BASE_URL}/GetProjectDetail?id=${id}`);
   },
+
   addProject: (project) => {
-    return axios.post(`${BASE_URL}/SaveProject`, project).then((res) => {
-      debugger;
-      console.log(res);
-    });
+    const data = { projectObj: JSON.stringify(project) };
+    return axios
+      .post(`${BASE_URL}/SaveProject`, qs.stringify(data))
+      .then((res) => {
+        console.log(res);
+      });
   },
 };
 

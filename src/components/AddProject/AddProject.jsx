@@ -75,8 +75,8 @@ const AddProject = (props) => {
         name='addProject'
         onFinish={onFinish}
         initialValues={{
-          name: 'Bilal ur Rehman',
-          description: 'Testing the scenario',
+          name: 'Bilal ur Rehman 3',
+          description: 'Testing the scenario 3',
           location: 'Location',
           bidAmount: '12',
           bidDate: moment(new Date()),
