@@ -24,6 +24,16 @@ function* getCurrentProjectDetails(data) {
   }
 }
 
+function* addProject(data) {
+  try {
+    yield put(projectActions.addProject.pending);
+    const response = yield call(API.addProject, data.payload);
+    yield put(projectActions.addProject.success(response.data));
+  } catch (error) {
+    yield put(projectActions.addProject.error(error));
+  }
+}
+
 export default function* rootSaga() {
   yield all([
     takeEvery(ACTIONS.GET_CURRENT_PROJECTS_LIST_BEGIN, getCurrentProjects),
@@ -31,5 +41,6 @@ export default function* rootSaga() {
       ACTIONS.GET_CURRENT_PROJECTS_DETAILS_BEGIN,
       getCurrentProjectDetails
     ),
+    takeEvery(ACTIONS.ADD_PROJECT_BEGIN, addProject),
   ]);
 }

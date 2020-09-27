@@ -1,4 +1,4 @@
-import ACTIONS, { FETCH_STATUS } from "../qto.constants";
+import ACTIONS, { FETCH_STATUS } from '../qto.constants';
 
 export const getCurrentProjectsList = {
   pending: {
@@ -34,6 +34,22 @@ export const getCurrentProjectsDetails = {
     status: FETCH_STATUS.ERROR,
   }),
 };
+export const addProject = {
+  pending: {
+    type: ACTIONS.ADD_PROJECT.PENDING,
+    status: FETCH_STATUS.LOADING,
+  },
+  success: (data) => ({
+    type: ACTIONS.ADD_PROJECT.SUCCESS,
+    data,
+    status: FETCH_STATUS.SUCCESS,
+  }),
+  error: (error) => ({
+    type: ACTIONS.ADD_PROJECT.ERROR,
+    error,
+    status: FETCH_STATUS.ERROR,
+  }),
+};
 
 export const getCurrentProjectsListBegin = () => {
   return {
@@ -44,5 +60,12 @@ export const getCurrentProjectDetailsBegin = (id) => {
   return {
     type: ACTIONS.GET_CURRENT_PROJECTS_DETAILS_BEGIN,
     payload: id,
+  };
+};
+
+export const addProjectBegin = (project) => {
+  return {
+    type: ACTIONS.ADD_PROJECT_BEGIN,
+    payload: project,
   };
 };

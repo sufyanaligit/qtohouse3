@@ -22,11 +22,8 @@ const CurrentProjects = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    if (!currentProjectList.length) {
-      getCurrentProjectsListBegin();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    getCurrentProjectsListBegin();
+  }, [getCurrentProjectsListBegin]);
 
   const fetchData = () => {
     setLoading(true);
@@ -43,7 +40,7 @@ const CurrentProjects = (props) => {
   };
 
   const handleInfiniteOnLoad = () => {
-    setLoading(true);
+    //setLoading(true);
     if (data.length > 14) {
       message.warning('Infinite List loaded all');
       setLoading(false);

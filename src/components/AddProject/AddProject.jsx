@@ -1,53 +1,24 @@
-import React, { useState } from 'react';
+import moment from 'moment';
+import React from 'react';
 import {
   Form,
   Input,
   Tooltip,
-  Cascader,
-  Select,
-  Row,
-  Col,
-  Checkbox,
+  Space,
   Button,
-  AutoComplete,
+  InputNumber,
+  DatePicker,
+  Select,
 } from 'antd';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+
+import {
+  QuestionCircleOutlined,
+  MinusCircleOutlined,
+  PlusOutlined,
+} from '@ant-design/icons';
+
+const { TextArea } = Input;
 const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
-const residences = [
-  {
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [
-      {
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [
-          {
-            value: 'xihu',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-];
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -83,37 +54,15 @@ const AddProject = (props) => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    const { addProjectBegin } = props;
+
+    values.statusKey = '';
+    values.addUpdateInd = 0;
+    values.rowId = 0;
+    console.log('Received values of form: ', JSON.stringify(values));
+    addProjectBegin(values);
   };
 
-  const prefixSelector = (
-    <Form.Item name='prefix' noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value='86'>+86</Option>
-        <Option value='87'>+87</Option>
-      </Select>
-    </Form.Item>
-  );
-  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-
-  const onWebsiteChange = (value) => {
-    if (!value) {
-      setAutoCompleteResult([]);
-    } else {
-      setAutoCompleteResult(
-        ['.com', '.org', '.net'].map((domain) => `${value}${domain}`)
-      );
-    }
-  };
-
-  const websiteOptions = autoCompleteResult.map((website) => ({
-    label: website,
-    value: website,
-  }));
   return (
     <>
       <hr />
@@ -123,188 +72,318 @@ const AddProject = (props) => {
       <Form
         {...formItemLayout}
         form={form}
-        name='register'
+        name='addProject'
         onFinish={onFinish}
         initialValues={{
-          residence: ['zhejiang', 'hangzhou', 'xihu'],
-          prefix: '86',
+          name: 'Bilal ur Rehman',
+          description: 'Testing the scenario',
+          location: 'Location',
+          bidAmount: '12',
+          bidDate: moment(new Date()),
+          completionTime: moment(new Date()),
+          projectType: 'all',
+          solicitation: 'Test',
+          bidFrom: '1',
+          bidTo: '2',
+          biddingMethod: 'Bidding Method',
+          biddingLocation: 'Bidding Location',
+          bidPhase: 'Bid Phase',
+          liquidatedDamages: 'Liquidated Damages',
+          preBidMeeting: 'Pre Bid Meeting',
+          notes: 'Notes',
+          csiDivisions: [
+            { divNo: '1', divName: 'Testing' },
+            { divNo: 2, divName: 'Testing 3' },
+          ],
         }}
-        scrollToFirstError
+        scrollToFirstError={true}
       >
         <Form.Item
-          name='email'
-          label='E-mail'
+          name='name'
+          label='Name'
           rules={[
             {
-              type: 'email',
-              message: 'The input is not valid E-mail!',
-            },
-            {
-              required: true,
-              message: 'Please input your E-mail!',
+              required: false,
+              message: 'Please input Name',
             },
           ]}
         >
           <Input />
         </Form.Item>
-
         <Form.Item
-          name='password'
-          label='Password'
+          name='location'
+          label='Location'
           rules={[
             {
-              required: true,
-              message: 'Please input your password!',
+              required: false,
+              message: 'Please input your Location!',
             },
           ]}
-          hasFeedback
         >
-          <Input.Password />
+          <Input />
         </Form.Item>
-
         <Form.Item
-          name='confirm'
-          label='Confirm Password'
-          dependencies={['password']}
-          hasFeedback
+          name='description'
+          label='Description'
           rules={[
             {
-              required: true,
-              message: 'Please confirm your password!',
+              required: false,
+              message: 'Please input your Description!',
             },
-            ({ getFieldValue }) => ({
-              validator(rule, value) {
-                if (!value || getFieldValue('password') === value) {
-                  return Promise.resolve();
-                }
 
-                return Promise.reject(
-                  'The two passwords that you entered do not match!'
-                );
-              },
-            }),
+            //dependencies={['password']}
+            // hasFeedback
+            // rules={[
+            //   {
+            //     required: false,
+            //     message: 'Please confirm your password!',
+            //   },
+            //   ({ getFieldValue }) => ({
+            //     validator(rule, value) {
+            //       if (!value || getFieldValue('password') === value) {
+            //         return Promise.resolve();
+            //       }
+
+            //       return Promise.reject(
+            //         'The two passwords that you entered do not match!'
+            //       );
+            //     },
+            //   }),
           ]}
         >
-          <Input.Password />
+          <TextArea rows={4} />
         </Form.Item>
-
         <Form.Item
-          name='nickname'
+          name='bidAmount'
+          label='Bid Amount ($)'
+          rules={[
+            {
+              required: false,
+              message: 'Please input Bid Amount!',
+            },
+          ]}
+        >
+          <InputNumber min={1} step={0.1} max={1000} />
+        </Form.Item>
+        <Form.Item
+          name='bidDate'
+          label='Bid Date'
+          rules={[
+            {
+              required: false,
+              message: 'Please select Bid Date!',
+            },
+          ]}
+        >
+          <DatePicker />
+        </Form.Item>
+        <Form.Item
           label={
             <span>
-              Nickname&nbsp;
-              <Tooltip title='What do you want others to call you?'>
+              <b>
+                <u>Project Details</u>
+              </b>
+              &nbsp;
+              <Tooltip title='This section contains the detail of the project'>
                 <QuestionCircleOutlined />
               </Tooltip>
             </span>
           }
+        ></Form.Item>
+        <Form.Item
+          name='projectType'
+          label='Select'
+          hasFeedback
+          rules={[{ required: true, message: 'Please select your country!' }]}
+        >
+          <Select placeholder='Please select project type'>
+            <Option value='current'>Current</Option>
+            <Option value='all'>All</Option>
+          </Select>
+        </Form.Item>
+        <Form.Item
+          name='solicitation'
+          label='Solicitation'
           rules={[
             {
-              required: true,
-              message: 'Please input your nickname!',
-              whitespace: true,
+              required: false,
+              message: 'Please select Solicitation!',
             },
           ]}
         >
           <Input />
         </Form.Item>
-
         <Form.Item
-          name='residence'
-          label='Habitual Residence'
+          name='bidFrom'
+          label='Bid From  ($)'
           rules={[
             {
-              type: 'array',
-              required: true,
-              message: 'Please select your habitual residence!',
+              required: false,
+              message: 'Please input Bid From!',
             },
           ]}
         >
-          <Cascader options={residences} />
+          <InputNumber min={1} step={0.1} max={1000} />
         </Form.Item>
-
         <Form.Item
-          name='phone'
-          label='Phone Number'
+          name='bidTo'
+          label='Bid To  ($)'
           rules={[
             {
-              required: true,
-              message: 'Please input your phone number!',
+              required: false,
+              message: 'Please input Bid To!',
             },
           ]}
         >
-          <Input
-            addonBefore={prefixSelector}
-            style={{
-              width: '100%',
+          <InputNumber min={1} step={0.1} max={1000} />
+        </Form.Item>
+        <Form.Item
+          name='biddingMethod'
+          label='Bidding Method'
+          rules={[
+            {
+              required: false,
+              message: 'Please input your Bidding Method!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name='biddingLocation'
+          label='Location'
+          rules={[
+            {
+              required: false,
+              message: 'Please input your Bidding Location!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name='bidPhase'
+          label='Bid Phase'
+          rules={[
+            {
+              required: false,
+              message: 'Please input your Bid Phase!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name='completionTime'
+          label='Completion Time'
+          rules={[
+            {
+              required: false,
+              message: 'Please input your Completion Time!',
+            },
+          ]}
+        >
+          <DatePicker />
+        </Form.Item>
+        <Form.Item
+          name='liquidatedDamages'
+          label='Liquidated Damages'
+          rules={[
+            {
+              required: false,
+              message: 'Please input your Liquidated Damages!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name='preBidMeeting'
+          label='Pre-bid Meeting'
+          rules={[
+            {
+              required: false,
+              message: 'Please input your Pre-bid Meeting!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name='notes'
+          label='Notes'
+          rules={[
+            {
+              required: false,
+              message: 'Please input your Notes	!',
+            },
+          ]}
+        >
+          <TextArea rows={4} />
+        </Form.Item>
+        <Form.Item label='CSI Division'>
+          <Form.List name='csiDivisions'>
+            {(fields, { add, remove }) => {
+              return (
+                <div>
+                  {fields.map((field) => (
+                    <Space
+                      key={field.key}
+                      style={{ display: 'flex', marginBottom: 8 }}
+                      align='start'
+                    >
+                      <Form.Item
+                        {...field}
+                        name={[field.name, 'divNo']}
+                        fieldKey={[field.fieldKey, 'divNo']}
+                        rules={[
+                          {
+                            required: false,
+                            message: 'Missing division number',
+                          },
+                        ]}
+                      >
+                        <Input placeholder='Division Number' />
+                      </Form.Item>
+                      <Form.Item
+                        {...field}
+                        name={[field.name, 'divName']}
+                        fieldKey={[field.fieldKey, 'divName']}
+                        rules={[
+                          { required: false, message: 'Missing division name' },
+                        ]}
+                      >
+                        <Input placeholder='Division  Name' />
+                      </Form.Item>
+
+                      <MinusCircleOutlined
+                        onClick={() => {
+                          remove(field.name);
+                        }}
+                      />
+                    </Space>
+                  ))}
+
+                  <Form.Item>
+                    <Button
+                      type='dashed'
+                      onClick={() => {
+                        add();
+                      }}
+                      block
+                    >
+                      <PlusOutlined /> Add field
+                    </Button>
+                  </Form.Item>
+                </div>
+              );
             }}
-          />
+          </Form.List>
         </Form.Item>
 
-        <Form.Item
-          name='website'
-          label='Website'
-          rules={[
-            {
-              required: true,
-              message: 'Please input website!',
-            },
-          ]}
-        >
-          <AutoComplete
-            options={websiteOptions}
-            onChange={onWebsiteChange}
-            placeholder='website'
-          >
-            <Input />
-          </AutoComplete>
-        </Form.Item>
-
-        <Form.Item
-          label='Captcha'
-          extra='We must make sure that your are a human.'
-        >
-          <Row gutter={8}>
-            <Col span={12}>
-              <Form.Item
-                name='captcha'
-                noStyle
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input the captcha you got!',
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Button>Get captcha</Button>
-            </Col>
-          </Row>
-        </Form.Item>
-
-        <Form.Item
-          name='agreement'
-          valuePropName='checked'
-          rules={[
-            {
-              validator: (_, value) =>
-                value
-                  ? Promise.resolve()
-                  : Promise.reject('Should accept agreement'),
-            },
-          ]}
-          {...tailFormItemLayout}
-        >
-          <Checkbox>
-            I have read the <a href=''>agreement</a>
-          </Checkbox>
-        </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type='primary' htmlType='submit'>
-            Registers
+            Register
           </Button>
         </Form.Item>
       </Form>
