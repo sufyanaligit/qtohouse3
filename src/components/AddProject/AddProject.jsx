@@ -1,5 +1,5 @@
-import moment from 'moment';
 import React from 'react';
+import moment from 'moment';
 import {
   Form,
   Input,
@@ -9,6 +9,7 @@ import {
   InputNumber,
   DatePicker,
   Select,
+  message,
 } from 'antd';
 
 import {
@@ -19,6 +20,7 @@ import {
 
 const { TextArea } = Input;
 const { Option } = Select;
+
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -51,17 +53,42 @@ const tailFormItemLayout = {
 };
 
 const AddProject = (props) => {
-  const [form] = Form.useForm();
+  const { loading, isProjectAdded } = props;
+  console.log(loading);
 
+  const [form] = Form.useForm();
   const onFinish = (values) => {
     const { addProjectBegin } = props;
-
     values.statusKey = '';
     values.addUpdateInd = 0;
     values.rowId = 0;
-    console.log('Received values of form: ', JSON.stringify(values));
     addProjectBegin(values);
   };
+
+  const resetFields = () => {
+    form.setFieldsValue({ name: '' });
+    form.setFieldsValue({ description: '' });
+    form.setFieldsValue({ location: '' });
+    form.setFieldsValue({ bidAmount: '' });
+    form.setFieldsValue({ bidDate: moment(new Date()) });
+    form.setFieldsValue({ completionTime: moment(new Date()) });
+    form.setFieldsValue({ projectType: 'current' });
+    form.setFieldsValue({ solicitation: '' });
+    form.setFieldsValue({ bidFrom: '' });
+    form.setFieldsValue({ bidTo: '' });
+    form.setFieldsValue({ biddingMethod: '' });
+    form.setFieldsValue({ biddingLocation: '' });
+    form.setFieldsValue({ bidPhase: '' });
+    form.setFieldsValue({ liquidatedDamages: '' });
+    form.setFieldsValue({ preBidMeeting: '' });
+    form.setFieldsValue({ notes: '' });
+    form.setFieldsValue({ csiDivisions: [] });
+  };
+
+  if (isProjectAdded) {
+    resetFields();
+    message.success('Project added successfully', 3);
+  }
 
   return (
     <>
@@ -81,7 +108,7 @@ const AddProject = (props) => {
           bidAmount: '12',
           bidDate: moment(new Date()),
           completionTime: moment(new Date()),
-          projectType: 'all',
+          projectType: 'feature',
           solicitation: 'Test',
           bidFrom: '1',
           bidTo: '2',
@@ -194,10 +221,11 @@ const AddProject = (props) => {
           name='projectType'
           label='Select'
           hasFeedback
-          rules={[{ required: true, message: 'Please select your country!' }]}
+          rules={[{ required: false, message: 'Please select your country!' }]}
         >
           <Select placeholder='Please select project type'>
             <Option value='current'>Current</Option>
+            <Option value='feature'>Feature</Option>
             <Option value='all'>All</Option>
           </Select>
         </Form.Item>
@@ -382,7 +410,7 @@ const AddProject = (props) => {
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
-          <Button type='primary' htmlType='submit'>
+          <Button type='primary' htmlType='submit' loading={loading}>
             Register
           </Button>
         </Form.Item>

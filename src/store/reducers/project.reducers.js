@@ -2,7 +2,12 @@ import { fromJS } from 'immutable';
 import ACTIONS, { PROJECT_TYPE } from '../qto.constants';
 
 export default (
-  state = fromJS({ currentProjects: {}, allProjects: {}, featureProjects: {} }),
+  state = fromJS({
+    currentProjects: {},
+    allProjects: {},
+    featureProjects: {},
+    loading: false,
+  }),
   action
 ) => {
   switch (action.type) {
@@ -16,10 +21,25 @@ export default (
       const currentProjects = action.data.filter(
         (item) => item.PRJT_TYPE.toLowerCase() === PROJECT_TYPE.CURRENT
       );
+
       return state
         .setIn(['currentProjects', 'loading'], false)
         .setIn(['currentProjects', 'data'], currentProjects);
     }
+    case ACTIONS.GET_FEATURED_PROJECTS_LIST.SUCCESS: {
+      const featureProjects = action.data.filter(
+        (item) => item.PRJT_TYPE.toLowerCase() === PROJECT_TYPE.FEATURED
+      );
+      return state
+        .setIn(['featureProjects', 'loading'], false)
+        .setIn(['featureProjects', 'data'], featureProjects);
+    }
+    case ACTIONS.GET_ALL_PROJECTS_LIST.SUCCESS: {
+      return state
+        .setIn(['allProjects', 'loading'], false)
+        .setIn(['allProjects', 'data'], action.data);
+    }
+
     case ACTIONS.GET_CURRENT_PROJECTS_LIST.ERROR: {
       return state.setIn(['currentProjects', 'loading'], false);
     }
@@ -35,10 +55,10 @@ export default (
         .setIn(['currentProjects', 'projectDetails'], action.data);
     }
     case ACTIONS.ADD_PROJECT.PENDING: {
-      return state.set('loading', action.status === 'LOADING' ? true : false);
+      return state.set('loading', true).set('isProjectAdded', false);
     }
     case ACTIONS.ADD_PROJECT.SUCCESS: {
-      return state.set('loading', false);
+      return state.set('loading', false).set('isProjectAdded', true);
     }
     default:
       return state;

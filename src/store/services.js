@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-const BASE_URL = 'http://localhost/DFW.WEBFRONTEND/qtohouse';
+const BASE_URL = 'http://qtohousemvcweb.qto.house/Qtohouse';
 
 const API = {
   getCurrentProjects: () => {
@@ -15,7 +15,7 @@ const API = {
     return axios
       .post(`${BASE_URL}/SaveProject`, qs.stringify(data))
       .then((res) => {
-        console.log(res);
+        return res.data;
       });
   },
 };

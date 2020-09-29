@@ -1,36 +1,68 @@
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 import createSelector from '../../utils/reselect';
 
 export const getProjects = (state) => {
   const { projects } = state;
   return projects || List();
 };
+
+export const getFeaturedProjects = createSelector(getProjects, (projects) => {
+  return projects.getIn(['featureProjects', 'data']) || List();
+});
+
 export const getCurrentProjects = createSelector(getProjects, (projects) => {
-  return projects.get('currentProjects') || List();
+  return projects.getIn(['currentProjects', 'data']) || List();
 });
 
 export const getAllProjects = createSelector(getProjects, (projects) => {
-  const { allProjects } = projects;
-  return allProjects || List();
+  return projects.getIn(['allProjects', 'data']) || List();
 });
-export const getCurrentProjectList = createSelector(
-  getCurrentProjects,
+
+// export const getCurrentProjects = createSelector(
+//   getCurrentProjects,
+//   (currentProjectsList) => {
+//     return currentProjectsList.get('data') || List();
+//   }
+// );
+
+export const getCurrentProjectStatus = createSelector(
+  getProjects,
   (currentProjectsList) => {
-    return currentProjectsList.get('data') || List();
+    return currentProjectsList.getIn(['currentProjects', 'loading']);
   }
 );
 
-export const getCurrentProjectStatus = createSelector(
-  getCurrentProjects,
-  (currentProjectsList) => {
-    return currentProjectsList.get('loading');
+export const getFeaturedProjectStatus = createSelector(
+  getProjects,
+  (featuredProjectsList) => {
+    return featuredProjectsList.getIn(['featureProjects', 'loading']);
+  }
+);
+
+export const getAllProjectStatus = createSelector(
+  getProjects,
+  (allProjectsList) => {
+    return allProjectsList.getIn(['allProjects', 'loading']);
   }
 );
 
 //Project Details
 export const getCurrentProjectDetails = createSelector(
-  getCurrentProjects,
+  getProjects,
   (currentProjectsList) => {
-    return currentProjectsList.get('projectDetails') || List();
+    return (
+      currentProjectsList.getIn(['currentProjects', 'projectDetails']) || Map()
+    );
   }
+);
+
+export const getAddProjectLoadingStatus = createSelector(
+  getProjects,
+  (projects) => {
+    return projects.get('loading');
+  }
+);
+
+export const getIsProjectAddedStatus = createSelector(getProjects, (projects) =>
+  projects.get('isProjectAdded')
 );

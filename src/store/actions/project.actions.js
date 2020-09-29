@@ -17,6 +17,22 @@ export const getCurrentProjectsList = {
   }),
 };
 
+export const getFeaturedProjectsList = {
+  success: (data) => ({
+    type: ACTIONS.GET_FEATURED_PROJECTS_LIST.SUCCESS,
+    data,
+    status: FETCH_STATUS.SUCCESS,
+  }),
+};
+
+export const getAllProjectsList = {
+  success: (data) => ({
+    type: ACTIONS.GET_ALL_PROJECTS_LIST.SUCCESS,
+    data,
+    status: FETCH_STATUS.SUCCESS,
+  }),
+};
+
 //Project Details
 export const getCurrentProjectsDetails = {
   pending: {
@@ -51,7 +67,7 @@ export const addProject = {
   }),
 };
 
-export const getCurrentProjectsListBegin = () => {
+export const getProjectsListBegin = () => {
   return {
     type: ACTIONS.GET_CURRENT_PROJECTS_LIST_BEGIN,
   };

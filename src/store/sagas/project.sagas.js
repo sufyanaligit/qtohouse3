@@ -4,11 +4,13 @@ import { projectActions } from '../actions';
 import API from '../services';
 
 //const delay = (time) => new Promise((resolve) => setTimeout(resolve, time));
-function* getCurrentProjects() {
+function* getProjects() {
   try {
     yield put(projectActions.getCurrentProjectsList.pending);
     const response = yield call(API.getCurrentProjects);
     yield put(projectActions.getCurrentProjectsList.success(response.data));
+    yield put(projectActions.getFeaturedProjectsList.success(response.data));
+    yield put(projectActions.getAllProjectsList.success(response.data));
   } catch (error) {
     yield put(projectActions.getCurrentProjectsList.error(error));
   }
@@ -28,7 +30,7 @@ function* addProject(data) {
   try {
     yield put(projectActions.addProject.pending);
     const response = yield call(API.addProject, data.payload);
-    yield put(projectActions.addProject.success(response.data));
+    yield put(projectActions.addProject.success(response));
   } catch (error) {
     yield put(projectActions.addProject.error(error));
   }
@@ -36,7 +38,7 @@ function* addProject(data) {
 
 export default function* rootSaga() {
   yield all([
-    takeEvery(ACTIONS.GET_CURRENT_PROJECTS_LIST_BEGIN, getCurrentProjects),
+    takeEvery(ACTIONS.GET_CURRENT_PROJECTS_LIST_BEGIN, getProjects),
     takeEvery(
       ACTIONS.GET_CURRENT_PROJECTS_DETAILS_BEGIN,
       getCurrentProjectDetails
