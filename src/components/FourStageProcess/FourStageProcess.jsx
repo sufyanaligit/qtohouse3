@@ -29,7 +29,7 @@ const FourStageProcess = (props) => {
                     alt="Service Image 1"
                     style={{ width: "100px" }}
                   />
-                  <h3 className="mb-0">SEND PLANS</h3>
+                  <h3 className="mb-0" style={{fontWeight:"500", color:"black"}}>SEND PLANS</h3>
                   <p className="mb-0">
                     Its easy simply E mail or post your plans and any other
                     relevant project documents to us.
@@ -46,7 +46,7 @@ const FourStageProcess = (props) => {
                     style={{ width: "100px" }}
                   />
 
-                  <h3 className="mb-0">RECEIVE QUOTATION</h3>
+                  <h3 className="mb-0" style={{fontWeight:"500", color:"black"}}>RECEIVE QUOTATION</h3>
 
                   <p className="mb-0">
                     On receipt of your plans we will provide you with a fixed
@@ -64,7 +64,7 @@ const FourStageProcess = (props) => {
                     style={{ width: "100px" }}
                   />
 
-                  <h3 className="mb-0">MAKE PAYMENT</h3>
+                  <h3 className="mb-0" style={{fontWeight:"500", color:"black"}}>MAKE PAYMENT</h3>
 
                   <p className="mb-0">
                     Using our simple and secure payment system, make payment for
@@ -81,7 +81,7 @@ const FourStageProcess = (props) => {
                     alt="Service Image 3"
                     style={{ width: "100px" }}
                   />
-                  <h3 className="mb-0">RECEIVE ESTIMATE</h3>
+                  <h3 className="mb-0" style={{fontWeight:"500", color:"black"}}>RECEIVE ESTIMATE</h3>
 
                   <p className="mb-0">
                     Within 5 working days your estimate report will be e mailed

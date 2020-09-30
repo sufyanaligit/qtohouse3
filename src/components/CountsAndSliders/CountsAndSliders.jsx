@@ -25,7 +25,7 @@ import Brand19 from "../../images/resources/brands/SUNY.jpg";
 const CountsAndSliders = (props) => {
   return (
     <section>
-      <div className="w-100 bg-color2 position-relative">
+      <div className="w-100 bg-color2 position-relative" style={{height:"142px"}}>
         <div className="container">
           <div className="why-us text-center w-100">
             <div className="row justify-content-center">
@@ -36,6 +36,7 @@ const CountsAndSliders = (props) => {
                       className="img-fluid"
                       src={WhyUsIcon}
                       alt="Why Us Icon 1"
+                      style={{height:"32px"}}
                     />
                     <h2 className="mb-0 counter">59</h2>
                     <h5 className="mb-0">Current Projects</h5>
@@ -50,6 +51,7 @@ const CountsAndSliders = (props) => {
                       className="img-fluid"
                       src={WhyUsIcon2}
                       alt="Why Us Icon 2"
+                      style={{height:"32px"}}
                     />
                     <h2 className="mb-0 counter">94</h2>
                     <h5 className="mb-0">Previous Projects</h5>
@@ -63,6 +65,7 @@ const CountsAndSliders = (props) => {
                       className="img-fluid"
                       src={WhyUsIcon3}
                       alt="Why Us Icon 3"
+                      style={{height:"32px"}}
                     />
                     <h2 className="mb-0 counter">66</h2>
                     <h5 className="mb-0">Award</h5>
@@ -77,61 +80,61 @@ const CountsAndSliders = (props) => {
         <div className="container ">
           <div className="brands-caro">
             <div className="brand-img">
-              <img className="img-fluid" src={Brand1} alt="Brand Image 1" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand1} alt="Brand Image 1" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand2} alt="Brand Image 2" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand2} alt="Brand Image 2" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand3} alt="Brand Image 3" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand3} alt="Brand Image 3" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand4} alt="Brand Image 4" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand4} alt="Brand Image 4" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand5} alt="Brand Image 5" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand5} alt="Brand Image 5" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand6} alt="Brand Image 6" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand6} alt="Brand Image 6" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand7} alt="Brand Image 7" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand7} alt="Brand Image 7" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand8} alt="Brand Image 8" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand8} alt="Brand Image 8" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand9} alt="Brand Image 9" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand9} alt="Brand Image 9" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand10} alt="Brand Image 10" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand10} alt="Brand Image 10" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand11} alt="Brand Image 11" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand11} alt="Brand Image 11" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand12} alt="Brand Image 12" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand12} alt="Brand Image 12" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand13} alt="Brand Image 13" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand13} alt="Brand Image 13" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand14} alt="Brand Image 14" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand14} alt="Brand Image 14" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand15} alt="Brand Image 15" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand15} alt="Brand Image 15" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand16} alt="Brand Image 16" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand16} alt="Brand Image 16" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand17} alt="Brand Image 17" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand17} alt="Brand Image 17" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand18} alt="Brand Image 18" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand18} alt="Brand Image 18" />
             </div>
             <div className="brand-img">
-              <img className="img-fluid" src={Brand19} alt="Brand Image 19" />
+              <img className="img-fluid" style={{height:"75px"}} src={Brand19} alt="Brand Image 19" />
             </div>
            
           </div>

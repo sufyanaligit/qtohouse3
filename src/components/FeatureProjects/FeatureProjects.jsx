@@ -48,7 +48,7 @@ const FeatureProjects = (props) => {
             </div>
           </div>
           <div style={{ textAlign: "center", marginTop: 10 }}>
-            <a className="thm-btn blue-btn-bg" href="#" title="">
+            <a className="thm-btn gold-btn-bg" href="#" title="">
               See More<i className="fas fa-arrow-right"></i>
             </a>
           </div>
