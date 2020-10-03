@@ -85,3 +85,10 @@ export const addProjectBegin = (project) => {
     payload: project,
   };
 };
+
+export const setIsLoginState = (loginState) => {
+  return {
+    type: ACTIONS.SET_LOGIN_STATE_BEGIN,
+    payload: loginState,
+  };
+};

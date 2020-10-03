@@ -2,7 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../images/logo.png';
 
-const HeaderTitle = () => {
+const HeaderTitle = (props) => {
+  const handleShowLoginModal = (event) => {
+    const { setIsLoginState } = props;
+    setIsLoginState(true);
+  };
   return (
     <header className='w-100'>
       <div className='topbar bg-color2 w-100'>
@@ -11,7 +15,7 @@ const HeaderTitle = () => {
             <div className='col-md-6 col-sm-12 col-lg-6 text-left'>
               <ul className='top-links d-inline-flex mb-0 list-unstyled w-100'>
                 <li>
-                  <a href='#' title=''>
+                  <a href={() => false} title=''>
                     Get your free Quantity TakeOff quote now!
                   </a>
                 </li>
@@ -20,23 +24,23 @@ const HeaderTitle = () => {
             <div className='col-md-6 col-sm-12 col-lg-6 text-right'>
               <ul className='top-links d-inline-flex justify-content-end mb-0 list-unstyled w-100'>
                 <li>
-                  <a href='#' title=''>
+                  <a href={() => false} title=''>
                     <i className='fas fa-shopping-cart'></i>Cart
                     <span className='badge'>0</span>
                   </a>
                 </li>
                 <li>
-                  <a href='#' title=''>
+                  <a href={() => false} title=''>
                     <i className='fas fa-phone-alt'></i>1-718-717-2601
                   </a>
                 </li>
                 <li>
-                  <a href='#' title=''>
+                  <a href={() => false} title=''>
                     <i className='fas fa-envelope'></i>
                   </a>
                 </li>
                 <li>
-                  <a href='#' title=''>
+                  <a href={() => false} title='' onClick={handleShowLoginModal}>
                     <i className='fas fa-lock'></i>Login
                   </a>
                 </li>
@@ -116,7 +120,7 @@ const HeaderTitle = () => {
                           </NavLink>
                         </li>
                         {/* <li>
-                          <a href="#" title="">
+                          <a href={() => false} title="">
                             Coverage Area
                           </a>
                         </li> */}
@@ -148,7 +152,11 @@ const HeaderTitle = () => {
                           </NavLink>
                         </li>
                       </ul>
-                      <a className='thm-btn gold-btn-bg' href='#' title=''>
+                      <a
+                        className='thm-btn gold-btn-bg'
+                        href={() => false}
+                        title=''
+                      >
                         Register
                       </a>
                     </nav>

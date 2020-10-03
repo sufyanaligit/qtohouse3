@@ -29,8 +29,12 @@ const ListItem = (props) => {
     }
   };
 
-  const handleOnClick = (path) => {
+  const handleOnClickProjectDetails = (path) => {
     history.push(`projects/${path}`);
+  };
+
+  const handleOnClickEditProject = (project_id) => {
+    history.push(`editProject/${project_id}`);
   };
   return (
     <InfiniteScroll
@@ -65,7 +69,8 @@ const ListItem = (props) => {
                 <button
                   className='custom-button'
                   target='_blank'
-                  onClick={() => handleOnClick(item.PRJT_ID)}
+                  rel='noopener noreferrer'
+                  onClick={() => handleOnClickProjectDetails(item.PRJT_ID)}
                 >
                   <span className='heading'>{item.NME}</span>
                 </button>
@@ -80,7 +85,10 @@ const ListItem = (props) => {
                   label='Location'
                 />
                 <span className='label'>&nbsp;Location</span>
-                <span className='value'>&nbsp;{item.LOC}</span>
+                <span className='value'>
+                  &nbsp;
+                  {`${item.BORH}, ${item.CITY}, ${item.STAT} `}
+                </span>
               </div>
               <div style={{ paddingRight: 10 }}>
                 <DollarCircleFilled
@@ -105,9 +113,20 @@ const ListItem = (props) => {
               <div>
                 <Button
                   type='primary'
-                  onClick={() => handleOnClick(item.PRJT_ID)}
+                  onClick={() => handleOnClickProjectDetails(item.PRJT_ID)}
                 >
                   <ArrowRightOutlined /> See Details
+                </Button>
+              </div>
+              &nbsp;
+              <div>
+                <Button
+                  type='info'
+                  style={{ background: '#8a8a8a' }}
+                  onClick={() => handleOnClickEditProject(item.PRJT_ID)}
+                >
+                  <ArrowRightOutlined />
+                  <span style={{ color: 'white' }}>Edit Details</span>
                 </Button>
               </div>
             </div>

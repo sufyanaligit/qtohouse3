@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Tabs } from 'antd';
 import CurrentProjects from '../CurrentProjects';
-import FeaturedProjects from '../FeaturedProjects';
+// import FeaturedProjects from '../FeaturedProjects';
 import AllProjects from '../AllProjects';
 
 const { TabPane } = Tabs;

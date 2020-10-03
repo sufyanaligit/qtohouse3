@@ -1,2 +1,2 @@
-import HeaderTitle from './HeaderTitle'
+import HeaderTitle from './HeaderTitle.container';
 export default HeaderTitle;

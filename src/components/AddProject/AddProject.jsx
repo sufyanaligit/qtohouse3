@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import {
   Form,
@@ -39,6 +39,7 @@ const formItemLayout = {
     },
   },
 };
+
 const tailFormItemLayout = {
   wrapperCol: {
     xs: {
@@ -53,10 +54,23 @@ const tailFormItemLayout = {
 };
 
 const AddProject = (props) => {
-  const { loading, isProjectAdded } = props;
-  console.log(loading);
+  const {
+    loading,
+    getProjectDetails,
+    match,
+    projectDetails,
+    currentProjectStatus,
+  } = props;
+  const project_id = match.params.id;
+  console.log(currentProjectStatus, projectDetails);
+  //const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getProjectDetails(project_id);
+  }, [getProjectDetails, project_id]);
 
   const [form] = Form.useForm();
+
   const onFinish = (values) => {
     const { addProjectBegin } = props;
     values.statusKey = '';
@@ -85,7 +99,7 @@ const AddProject = (props) => {
     form.setFieldsValue({ csiDivisions: [] });
   };
 
-  if (isProjectAdded) {
+  if (loading) {
     resetFields();
     message.success('Project added successfully', 3);
   }
@@ -101,28 +115,28 @@ const AddProject = (props) => {
         form={form}
         name='addProject'
         onFinish={onFinish}
-        initialValues={{
-          name: 'Bilal ur Rehman 3',
-          description: 'Testing the scenario 3',
-          location: 'Location',
-          bidAmount: '12',
-          bidDate: moment(new Date()),
-          completionTime: moment(new Date()),
-          projectType: 'feature',
-          solicitation: 'Test',
-          bidFrom: '1',
-          bidTo: '2',
-          biddingMethod: 'Bidding Method',
-          biddingLocation: 'Bidding Location',
-          bidPhase: 'Bid Phase',
-          liquidatedDamages: 'Liquidated Damages',
-          preBidMeeting: 'Pre Bid Meeting',
-          notes: 'Notes',
-          csiDivisions: [
-            { divNo: '1', divName: 'Testing' },
-            { divNo: 2, divName: 'Testing 3' },
-          ],
-        }}
+        // initialValues={{
+        //   name: 'Bilal ur Rehman 3',
+        //   description: 'Testing the scenario 3',
+        //   location: 'Location',
+        //   bidAmount: '12',
+        //   bidDate: moment(new Date()),
+        //   completionTime: moment(new Date()),
+        //   projectType: 'feature',
+        //   solicitation: 'Test',
+        //   bidFrom: '1',
+        //   bidTo: '2',
+        //   biddingMethod: 'Bidding Method',
+        //   biddingLocation: 'Bidding Location',
+        //   bidPhase: 'Bid Phase',
+        //   liquidatedDamages: 'Liquidated Damages',
+        //   preBidMeeting: 'Pre Bid Meeting',
+        //   notes: 'Notes',
+        //   csiDivisions: [
+        //     { divNo: '1', divName: 'Testing' },
+        //     { divNo: 2, divName: 'Testing 3' },
+        //   ],
+        // }}
         scrollToFirstError={true}
       >
         <Form.Item

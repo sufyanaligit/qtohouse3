@@ -7,6 +7,7 @@ export default (
     allProjects: {},
     featureProjects: {},
     loading: false,
+    isLoginModal: false,
   }),
   action
 ) => {
@@ -55,10 +56,13 @@ export default (
         .setIn(['currentProjects', 'projectDetails'], action.data);
     }
     case ACTIONS.ADD_PROJECT.PENDING: {
-      return state.set('loading', true).set('isProjectAdded', false);
+      return state.set('loading', true);
     }
     case ACTIONS.ADD_PROJECT.SUCCESS: {
-      return state.set('loading', false).set('isProjectAdded', true);
+      return state.set('loading', false);
+    }
+    case ACTIONS.SET_LOGIN_STATE_BEGIN: {
+      return state.set('isLoginModal', action.payload);
     }
     default:
       return state;
