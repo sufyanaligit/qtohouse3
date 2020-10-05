@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import moment from 'moment';
 import {
   Form,
@@ -11,12 +11,13 @@ import {
   Select,
   message,
 } from 'antd';
-
 import {
   QuestionCircleOutlined,
   MinusCircleOutlined,
   PlusOutlined,
 } from '@ant-design/icons';
+import { isObjectEmpty } from '../../utils/utils';
+import Loader from '../Loader';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -62,31 +63,33 @@ const AddProject = (props) => {
     currentProjectStatus,
   } = props;
   const project_id = match.params.id;
+
   console.log(currentProjectStatus, projectDetails);
-  //const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    getProjectDetails(project_id);
-  }, [getProjectDetails, project_id]);
-
+  // const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
     const { addProjectBegin } = props;
-    values.statusKey = '';
-    values.addUpdateInd = 0;
+    // values.statusKey = '';
+    values.addUpdateInd = project_id ? 1 : 0;
     values.rowId = 0;
+    values.project_id = project_id;
+    values.project_detail_id = projectDetails.PRJT_DET_ID;
     addProjectBegin(values);
   };
 
-  const resetFields = () => {
+  const resetFields = useCallback(() => {
     form.setFieldsValue({ name: '' });
     form.setFieldsValue({ description: '' });
     form.setFieldsValue({ location: '' });
+    form.setFieldsValue({ borough: '' });
+    form.setFieldsValue({ city: '' });
+    form.setFieldsValue({ state: '' });
     form.setFieldsValue({ bidAmount: '' });
     form.setFieldsValue({ bidDate: moment(new Date()) });
     form.setFieldsValue({ completionTime: moment(new Date()) });
     form.setFieldsValue({ projectType: 'current' });
+    form.setFieldsValue({ projectStatus: 'published' });
     form.setFieldsValue({ solicitation: '' });
     form.setFieldsValue({ bidFrom: '' });
     form.setFieldsValue({ bidTo: '' });
@@ -97,18 +100,64 @@ const AddProject = (props) => {
     form.setFieldsValue({ preBidMeeting: '' });
     form.setFieldsValue({ notes: '' });
     form.setFieldsValue({ csiDivisions: [] });
+  }, [form]);
+
+  const setFields = (projectDetails) => {
+    const csiDivisions = [];
+    projectDetails.CsiDivision.map((value) => {
+      const csiDivision = {
+        divNo: value.CSI_DVSN_ID,
+        divName: value.NME,
+      };
+      csiDivisions.push(csiDivision);
+    });
+    form.setFieldsValue({ name: projectDetails.PRJT_NME });
+    form.setFieldsValue({ description: projectDetails.DSCR });
+    form.setFieldsValue({ location: projectDetails.LOC });
+    form.setFieldsValue({ borough: projectDetails.BORH });
+    form.setFieldsValue({ city: projectDetails.CITY });
+    form.setFieldsValue({ state: projectDetails.STAT });
+    form.setFieldsValue({ bidAmount: projectDetails.AMNT });
+    form.setFieldsValue({
+      bidDate: moment(`${projectDetails.BID_DATE}`),
+    });
+    form.setFieldsValue({
+      completionTime: moment(`${projectDetails.CMPL_DTE}`),
+    });
+    form.setFieldsValue({ projectType: projectDetails.PRJT_TYPE });
+    form.setFieldsValue({ solicitation: projectDetails.SLTN });
+    form.setFieldsValue({ bidFrom: projectDetails.BID_FROM });
+    form.setFieldsValue({ bidTo: projectDetails.BID_TO });
+    form.setFieldsValue({ biddingMethod: projectDetails.BID_MTHD });
+    form.setFieldsValue({ biddingLocation: projectDetails.BID_LOC });
+    form.setFieldsValue({ bidPhase: projectDetails.BID_PHAS });
+    form.setFieldsValue({ liquidatedDamages: projectDetails.LQUD_DMGS });
+    form.setFieldsValue({ preBidMeeting: projectDetails.PRE_BID_METG });
+    form.setFieldsValue({ notes: projectDetails.NOTE });
+    form.setFieldsValue({ csiDivisions: csiDivisions });
+    form.setFieldsValue({ projectStatus: projectDetails.STS_KEY });
   };
+
+  useEffect(() => {
+    if (project_id) getProjectDetails(project_id);
+    else resetFields();
+  }, [getProjectDetails, project_id, resetFields]);
+
+  if (!isObjectEmpty(projectDetails)) {
+    setFields(projectDetails);
+  }
 
   if (loading) {
     resetFields();
     message.success('Project added successfully', 3);
   }
 
+  if (currentProjectStatus) return <Loader />;
   return (
     <>
       <hr />
       <h1 style={{ textAlign: 'center' }}>
-        <u>Add Project Form</u>
+        {project_id ? <u>Edit Project</u> : <u>Add Project</u>}
       </h1>
       <Form
         {...formItemLayout}
@@ -116,8 +165,11 @@ const AddProject = (props) => {
         name='addProject'
         onFinish={onFinish}
         // initialValues={{
-        //   name: 'Bilal ur Rehman 3',
+        //   name: projectDetails.PRJT_NME && projectDetails.PRJT_NME,
         //   description: 'Testing the scenario 3',
+        //   borough: 'Test',
+        //   city: 'Lahore',
+        //   state: 'Punjab',
         //   location: 'Location',
         //   bidAmount: '12',
         //   bidDate: moment(new Date()),
@@ -144,7 +196,7 @@ const AddProject = (props) => {
           label='Name'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please input Name',
             },
           ]}
@@ -156,8 +208,44 @@ const AddProject = (props) => {
           label='Location'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please input your Location!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name='borough'
+          label='Borough'
+          rules={[
+            {
+              required: true,
+              message: 'Please input Borough!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name='city'
+          label='City'
+          rules={[
+            {
+              required: true,
+              message: 'Please input your City!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name='state'
+          label='State'
+          rules={[
+            {
+              required: true,
+              message: 'Please input your State!',
             },
           ]}
         >
@@ -168,7 +256,7 @@ const AddProject = (props) => {
           label='Description'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please input your Description!',
             },
 
@@ -176,7 +264,7 @@ const AddProject = (props) => {
             // hasFeedback
             // rules={[
             //   {
-            //     required: false,
+            //     required: true,
             //     message: 'Please confirm your password!',
             //   },
             //   ({ getFieldValue }) => ({
@@ -199,7 +287,7 @@ const AddProject = (props) => {
           label='Bid Amount ($)'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please input Bid Amount!',
             },
           ]}
@@ -211,7 +299,7 @@ const AddProject = (props) => {
           label='Bid Date'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please select Bid Date!',
             },
           ]}
@@ -233,9 +321,9 @@ const AddProject = (props) => {
         ></Form.Item>
         <Form.Item
           name='projectType'
-          label='Select'
+          label='Project Type'
           hasFeedback
-          rules={[{ required: false, message: 'Please select your country!' }]}
+          rules={[{ required: true, message: 'Please select project type!' }]}
         >
           <Select placeholder='Please select project type'>
             <Option value='current'>Current</Option>
@@ -244,11 +332,22 @@ const AddProject = (props) => {
           </Select>
         </Form.Item>
         <Form.Item
+          name='projectStatus'
+          label='Project Status'
+          hasFeedback
+          rules={[{ required: true, message: 'Please select project status!' }]}
+        >
+          <Select placeholder='Please select project status'>
+            <Option value='published'>Published</Option>
+            <Option value='inactive'>Inactive</Option>
+          </Select>
+        </Form.Item>
+        <Form.Item
           name='solicitation'
           label='Solicitation'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please select Solicitation!',
             },
           ]}
@@ -260,7 +359,7 @@ const AddProject = (props) => {
           label='Bid From  ($)'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please input Bid From!',
             },
           ]}
@@ -272,7 +371,7 @@ const AddProject = (props) => {
           label='Bid To  ($)'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please input Bid To!',
             },
           ]}
@@ -284,7 +383,7 @@ const AddProject = (props) => {
           label='Bidding Method'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please input your Bidding Method!',
             },
           ]}
@@ -296,7 +395,7 @@ const AddProject = (props) => {
           label='Location'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please input your Bidding Location!',
             },
           ]}
@@ -308,7 +407,7 @@ const AddProject = (props) => {
           label='Bid Phase'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please input your Bid Phase!',
             },
           ]}
@@ -320,7 +419,7 @@ const AddProject = (props) => {
           label='Completion Time'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please input your Completion Time!',
             },
           ]}
@@ -332,7 +431,7 @@ const AddProject = (props) => {
           label='Liquidated Damages'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please input your Liquidated Damages!',
             },
           ]}
@@ -344,7 +443,7 @@ const AddProject = (props) => {
           label='Pre-bid Meeting'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please input your Pre-bid Meeting!',
             },
           ]}
@@ -356,7 +455,7 @@ const AddProject = (props) => {
           label='Notes'
           rules={[
             {
-              required: false,
+              required: true,
               message: 'Please input your Notes	!',
             },
           ]}
@@ -380,7 +479,7 @@ const AddProject = (props) => {
                         fieldKey={[field.fieldKey, 'divNo']}
                         rules={[
                           {
-                            required: false,
+                            required: true,
                             message: 'Missing division number',
                           },
                         ]}
@@ -392,7 +491,7 @@ const AddProject = (props) => {
                         name={[field.name, 'divName']}
                         fieldKey={[field.fieldKey, 'divName']}
                         rules={[
-                          { required: false, message: 'Missing division name' },
+                          { required: true, message: 'Missing division name' },
                         ]}
                       >
                         <Input placeholder='Division  Name' />
