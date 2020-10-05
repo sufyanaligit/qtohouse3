@@ -13,7 +13,7 @@ const WhyChooseQTO = (props) => {
           <div className='serv-wrap w-100'>
             <div className='row'>
               <div className='col-md-6 col-sm-6 col-lg-4'>
-                <div className='serv-box text-center w-100'>
+                <div className='serv-box text-center w-100' style={{minHeight: '240px'}}>
                   <div className='mb-0'>
                     <h3>TRUSTWORTHY</h3>
                   </div>
@@ -24,7 +24,7 @@ const WhyChooseQTO = (props) => {
                 </div>
               </div>
               <div className='col-md-6 col-sm-6 col-lg-4'>
-                <div className='serv-box text-center w-100'>
+                <div className='serv-box text-center w-100' style={{minHeight: '240px'}}>
                   {/* <img className="img-fluid" src={Two} alt="Service Image 2" /> */}
                   <div className='mb-0'>
                     <h3>EXPERIENCED</h3>
@@ -37,7 +37,7 @@ const WhyChooseQTO = (props) => {
                 </div>
               </div>
               <div className='col-md-6 col-sm-6 col-lg-4'>
-                <div className='serv-box text-center w-100'>
+                <div className='serv-box text-center w-100'  style={{minHeight: '240px'}}>
                   {/* <img className="img-fluid" src={Three} alt="Service Image 3" /> */}
                   <div className='mb-0'>
                     <h3>GUARANTEED</h3>

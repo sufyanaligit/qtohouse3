@@ -107,7 +107,7 @@ const AddProject = (props) => {
     projectDetails.CsiDivision.map((value) => {
       const csiDivision = {
         division_id: value.CSI_DVSN_ID,
-        divNo: value.CSI_DVSN_ID,
+        divNo: value.DVSN_NO,
         divName: value.NME,
       };
       return csiDivisions.push(csiDivision);

@@ -3,7 +3,7 @@ import React from 'react';
 const ListYourSelf = (props) => {
   return (
     <section>
-      <div className='listyourself w-100 pt-80 pb-80 position-relative'>
+      <div className='listyourself w-100 pb-80 position-relative'>
         <div className='container'>
           <div className='sec-title position-relative text-center w-100'>
             <h2 className='mb-0'>

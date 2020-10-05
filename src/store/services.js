@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-const BASE_URL = 'http://qtohousemvcweb.qto.house/Qtohouse';
+const BASE_URL = 'http://qtohousemvcweb.qto.house/Qtohouse/';
 
 const API = {
   getCurrentProjects: () => {
@@ -21,10 +21,10 @@ const API = {
   validateLogin: ({ userName, password }) => {
     debugger;
     const data = {
-      projectObj: {
-        userName: JSON.stringify('ahmad'),
-        password: JSON.stringify('123'),
-      },
+      projectObj: JSON.stringify({
+        userName: userName,
+        password: password
+      })
     };
     return axios
       .post(

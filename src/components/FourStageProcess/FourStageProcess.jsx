@@ -19,7 +19,7 @@ const FourStageProcess = (props) => {
           <div className='serv-wrap w-100'>
             <div className='row'>
               <div className='col-md-3 col-sm-3 col-lg-3'>
-                <div className='serv-box text-center w-100'>
+                <div className='serv-box text-center w-100' style={{height: '440px'}}>
                   <span className='four-stage-process-label'>
                     Initial Stage
                   </span>
@@ -42,7 +42,7 @@ const FourStageProcess = (props) => {
                 </div>
               </div>
               <div className='col-md-6 col-sm-6 col-lg-3'>
-                <div className='serv-box text-center w-100'>
+                <div className='serv-box text-center w-100' style={{height: '440px'}}>
                   <span className='four-stage-process-label'>Second Stage</span>
                   <img
                     className='img-fluid'
@@ -65,7 +65,7 @@ const FourStageProcess = (props) => {
                 </div>
               </div>
               <div className='col-md-6 col-sm-6 col-lg-3'>
-                <div className='serv-box text-center w-100'>
+                <div className='serv-box text-center w-100' style={{height: '440px'}}>
                   <span className='four-stage-process-label'>Third Stage</span>
                   <img
                     className='img-fluid'
@@ -88,7 +88,7 @@ const FourStageProcess = (props) => {
                 </div>
               </div>
               <div className='col-md-6 col-sm-6 col-lg-3'>
-                <div className='serv-box text-center w-100'>
+                <div className='serv-box text-center w-100' style={{height: '440px'}}>
                   <span className='four-stage-process-label'>FINAL STAGE</span>
                   <img
                     className='img-fluid'
