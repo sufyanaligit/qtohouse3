@@ -106,10 +106,11 @@ const AddProject = (props) => {
     const csiDivisions = [];
     projectDetails.CsiDivision.map((value) => {
       const csiDivision = {
+        division_id: value.CSI_DVSN_ID,
         divNo: value.CSI_DVSN_ID,
         divName: value.NME,
       };
-      csiDivisions.push(csiDivision);
+      return csiDivisions.push(csiDivision);
     });
     form.setFieldsValue({ name: projectDetails.PRJT_NME });
     form.setFieldsValue({ description: projectDetails.DSCR });

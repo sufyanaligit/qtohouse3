@@ -35,6 +35,15 @@ function* addProject(data) {
     yield put(projectActions.addProject.error(error));
   }
 }
+function* validateLogin(data) {
+  try {
+    yield put(projectActions.validateLogin.pending);
+    const response = yield call(API.validateLogin, data.payload);
+    yield put(projectActions.validateLogin.success(response));
+  } catch (error) {
+    yield put(projectActions.validateLogin.error(error));
+  }
+}
 
 export default function* rootSaga() {
   yield all([
@@ -44,5 +53,6 @@ export default function* rootSaga() {
       getCurrentProjectDetails
     ),
     takeEvery(ACTIONS.ADD_PROJECT_BEGIN, addProject),
+    takeEvery(ACTIONS.VALIDATE_LOGIN_BEGIN, validateLogin),
   ]);
 }

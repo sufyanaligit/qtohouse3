@@ -66,6 +66,22 @@ export const addProject = {
     status: FETCH_STATUS.ERROR,
   }),
 };
+export const validateLogin = {
+  pending: {
+    type: ACTIONS.VALIDATE_LOGIN.PENDING,
+    status: FETCH_STATUS.LOADING,
+  },
+  success: (data) => ({
+    type: ACTIONS.VALIDATE_LOGIN.SUCCESS,
+    data,
+    status: FETCH_STATUS.SUCCESS,
+  }),
+  error: (error) => ({
+    type: ACTIONS.VALIDATE_LOGIN.ERROR,
+    error,
+    status: FETCH_STATUS.ERROR,
+  }),
+};
 
 export const getProjectsListBegin = () => {
   return {
@@ -90,5 +106,12 @@ export const setIsLoginState = (loginState) => {
   return {
     type: ACTIONS.SET_LOGIN_STATE_BEGIN,
     payload: loginState,
+  };
+};
+
+export const validateLoginCredentialsBegin = (userName, password) => {
+  return {
+    type: ACTIONS.VALIDATE_LOGIN_BEGIN,
+    payload: { userName, password },
   };
 };

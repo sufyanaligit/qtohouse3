@@ -2,9 +2,12 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-const Login = () => {
+const Login = (props) => {
+  const { loading } = props;
   const onFinish = (values) => {
+    const { validateLoginCredentialsBegin } = props;
     console.log('Received values of form: ', values);
+    validateLoginCredentialsBegin(values.userName, values.password);
   };
 
   return (
@@ -17,7 +20,7 @@ const Login = () => {
       onFinish={onFinish}
     >
       <Form.Item
-        name='username'
+        name='userName'
         rules={[
           {
             required: true,
@@ -47,7 +50,12 @@ const Login = () => {
       </Form.Item>
 
       <Form.Item>
-        <Button type='primary' htmlType='submit' className='login-form-button'>
+        <Button
+          loading={loading}
+          type='primary'
+          htmlType='submit'
+          className='login-form-button'
+        >
           Log in
         </Button>
         {/* Or <a href=''>register now!</a> */}
