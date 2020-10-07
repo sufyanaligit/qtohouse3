@@ -21,7 +21,7 @@ const Footer = (props) => {
                       src='assets/images/truebid-icon.png'
                       alt='True Bid Icon'
                     />
-                    Qto Inc.
+                    QTO House.
                   </li>
                   {/* <li>
                     <i className="fas fa-map-marker-alt"></i>99 Wall Street,
