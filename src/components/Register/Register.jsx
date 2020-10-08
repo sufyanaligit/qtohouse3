@@ -1,6 +1,6 @@
 /* eslint-disable no-template-curly-in-string */
 import React from 'react';
-import { Form, Input, InputNumber, Button, Divider, Select } from 'antd';
+import { Form, Input, Button, Divider, Select } from 'antd';
 import './Register.scss';
 
 const { Option } = Select;

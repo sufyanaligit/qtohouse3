@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Tabs } from 'antd';
 import CurrentProjects from '../CurrentProjects';
 // import FeaturedProjects from '../FeaturedProjects';
+import Search from '../SearchComponent';
 import AllProjects from '../AllProjects';
 
 const { TabPane } = Tabs;
@@ -24,7 +25,8 @@ const Projects = (props) => {
   };
   return (
     <Tabs onChange={callback} type='card' centered size='large'>
-      <TabPane tab=' CURRENT PROJECTS' key='1'>
+      <TabPane tab='CURRENT PROJECTS' key='1'>
+        <Search />
         <CurrentProjects data={currentProjects} isLoading={isLoading} />
       </TabPane>
       <TabPane tab='FEATURED PROJECTS' key='2'>

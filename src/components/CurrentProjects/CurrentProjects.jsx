@@ -1,6 +1,7 @@
 import React from 'react';
 import Loader from '../Loader';
 import InfiniteListView from '../ListItem';
+
 import './CurrentProjects.scss';
 
 const CurrentProjects = (props) => {
