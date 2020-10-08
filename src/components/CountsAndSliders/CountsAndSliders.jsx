@@ -41,7 +41,7 @@ const CountsAndSliders = (props) => {
                       alt='Why Us Icon 1'
                       style={{ height: '32px' }}
                     />
-                    <h2 className='mb-0 counter'>59</h2>
+                    <h2 className='mb-0 counter'>80</h2>
                     <h5 className='mb-0'>Current Projects</h5>
                     {/* Upon clicking,open current project page */}
                   </a>

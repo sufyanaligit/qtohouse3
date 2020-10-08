@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 import Logo from '../../images/logo.png';
 
 const HeaderTitle = (props) => {
@@ -151,14 +152,14 @@ const HeaderTitle = (props) => {
                             Add Project
                           </NavLink>
                         </li>
+
+                        <NavLink
+                          className={classNames('thm-btn gold-btn-bg')}
+                          to='/register'
+                        >
+                          Register
+                        </NavLink>
                       </ul>
-                      <a
-                        className='thm-btn gold-btn-bg'
-                        href={() => false}
-                        title=''
-                      >
-                        Register
-                      </a>
                     </nav>
                   </div>
                 </div>

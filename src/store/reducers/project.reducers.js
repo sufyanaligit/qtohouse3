@@ -8,6 +8,7 @@ export default (
     featureProjects: {},
     loading: false,
     isLoginModal: false,
+    userInfo: {},
   }),
   action
 ) => {
@@ -63,6 +64,24 @@ export default (
     }
     case ACTIONS.SET_LOGIN_STATE_BEGIN: {
       return state.set('isLoginModal', action.payload);
+    }
+    case ACTIONS.VALIDATE_LOGIN.PENDING: {
+      return state.setIn(['userInfo', 'loading'], true);
+    }
+    case ACTIONS.VALIDATE_LOGIN.SUCCESS: {
+      return state
+        .setIn(['userInfo', 'loading'], false)
+        .setIn(
+          ['userInfo', 'isLoggedIn'],
+          action.data === 'True' ? true : false
+        )
+        .set('isLoginModal', false);
+    }
+    case ACTIONS.VALIDATE_LOGIN.ERROR: {
+      return state
+        .setIn(['userInfo', 'loading'], false)
+        .setIn(['userInfo', 'error'], true)
+        .set('isLoginModal', false);
     }
     default:
       return state;

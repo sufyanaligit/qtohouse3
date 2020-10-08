@@ -19,12 +19,11 @@ const API = {
       });
   },
   validateLogin: ({ userName, password }) => {
-    debugger;
     const data = {
       projectObj: JSON.stringify({
         userName: userName,
-        password: password
-      })
+        password: password,
+      }),
     };
     return axios
       .post(
@@ -32,7 +31,6 @@ const API = {
         qs.stringify(data)
       )
       .then((res) => {
-        debugger;
         return res.data;
       })
       .catch((err) => console.log(err));

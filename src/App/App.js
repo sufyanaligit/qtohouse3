@@ -11,6 +11,7 @@ import AddProject from '../components/AddProject';
 import Page404 from '../components/PageNotFound';
 import LoginModal from '../components/Modal';
 import LoginForm from '../components/Login';
+import Register from '../components/Register/Register';
 import '../antd.css';
 
 const App = (props) => {
@@ -40,6 +41,11 @@ const App = (props) => {
           exact
           path='/editProject/:id'
           render={(props) => <AddProject {...props} />}
+        />
+        <Route
+          exact
+          path='/register'
+          render={(props) => <Register {...props} />}
         />
         <Route component={Page404} />
       </Switch>
