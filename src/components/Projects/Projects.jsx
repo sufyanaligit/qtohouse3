@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Tabs } from 'antd';
 import CurrentProjects from '../CurrentProjects';
-// import FeaturedProjects from '../FeaturedProjects';
+import FeaturedProjects from '../FeaturedProjects';
 import Search from '../SearchComponent';
 import AllProjects from '../AllProjects';
 
@@ -30,8 +30,8 @@ const Projects = (props) => {
         <CurrentProjects data={currentProjects} isLoading={isLoading} />
       </TabPane>
       <TabPane tab='FEATURED PROJECTS' key='2'>
-        {/* <FeaturedProjects data={featuredProjects} isLoading={isLoading} /> */}
-        <h1>FeaturedProjects to be displayed here</h1>
+        <FeaturedProjects data={featuredProjects} isLoading={isLoading} />
+        {/* <h1>FeaturedProjects to be displayed here</h1> */}
       </TabPane>
       <TabPane tab='ALL PROJECTS' key='3'>
         <AllProjects data={allProjects} isLoading={isLoading} />

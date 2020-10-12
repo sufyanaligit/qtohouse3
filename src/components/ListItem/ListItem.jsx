@@ -9,7 +9,7 @@ import {
 import InfiniteScroll from 'react-infinite-scroller';
 
 const ListItem = (props) => {
-  const { data, isLoading } = props;
+  const { data, isLoading, isAdminLoggedIn } = props;
   //TODO: To be used later
   // const [setData] = useState(data);
   const [loading, setLoading] = useState(isLoading);
@@ -119,16 +119,18 @@ const ListItem = (props) => {
                 </Button>
               </div>
               &nbsp;
-              <div>
-                <Button
-                  type='info'
-                  style={{ background: '#8a8a8a' }}
-                  onClick={() => handleOnClickEditProject(item.PRJT_ID)}
-                >
-                  <ArrowRightOutlined />
-                  <span style={{ color: 'white' }}>Edit Details</span>
-                </Button>
-              </div>
+              {isAdminLoggedIn && (
+                <div>
+                  <Button
+                    type='info'
+                    style={{ background: '#8a8a8a' }}
+                    onClick={() => handleOnClickEditProject(item.PRJT_ID)}
+                  >
+                    <ArrowRightOutlined />
+                    <span style={{ color: 'white' }}>Edit Details</span>
+                  </Button>
+                </div>
+              )}
             </div>
             <hr />
             <div>{item.DSCR}</div>

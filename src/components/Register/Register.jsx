@@ -1,6 +1,7 @@
-/* eslint-disable no-template-curly-in-string */
-import React from 'react';
-import { Form, Input, Button, Divider, Select } from 'antd';
+import React, { useState } from 'react';
+import { Form, Input, Button, Divider, Select, message } from 'antd';
+import { useHistory } from 'react-router-dom';
+import API from '../../store/services';
 import './Register.scss';
 
 const { Option } = Select;
@@ -17,41 +18,107 @@ const formItemLayout = {
 };
 
 const Register = (props) => {
+  const history = useHistory();
+  const [isRegistrationSuccessful, setUserRegistrationStatus] = useState(false);
+  const [isUserNameAlreadyExists, setUserNameStatus] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [form] = Form.useForm();
+
   const onFinish = (values) => {
-    console.log(values);
+    // const { registerUserBegin } = props;
+    const userRegistration = values;
+    userRegistration.isEdit = 0;
+    userRegistration.adminIndicator = 0;
+    userRegistration.approveIndicator = 0;
+    setLoading(true);
+    API.registerUser(userRegistration).then((response) => {
+      const messageCode = response.data.MessageCode;
+      if (messageCode === 3) {
+        setUserRegistrationStatus(false);
+        setUserNameStatus(true);
+        setLoading(false);
+        setTimeout(() => {
+          setUserRegistrationStatus(false);
+          setUserNameStatus(false);
+          setLoading(false);
+        }, 1000);
+      } else {
+        setUserRegistrationStatus(true);
+        setUserNameStatus(false);
+        setLoading(false);
+      }
+    });
   };
-  const validateMessages = {
-    required: '${label} is required!',
-    types: {
-      email: '${label} is not validate email!',
-    },
-  };
+
+  if (isRegistrationSuccessful) {
+    form.resetFields();
+    message.info(
+      'Registration successful. An admin will soon approve your request',
+      3
+    );
+    history.push('/');
+  }
+  if (isUserNameAlreadyExists) {
+    message.info('UserName already exists. Please enter a different name', 3);
+  }
   return (
     <div className='register-container'>
       <Form
         {...formItemLayout}
-        name='nest-messages'
+        form={form}
+        name='userRegistrationForm'
         onFinish={onFinish}
-        validateMessages={validateMessages}
+        // initialValues={{
+        //   firstName: 'Bilal',
+        //   middleName: 'ur',
+        //   lastName: 'Rehman',
+        //   loginId: 'BilalurRehman_27',
+        //   email: 'bilal@gmail.com',
+        //   password: 'BilalurRehman_27',
+        //   confirm: 'BilalurRehman_27',
+        //   company: 'QTO House',
+        // }}
+        scrollToFirstError={true}
       >
         <h1 style={{ textAlign: 'center' }}>Registration</h1>
         <Divider />
         <Form.Item
-          name={['user', 'name']}
-          label='Name'
+          name={'firstName'}
+          label='First Name'
           rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          name={['user', 'email']}
+          name='lastName'
+          label='Last Name'
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name='middleName'
+          label='Middle Name'
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name='loginId'
+          label='User Name'
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name='email'
           label='Email'
           rules={[{ type: 'email', required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          name={['user', 'password']}
+          name='password'
           label='Password'
           rules={[
             {
@@ -63,9 +130,8 @@ const Register = (props) => {
         >
           <Input.Password />
         </Form.Item>
-
         <Form.Item
-          name={['user', 'confirm']}
+          name='confirm'
           label='Confirm Password'
           dependencies={['password']}
           hasFeedback
@@ -88,23 +154,28 @@ const Register = (props) => {
         >
           <Input.Password />
         </Form.Item>
-        <Form.Item name={['user', 'company']} label='Company'>
+        <Form.Item
+          name='company'
+          label='Company'
+          rules={[
+            {
+              required: true,
+              message: 'Please input your Company Name!',
+            },
+          ]}
+        >
           <Input />
         </Form.Item>
-        <Form.Item
-          name={['user', 'customerRole']}
-          label='Role'
-          // rules={[{ required: true }]}
-        >
-          <Select disabled defaultValue='customer' style={{ width: 120 }}>
+        <Form.Item name='role' label='Role' initialValue='customer'>
+          <Select disabled style={{ width: 120 }}>
             <Option value='customer'>Customer</Option>
           </Select>
         </Form.Item>
-        {/* <Form.Item name={['user', 'introduction']} label='Introduction'>
+        {/* <Form.Item name='introduction' label='Introduction'>
           <Input.TextArea />
         </Form.Item> */}
         <Form.Item wrapperCol={{ ...formItemLayout.wrapperCol, offset: 8 }}>
-          <Button type='primary' htmlType='submit'>
+          <Button type='primary' htmlType='submit' loading={loading}>
             Register
           </Button>
         </Form.Item>

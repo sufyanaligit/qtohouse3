@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import HomePage from '../components/HomePage';
 import HeaderTitle from '../components/HeaderTitle';
@@ -11,11 +11,18 @@ import AddProject from '../components/AddProject';
 import Page404 from '../components/PageNotFound';
 import LoginModal from '../components/Modal';
 import LoginForm from '../components/Login';
-import Register from '../components/Register/Register';
+import Register from '../components/Register';
+import PendingApprovals from '../components/PendingApprovals';
 import '../antd.css';
 
 const App = (props) => {
-  const { shouldShowLoginModal } = props;
+  const { shouldShowLoginModal, getLoggedInUserInfoBegin } = props;
+  const isSessionValid = !!localStorage.getItem('QTOUserId');
+
+  useEffect(() => {
+    if (isSessionValid)
+      getLoggedInUserInfoBegin(localStorage.getItem('QTOUserId'));
+  }, [getLoggedInUserInfoBegin, isSessionValid]);
   return (
     <>
       {shouldShowLoginModal && (
@@ -46,6 +53,11 @@ const App = (props) => {
           exact
           path='/register'
           render={(props) => <Register {...props} />}
+        />
+        <Route
+          exact
+          path='/pendingApprovals'
+          render={(props) => <PendingApprovals {...props} />}
         />
         <Route component={Page404} />
       </Switch>

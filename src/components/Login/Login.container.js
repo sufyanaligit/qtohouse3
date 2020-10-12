@@ -3,13 +3,13 @@ import Login from './Login';
 import { validateLoginCredentialsBegin } from '../../store/actions/project.actions';
 import {
   getLoginLoadingStatus,
-  getLoggedInStatus,
+  getLoggedInErrorStatus,
 } from '../../store/selectors/application.selectors';
 
 const mapStateToProps = (state) => {
   const loading = !!getLoginLoadingStatus(state);
-  const isLoggedIn = getLoggedInStatus(state);
-  return { loading, isLoggedIn };
+  const isError = getLoggedInErrorStatus(state);
+  return { loading, isError };
 };
 const mapDispatchToProps = {
   validateLoginCredentialsBegin,

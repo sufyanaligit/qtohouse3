@@ -66,3 +66,17 @@ export const getAddProjectLoadingStatus = createSelector(
 export const getIsProjectAddedStatus = createSelector(getProjects, (projects) =>
   projects.get('isProjectAdded')
 );
+
+export const getCurrentProjectsCount = createSelector(
+  getProjects,
+  (projects) => {
+    return projects.getIn(['currentProjects', 'currentProjectsCount'] || 0);
+  }
+);
+
+export const getFeatureProjectsCount = createSelector(
+  getProjects,
+  (projects) => {
+    return projects.getIn(['featureProjects', 'featureProjectsCount'] || 0);
+  }
+);

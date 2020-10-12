@@ -3,7 +3,7 @@ import './AboutUs.scss';
 
 const AboutUs = (props) => {
   return (
-    <div class='about-us-container'>
+    <div className='about-us-container'>
       <h1>About Us</h1>
       <p>
         QTO House is a well reputed and emerging quantity take-off and

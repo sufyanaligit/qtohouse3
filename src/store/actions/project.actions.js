@@ -82,6 +82,38 @@ export const validateLogin = {
     status: FETCH_STATUS.ERROR,
   }),
 };
+export const validateUserSession = {
+  pending: {
+    type: ACTIONS.VALIDATE_USER_SESSION.PENDING,
+    status: FETCH_STATUS.LOADING,
+  },
+  success: (data) => ({
+    type: ACTIONS.VALIDATE_USER_SESSION.SUCCESS,
+    data,
+    status: FETCH_STATUS.SUCCESS,
+  }),
+  error: (error) => ({
+    type: ACTIONS.VALIDATE_USER_SESSION.ERROR,
+    error,
+    status: FETCH_STATUS.ERROR,
+  }),
+};
+export const getPendingUserApprovals = {
+  pending: {
+    type: ACTIONS.GET_USER_PENDING_APPROVAL.PENDING,
+    status: FETCH_STATUS.LOADING,
+  },
+  success: (data) => ({
+    type: ACTIONS.GET_USER_PENDING_APPROVAL.SUCCESS,
+    data,
+    status: FETCH_STATUS.SUCCESS,
+  }),
+  error: (error) => ({
+    type: ACTIONS.GET_USER_PENDING_APPROVAL.ERROR,
+    error,
+    status: FETCH_STATUS.ERROR,
+  }),
+};
 
 export const getProjectsListBegin = () => {
   return {
@@ -108,10 +140,35 @@ export const setIsLoginState = (loginState) => {
     payload: loginState,
   };
 };
+export const clearUserSession = (userId) => {
+  return {
+    type: ACTIONS.CLEAR_USER_SESSION,
+    payload: userId,
+  };
+};
 
 export const validateLoginCredentialsBegin = (userName, password) => {
   return {
     type: ACTIONS.VALIDATE_LOGIN_BEGIN,
     payload: { userName, password },
+  };
+};
+
+export const getLoggedInUserInfoBegin = (userId) => {
+  return {
+    type: ACTIONS.VALIDATE_USER_SESSION_BEGIN,
+    payload: { userId },
+  };
+};
+
+export const getUserPendingApprovalListBegin = () => {
+  return {
+    type: ACTIONS.GET_USER_PENDING_APPROVAL_BEGIN,
+  };
+};
+export const approvePendingStatus = (data) => {
+  return {
+    type: ACTIONS.APPROVE_PENDING_STATUS,
+    payload: data,
   };
 };

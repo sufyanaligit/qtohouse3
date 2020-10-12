@@ -9,6 +9,7 @@ export default (
     loading: false,
     isLoginModal: false,
     userInfo: {},
+    pendingApprovals: {},
   }),
   action
 ) => {
@@ -26,7 +27,11 @@ export default (
 
       return state
         .setIn(['currentProjects', 'loading'], false)
-        .setIn(['currentProjects', 'data'], currentProjects);
+        .setIn(['currentProjects', 'data'], currentProjects)
+        .setIn(
+          ['currentProjects', 'currentProjectsCount'],
+          currentProjects.length
+        );
     }
     case ACTIONS.GET_FEATURED_PROJECTS_LIST.SUCCESS: {
       const featureProjects = action.data.filter(
@@ -34,7 +39,11 @@ export default (
       );
       return state
         .setIn(['featureProjects', 'loading'], false)
-        .setIn(['featureProjects', 'data'], featureProjects);
+        .setIn(['featureProjects', 'data'], featureProjects)
+        .setIn(
+          ['featureProjects', 'featureProjectsCount'],
+          featureProjects.length
+        );
     }
     case ACTIONS.GET_ALL_PROJECTS_LIST.SUCCESS: {
       return state
@@ -69,20 +78,70 @@ export default (
       return state.setIn(['userInfo', 'loading'], true);
     }
     case ACTIONS.VALIDATE_LOGIN.SUCCESS: {
+      const { data } = action;
+      localStorage.setItem('QTOUserId', data.LoginID);
       return state
         .setIn(['userInfo', 'loading'], false)
         .setIn(
           ['userInfo', 'isLoggedIn'],
-          action.data === 'True' ? true : false
+          data.MessageCode === 1 ? true : false
         )
+        .setIn(['userInfo', 'isRoleAdmin'], data.AdminInd)
+        .setIn(['userInfo', 'userName'], data.LoginID)
+        .setIn(['userInfo', 'error'], false)
         .set('isLoginModal', false);
     }
     case ACTIONS.VALIDATE_LOGIN.ERROR: {
+      const { error } = action;
+      localStorage.setItem('QTOUserToken', '');
       return state
         .setIn(['userInfo', 'loading'], false)
         .setIn(['userInfo', 'error'], true)
+        .setIn(
+          ['userInfo', 'isLoggedIn'],
+          error.MessageCode === 1 ? true : false
+        );
+    }
+    case ACTIONS.VALIDATE_USER_SESSION.PENDING: {
+      return state.set('loading', true);
+    }
+    case ACTIONS.VALIDATE_USER_SESSION.SUCCESS: {
+      const { data } = action;
+      return state
+        .setIn(['userInfo', 'loading'], false)
+        .setIn(['userInfo', 'isLoggedIn'], true)
+        .setIn(['userInfo', 'isRoleAdmin'], data.ADMN_IND)
+        .setIn(['userInfo', 'userName'], data.LOGN_ID)
+        .setIn(['userInfo', 'error'], false)
         .set('isLoginModal', false);
     }
+    case ACTIONS.VALIDATE_USER_SESSION.ERROR: {
+      return state
+        .setIn(['userInfo', 'loading'], false)
+        .setIn(['userInfo', 'isLoggedIn'], false)
+        .setIn(['userInfo', 'error'], true)
+        .set('isLoginModal', false);
+    }
+    case ACTIONS.CLEAR_USER_SESSION: {
+      localStorage.removeItem('QTOUserId');
+      return state.set('userInfo', {});
+    }
+    case ACTIONS.GET_USER_PENDING_APPROVAL.PENDING: {
+      return state.setIn(['pendingApprovals', 'loading'], true);
+    }
+    case ACTIONS.GET_USER_PENDING_APPROVAL.SUCCESS: {
+      const { data } = action;
+      const pendingApprovalList = data.filter(
+        (item) => item.APPR_IND === false && item.ADMN_IND === false
+      );
+      return state
+        .setIn(['pendingApprovals', 'loading'], false)
+        .setIn(['pendingApprovals', 'pendingUserList'], pendingApprovalList);
+    }
+    case ACTIONS.GET_USER_PENDING_APPROVAL.ERROR: {
+      return state.setIn(['pendingApprovals', 'loading'], false);
+    }
+
     default:
       return state;
   }

@@ -23,6 +23,8 @@ import Brand18 from '../../images/resources/brands/PANYNJ.png';
 import Brand19 from '../../images/resources/brands/SUNY.jpg';
 
 const CountsAndSliders = (props) => {
+  const { currentProjectsCount, featuredProjectsCount } = props;
+
   return (
     <section>
       <div
@@ -41,7 +43,7 @@ const CountsAndSliders = (props) => {
                       alt='Why Us Icon 1'
                       style={{ height: '32px' }}
                     />
-                    <h2 className='mb-0 counter'>80</h2>
+                    <h2 className='mb-0 counter'>{currentProjectsCount}</h2>
                     <h5 className='mb-0'>Current Projects</h5>
                     {/* Upon clicking,open current project page */}
                   </a>
@@ -56,8 +58,8 @@ const CountsAndSliders = (props) => {
                       alt='Why Us Icon 2'
                       style={{ height: '32px' }}
                     />
-                    <h2 className='mb-0 counter'>94</h2>
-                    <h5 className='mb-0'>Previous Projects</h5>
+                    <h2 className='mb-0 counter'>{featuredProjectsCount}</h2>
+                    <h5 className='mb-0'>Feature Projects</h5>
                   </a>
                 </div>
               </div>

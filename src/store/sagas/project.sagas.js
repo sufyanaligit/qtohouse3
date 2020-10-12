@@ -39,9 +39,42 @@ function* validateLogin(data) {
   try {
     yield put(projectActions.validateLogin.pending);
     const response = yield call(API.validateLogin, data.payload);
-    yield put(projectActions.validateLogin.success(response));
+    if (response.MessageCode === 1)
+      yield put(projectActions.validateLogin.success(response));
+    else {
+      yield put(projectActions.validateLogin.error(response));
+    }
   } catch (error) {
     yield put(projectActions.validateLogin.error(error));
+  }
+}
+
+function* validateUserSession(data) {
+  try {
+    yield put(projectActions.validateUserSession.pending);
+    const response = yield call(API.validateUserSession, data.payload);
+    yield put(projectActions.validateUserSession.success(response.data));
+  } catch (error) {
+    yield put(projectActions.validateUserSession.error(error));
+  }
+}
+function* getPendingUserApprovals() {
+  try {
+    yield put(projectActions.getPendingUserApprovals.pending);
+    const response = yield call(API.getPendingUserApprovals);
+    yield put(projectActions.getPendingUserApprovals.success(response));
+  } catch (error) {
+    yield put(projectActions.getPendingUserApprovals.error(error));
+  }
+}
+function* approvePendingStatus({ payload }) {
+  try {
+    yield put(projectActions.getPendingUserApprovals.pending);
+    const response = yield call(API.approvePendingStatus, payload);
+    debugger;
+    yield put(projectActions.getPendingUserApprovals.success(payload));
+  } catch (error) {
+    yield put(projectActions.getPendingUserApprovals.error(error));
   }
 }
 
@@ -54,5 +87,8 @@ export default function* rootSaga() {
     ),
     takeEvery(ACTIONS.ADD_PROJECT_BEGIN, addProject),
     takeEvery(ACTIONS.VALIDATE_LOGIN_BEGIN, validateLogin),
+    takeEvery(ACTIONS.VALIDATE_USER_SESSION_BEGIN, validateUserSession),
+    takeEvery(ACTIONS.GET_USER_PENDING_APPROVAL_BEGIN, getPendingUserApprovals),
+    takeEvery(ACTIONS.APPROVE_PENDING_STATUS, approvePendingStatus),
   ]);
 }

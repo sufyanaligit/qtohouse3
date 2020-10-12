@@ -1,13 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Menu, Dropdown } from 'antd';
+import {
+  DownOutlined,
+  UserSwitchOutlined,
+  LogoutOutlined,
+} from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 import Logo from '../../images/logo.png';
 
 const HeaderTitle = (props) => {
+  const { isLoggedIn, loggedInUserName, isAdminLoggedIn } = props;
+  const [visible, setVisible] = useState(false);
+
+  const handleMenuClick = (e) => {
+    const { clearUserSession } = props;
+    if (e.key === '3') {
+      clearUserSession(loggedInUserName);
+      setVisible(false);
+    }
+  };
+
+  const handleVisibleChange = (flag) => {
+    setVisible(flag);
+  };
+
   const handleShowLoginModal = (event) => {
     const { setIsLoginState } = props;
     setIsLoginState(true);
   };
+
+  const menu = (
+    <Menu onClick={handleMenuClick}>
+      <Menu.Item key='1'>
+        <UserSwitchOutlined />
+        User Profile
+      </Menu.Item>
+      <Menu.Item key='3'>
+        <LogoutOutlined /> Logout
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <header className='w-100'>
       <div className='topbar bg-color2 w-100'>
@@ -41,9 +74,29 @@ const HeaderTitle = (props) => {
                   </a>
                 </li>
                 <li>
-                  <a href={() => false} title='' onClick={handleShowLoginModal}>
-                    <i className='fas fa-lock'></i>Login
-                  </a>
+                  {!isLoggedIn ? (
+                    <a
+                      href={() => false}
+                      title=''
+                      onClick={handleShowLoginModal}
+                    >
+                      <i className='fas fa-lock'></i>Login
+                    </a>
+                  ) : (
+                    <Dropdown
+                      overlay={menu}
+                      onVisibleChange={handleVisibleChange}
+                      visible={visible}
+                    >
+                      <a
+                        href={() => false}
+                        className='ant-dropdown-link'
+                        onClick={(e) => e.preventDefault()}
+                      >
+                        {loggedInUserName} <DownOutlined />
+                      </a>
+                    </Dropdown>
+                  )}
                 </li>
               </ul>
             </div>
@@ -143,15 +196,28 @@ const HeaderTitle = (props) => {
                             Contact Us
                           </NavLink>
                         </li>
-                        <li>
-                          <NavLink
-                            className='nav-link'
-                            activeClassName='active'
-                            to='/addProject'
-                          >
-                            Add Project
-                          </NavLink>
-                        </li>
+                        {isAdminLoggedIn && (
+                          <>
+                            <li>
+                              <NavLink
+                                className='nav-link'
+                                activeClassName='active'
+                                to='/addProject'
+                              >
+                                Add Project
+                              </NavLink>
+                            </li>
+                            <li>
+                              <NavLink
+                                className='nav-link'
+                                activeClassName='active'
+                                to='/pendingApprovals'
+                              >
+                                Approvals
+                              </NavLink>
+                            </li>
+                          </>
+                        )}
 
                         <NavLink
                           className={classNames('thm-btn gold-btn-bg')}

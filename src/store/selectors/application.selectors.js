@@ -17,3 +17,24 @@ export const getLoginLoadingStatus = createSelector(getProjects, (projects) =>
 export const getLoggedInStatus = createSelector(getProjects, (projects) =>
   projects.getIn(['userInfo', 'isLoggedIn'])
 );
+
+export const getLoggedInErrorStatus = createSelector(getProjects, (projects) =>
+  projects.getIn(['userInfo', 'error'])
+);
+
+export const getLoggedInUserName = createSelector(getProjects, (projects) =>
+  projects.getIn(['userInfo', 'userName'])
+);
+
+export const getIsAdminLoggedIn = createSelector(getProjects, (projects) =>
+  projects.getIn(['userInfo', 'isRoleAdmin'])
+);
+
+export const getUserApprovalLoadingStatus = createSelector(
+  getProjects,
+  (projects) => projects.getIn(['pendingApprovals', 'loading'])
+);
+
+export const getUserApprovalList = createSelector(getProjects, (projects) =>
+  projects.getIn(['pendingApprovals', 'pendingUserList'])
+);
