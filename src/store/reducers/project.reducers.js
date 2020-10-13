@@ -72,7 +72,9 @@ export default (
       return state.set('loading', false);
     }
     case ACTIONS.SET_LOGIN_STATE_BEGIN: {
-      return state.set('isLoginModal', action.payload);
+      return state
+        .set('isLoginModal', action.payload)
+        .setIn(['userInfo', 'error'], false);
     }
     case ACTIONS.VALIDATE_LOGIN.PENDING: {
       return state.setIn(['userInfo', 'loading'], true);
