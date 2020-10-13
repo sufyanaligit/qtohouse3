@@ -114,6 +114,22 @@ export const getPendingUserApprovals = {
     status: FETCH_STATUS.ERROR,
   }),
 };
+export const approvePendingStatus = {
+  pending: {
+    type: ACTIONS.APPROVE_PENDING_STATUS.PENDING,
+    status: FETCH_STATUS.LOADING,
+  },
+  success: (data) => ({
+    type: ACTIONS.APPROVE_PENDING_STATUS.SUCCESS,
+    data,
+    status: FETCH_STATUS.SUCCESS,
+  }),
+  error: (error) => ({
+    type: ACTIONS.APPROVE_PENDING_STATUS.ERROR,
+    error,
+    status: FETCH_STATUS.ERROR,
+  }),
+};
 
 export const getProjectsListBegin = () => {
   return {
@@ -166,9 +182,9 @@ export const getUserPendingApprovalListBegin = () => {
     type: ACTIONS.GET_USER_PENDING_APPROVAL_BEGIN,
   };
 };
-export const approvePendingStatus = (data) => {
+export const approvePendingStatusBegin = (data) => {
   return {
-    type: ACTIONS.APPROVE_PENDING_STATUS,
+    type: ACTIONS.APPROVE_PENDING_STATUS_BEGIN,
     payload: data,
   };
 };

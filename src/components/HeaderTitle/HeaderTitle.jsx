@@ -6,10 +6,12 @@ import {
   LogoutOutlined,
 } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 import Logo from '../../images/logo.png';
 
 const HeaderTitle = (props) => {
+  const history = useHistory();
   const { isLoggedIn, loggedInUserName, isAdminLoggedIn } = props;
   const [visible, setVisible] = useState(false);
 
@@ -17,6 +19,10 @@ const HeaderTitle = (props) => {
     const { clearUserSession } = props;
     if (e.key === '3') {
       clearUserSession(loggedInUserName);
+      setVisible(false);
+    }
+    if (e.key === '1') {
+      history.push('/userProfile');
       setVisible(false);
     }
   };

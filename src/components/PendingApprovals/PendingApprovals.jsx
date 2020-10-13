@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Input, Button, Space, Divider } from 'antd';
+import { Table, Input, Button, Space, Divider, Spin, Tooltip } from 'antd';
 import Highlighter from 'react-highlight-words';
 import {
   SearchOutlined,
@@ -13,7 +13,7 @@ const PendingApprovals = (props) => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const [searchInput, setSearchInput] = useState('');
-
+  console.log('loading', loading);
   useEffect(() => {
     getUserPendingApprovalListBegin();
   }, [getUserPendingApprovalListBegin]);
@@ -97,15 +97,29 @@ const PendingApprovals = (props) => {
     setSearchText('');
   };
 
-  const handleApproveClick = (loginId) => {
-    const { approvePendingStatus } = props;
+  const handleApproveClick = (userId, loginId, activeIndicator) => {
+    const { approvePendingStatusBegin } = props;
     const data = {
       isEdit: 1,
       adminIndicator: 0,
       approveIndicator: 1,
+      userId,
       loginId,
+      activeIndicator,
     };
-    approvePendingStatus(data);
+    approvePendingStatusBegin(data);
+  };
+  const handleRejectClick = (userId, loginId, activeIndicator) => {
+    const { approvePendingStatusBegin } = props;
+    const data = {
+      isEdit: 1,
+      adminIndicator: 0,
+      approveIndicator: 0,
+      userId,
+      loginId,
+      activeIndicator,
+    };
+    approvePendingStatusBegin(data);
   };
 
   const columns = [
@@ -150,11 +164,15 @@ const PendingApprovals = (props) => {
       title: 'Status',
       dataIndex: 'APPR_IND',
       key: 'status',
-      render: (data) => {
-        return data.ACT_IND === true ? (
-          <CheckCircleTwoTone title='active' />
+      render: (approveIndicator) => {
+        return approveIndicator === true ? (
+          <Tooltip title='active'>
+            <CheckCircleTwoTone twoToneColor='#52c41a' />
+          </Tooltip>
         ) : (
-          <CloseCircleTwoTone title='inactive' />
+          <Tooltip title='inactive'>
+            <CloseCircleTwoTone twoToneColor='#eb2f96' />
+          </Tooltip>
         );
       },
     },
@@ -165,18 +183,40 @@ const PendingApprovals = (props) => {
       render: (data) => {
         return (
           <>
-            <Button
-              type='primary'
-              title='Approve'
-              onClick={() => handleApproveClick(data.LOGN_ID)}
-            >
-              Approve <CheckCircleTwoTone />
-            </Button>{' '}
-            &nbsp;
-            <Button type='danger' title='Reject'>
-              Reject
-              <CloseCircleTwoTone />
-            </Button>
+            {data.APPR_IND === true ? (
+              ''
+            ) : (
+              <>
+                <Button
+                  type='primary'
+                  title='Approve'
+                  onClick={() =>
+                    handleApproveClick(
+                      data.USER_ID,
+                      data.LOGN_ID,
+                      !!data.ACT_IND
+                    )
+                  }
+                >
+                  Approve <CheckCircleTwoTone />
+                </Button>{' '}
+                &nbsp;
+                <Button
+                  type='danger'
+                  title='Reject'
+                  onClick={() =>
+                    handleRejectClick(
+                      data.USER_ID,
+                      data.LOGN_ID,
+                      !!data.ACT_IND
+                    )
+                  }
+                >
+                  Reject
+                  <CloseCircleTwoTone />
+                </Button>
+              </>
+            )}
           </>
         );
       },
@@ -186,8 +226,18 @@ const PendingApprovals = (props) => {
   return (
     <div className='pending-approvals-container'>
       <h1>Pending Approvals</h1>
-      <Divider />
-      <Table columns={columns} dataSource={pendingList} />;
+      <Spin spinning={loading}>
+        <Divider />
+        <Table
+          columns={columns}
+          dataSource={pendingList}
+          pagination={{
+            pageSizeOptions: ['10', '20', '30'],
+            showSizeChanger: true,
+            pageSize: 10,
+          }}
+        />
+      </Spin>
     </div>
   );
 };

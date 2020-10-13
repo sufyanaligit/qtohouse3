@@ -48,9 +48,12 @@ const API = {
     return axios.get(`${BASE_URL}/UserAuth/GetUser`).then((res) => res.data);
   },
   approvePendingStatus: (request) => {
-    debugger;
     const data = { projectObj: JSON.stringify(request) };
-    return axios.post(`${BASE_URL}/UserAuth/SaveUser`, qs.stringify(data));
+    return axios
+      .post(`${BASE_URL}/UserAuth/SaveUser`, qs.stringify(data))
+      .then((res) => {
+        return res.data;
+      });
   },
 };
 

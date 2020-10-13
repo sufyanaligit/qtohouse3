@@ -13,6 +13,8 @@ import LoginModal from '../components/Modal';
 import LoginForm from '../components/Login';
 import Register from '../components/Register';
 import PendingApprovals from '../components/PendingApprovals';
+import UserProfile from '../components/UserProfile';
+
 import '../antd.css';
 
 const App = (props) => {
@@ -53,6 +55,11 @@ const App = (props) => {
           exact
           path='/register'
           render={(props) => <Register {...props} />}
+        />
+        <Route
+          exact
+          path='/userProfile'
+          render={(props) => <UserProfile {...props} />}
         />
         <Route
           exact

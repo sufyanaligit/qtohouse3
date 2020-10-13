@@ -149,6 +149,7 @@ const AddProject = (props) => {
   }
 
   if (loading) {
+    debugger;
     resetFields();
     message.success('Project added successfully', 3);
   }
@@ -156,10 +157,10 @@ const AddProject = (props) => {
   if (currentProjectStatus) return <Loader />;
   return (
     <>
-      <hr />
       <h1 style={{ textAlign: 'center' }}>
         {project_id ? <u>Edit Project</u> : <u>Add Project</u>}
       </h1>
+      <hr />
       <Form
         {...formItemLayout}
         form={form}

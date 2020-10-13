@@ -6,7 +6,7 @@ import {
 } from '../../store/selectors/application.selectors';
 import {
   getUserPendingApprovalListBegin,
-  approvePendingStatus,
+  approvePendingStatusBegin,
 } from '../../store/actions/project.actions';
 
 const mapStateToProps = (state) => {
@@ -16,6 +16,6 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = {
   getUserPendingApprovalListBegin,
-  approvePendingStatus,
+  approvePendingStatusBegin,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PendingApprovals);

@@ -103,7 +103,7 @@ export default (
         );
     }
     case ACTIONS.VALIDATE_USER_SESSION.PENDING: {
-      return state.set('loading', true);
+      return state.setIn(['userInfo', 'loading'], true);
     }
     case ACTIONS.VALIDATE_USER_SESSION.SUCCESS: {
       const { data } = action;
@@ -113,6 +113,7 @@ export default (
         .setIn(['userInfo', 'isRoleAdmin'], data.ADMN_IND)
         .setIn(['userInfo', 'userName'], data.LOGN_ID)
         .setIn(['userInfo', 'error'], false)
+        .setIn(['userInfo', 'loggedInUserDetails'], data)
         .set('isLoginModal', false);
     }
     case ACTIONS.VALIDATE_USER_SESSION.ERROR: {
@@ -132,13 +133,44 @@ export default (
     case ACTIONS.GET_USER_PENDING_APPROVAL.SUCCESS: {
       const { data } = action;
       const pendingApprovalList = data.filter(
-        (item) => item.APPR_IND === false && item.ADMN_IND === false
+        (item) => item.ADMN_IND === false
       );
       return state
         .setIn(['pendingApprovals', 'loading'], false)
         .setIn(['pendingApprovals', 'pendingUserList'], pendingApprovalList);
     }
     case ACTIONS.GET_USER_PENDING_APPROVAL.ERROR: {
+      return state.setIn(['pendingApprovals', 'loading'], false);
+    }
+
+    case ACTIONS.APPROVE_PENDING_STATUS.PENDING: {
+      return state.setIn(['pendingApprovals', 'loading'], true);
+    }
+    case ACTIONS.APPROVE_PENDING_STATUS.SUCCESS: {
+      const { data } = action;
+      const list = fromJS(state.getIn(['pendingApprovals', 'pendingUserList']));
+
+      const pendingApprovalList = list.update(
+        list.findIndex((item) => {
+          return (
+            item.get('ADMN_IND') === false &&
+            item.get('APPR_IND') === false &&
+            item.get('LOGN_ID') === data.loginId
+          );
+        }),
+        (item) => {
+          return item.set('APPR_IND', true);
+        }
+      );
+
+      return state
+        .setIn(['pendingApprovals', 'loading'], false)
+        .setIn(
+          ['pendingApprovals', 'pendingUserList'],
+          pendingApprovalList.toJS()
+        );
+    }
+    case ACTIONS.APPROVE_PENDING_STATUS.ERROR: {
       return state.setIn(['pendingApprovals', 'loading'], false);
     }
 

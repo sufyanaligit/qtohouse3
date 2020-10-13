@@ -69,12 +69,11 @@ function* getPendingUserApprovals() {
 }
 function* approvePendingStatus({ payload }) {
   try {
-    yield put(projectActions.getPendingUserApprovals.pending);
+    yield put(projectActions.approvePendingStatus.pending);
     const response = yield call(API.approvePendingStatus, payload);
-    debugger;
-    yield put(projectActions.getPendingUserApprovals.success(payload));
+    yield put(projectActions.approvePendingStatus.success(payload));
   } catch (error) {
-    yield put(projectActions.getPendingUserApprovals.error(error));
+    yield put(projectActions.approvePendingStatus.error(error));
   }
 }
 
@@ -89,6 +88,6 @@ export default function* rootSaga() {
     takeEvery(ACTIONS.VALIDATE_LOGIN_BEGIN, validateLogin),
     takeEvery(ACTIONS.VALIDATE_USER_SESSION_BEGIN, validateUserSession),
     takeEvery(ACTIONS.GET_USER_PENDING_APPROVAL_BEGIN, getPendingUserApprovals),
-    takeEvery(ACTIONS.APPROVE_PENDING_STATUS, approvePendingStatus),
+    takeEvery(ACTIONS.APPROVE_PENDING_STATUS_BEGIN, approvePendingStatus),
   ]);
 }
