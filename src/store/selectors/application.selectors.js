@@ -38,3 +38,7 @@ export const getUserApprovalLoadingStatus = createSelector(
 export const getUserApprovalList = createSelector(getProjects, (projects) =>
   projects.getIn(['pendingApprovals', 'pendingUserList'])
 );
+
+export const getLoggedInUserRole = createSelector(getProjects, (projects) =>
+  projects.getIn(['userInfo', 'isRoleAdmin'] || false)
+);

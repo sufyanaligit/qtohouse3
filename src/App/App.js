@@ -14,11 +14,12 @@ import LoginForm from '../components/Login';
 import Register from '../components/Register';
 import PendingApprovals from '../components/PendingApprovals';
 import UserProfile from '../components/UserProfile';
+import NotAuthorized from '../components/NotAuthorized';
 
 import '../antd.css';
 
 const App = (props) => {
-  const { shouldShowLoginModal, getLoggedInUserInfoBegin } = props;
+  const { shouldShowLoginModal, getLoggedInUserInfoBegin, isRoleAdmin } = props;
   const isSessionValid = !!localStorage.getItem('QTOUserId');
 
   useEffect(() => {
@@ -44,12 +45,16 @@ const App = (props) => {
         <Route
           exact
           path='/addProject'
-          render={(props) => <AddProject {...props} />}
+          render={(props) => {
+            return isRoleAdmin ? <AddProject {...props} /> : <NotAuthorized />;
+          }}
         />
         <Route
           exact
           path='/editProject/:id'
-          render={(props) => <AddProject {...props} />}
+          render={(props) => {
+            return isRoleAdmin ? <AddProject {...props} /> : <NotAuthorized />;
+          }}
         />
         <Route
           exact
@@ -64,7 +69,13 @@ const App = (props) => {
         <Route
           exact
           path='/pendingApprovals'
-          render={(props) => <PendingApprovals {...props} />}
+          render={(props) => {
+            return isRoleAdmin ? (
+              <PendingApprovals {...props} />
+            ) : (
+              <NotAuthorized />
+            );
+          }}
         />
         <Route component={Page404} />
       </Switch>

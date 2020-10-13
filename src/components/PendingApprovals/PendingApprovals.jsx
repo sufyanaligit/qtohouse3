@@ -161,7 +161,7 @@ const PendingApprovals = (props) => {
       ...getColumnSearchProps('EMAIL_ID'),
     },
     {
-      title: 'Status',
+      title: 'Active',
       dataIndex: 'APPR_IND',
       key: 'status',
       render: (approveIndicator) => {
