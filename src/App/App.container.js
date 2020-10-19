@@ -4,7 +4,10 @@ import {
   getLoginModalStatus,
   getLoggedInUserRole,
 } from '../store/selectors/application.selectors';
-import { getLoggedInUserInfoBegin } from '../store/actions/project.actions';
+import {
+  getLoggedInUserInfoBegin,
+  clearUserSession,
+} from '../store/actions/project.actions';
 
 const mapStateToProps = (state) => {
   const shouldShowLoginModal = getLoginModalStatus(state);
@@ -14,6 +17,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   getLoggedInUserInfoBegin,
+  clearUserSession,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -161,7 +161,9 @@ export default (
           );
         }),
         (item) => {
-          return item.set('APPR_IND', true);
+          return item
+            .set('APPR_IND', true)
+            .set('ACT_IND', !!data.approveIndicator);
         }
       );
 

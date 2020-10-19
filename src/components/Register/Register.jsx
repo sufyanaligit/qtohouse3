@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Divider, Select, message } from 'antd';
+import { Form, Input, Button, Divider, message } from 'antd';
 import { useHistory } from 'react-router-dom';
 import API from '../../store/services';
 import './Register.scss';
-
-const { Option } = Select;
 
 const formItemLayout = {
   labelCol: {
@@ -166,11 +164,11 @@ const Register = (props) => {
         >
           <Input />
         </Form.Item>
-        <Form.Item name='role' label='Role' initialValue='customer'>
+        {/* <Form.Item name='role' label='Role' initialValue='customer'>
           <Select disabled style={{ width: 120 }}>
             <Option value='customer'>Customer</Option>
           </Select>
-        </Form.Item>
+        </Form.Item> */}
         {/* <Form.Item name='introduction' label='Introduction'>
           <Input.TextArea />
         </Form.Item> */}

@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Input, Button, Space, Divider, Spin, Tooltip } from 'antd';
+import {
+  Table,
+  Input,
+  Button,
+  Space,
+  Divider,
+  Spin,
+  Tooltip,
+  Select,
+} from 'antd';
 import Highlighter from 'react-highlight-words';
 import {
   SearchOutlined,
@@ -7,6 +16,8 @@ import {
   CloseCircleTwoTone,
 } from '@ant-design/icons';
 import './PendingApprovals.scss';
+
+const { Option } = Select;
 
 const PendingApprovals = (props) => {
   const { loading, pendingList, getUserPendingApprovalListBegin } = props;
@@ -97,7 +108,7 @@ const PendingApprovals = (props) => {
     setSearchText('');
   };
 
-  const handleApproveClick = (userId, loginId, activeIndicator) => {
+  const handleApproveClick = (userId, loginId) => {
     const { approvePendingStatusBegin } = props;
     const data = {
       isEdit: 1,
@@ -105,11 +116,11 @@ const PendingApprovals = (props) => {
       approveIndicator: 1,
       userId,
       loginId,
-      activeIndicator,
+      activeIndicator: 1,
     };
     approvePendingStatusBegin(data);
   };
-  const handleRejectClick = (userId, loginId, activeIndicator) => {
+  const handleRejectClick = (userId, loginId) => {
     const { approvePendingStatusBegin } = props;
     const data = {
       isEdit: 1,
@@ -117,7 +128,7 @@ const PendingApprovals = (props) => {
       approveIndicator: 0,
       userId,
       loginId,
-      activeIndicator,
+      activeIndicator: 0,
     };
     approvePendingStatusBegin(data);
   };
@@ -147,7 +158,7 @@ const PendingApprovals = (props) => {
       title: 'User Name',
       dataIndex: 'LOGN_ID',
       key: 'userName',
-      width: '20%',
+      width: '15%',
       render: (data) => {
         return data.LOGN_ID;
       },
@@ -161,11 +172,24 @@ const PendingApprovals = (props) => {
       ...getColumnSearchProps('EMAIL_ID'),
     },
     {
+      title: 'Role',
+      dataIndex: '',
+      key: 'role',
+      width: '15%',
+      render: (data) => {
+        return (
+          <Select style={{ width: 120 }} defaultValue='customer'>
+            <Option value='customer'>Customer</Option>
+          </Select>
+        );
+      },
+    },
+    {
       title: 'Active',
-      dataIndex: 'APPR_IND',
+      dataIndex: 'ACT_IND',
       key: 'status',
-      render: (approveIndicator) => {
-        return approveIndicator === true ? (
+      render: (activeIndicator) => {
+        return activeIndicator === true ? (
           <Tooltip title='active'>
             <CheckCircleTwoTone twoToneColor='#52c41a' />
           </Tooltip>
@@ -190,13 +214,7 @@ const PendingApprovals = (props) => {
                 <Button
                   type='primary'
                   title='Approve'
-                  onClick={() =>
-                    handleApproveClick(
-                      data.USER_ID,
-                      data.LOGN_ID,
-                      !!data.ACT_IND
-                    )
-                  }
+                  onClick={() => handleApproveClick(data.USER_ID, data.LOGN_ID)}
                 >
                   Approve <CheckCircleTwoTone />
                 </Button>{' '}
@@ -204,13 +222,7 @@ const PendingApprovals = (props) => {
                 <Button
                   type='danger'
                   title='Reject'
-                  onClick={() =>
-                    handleRejectClick(
-                      data.USER_ID,
-                      data.LOGN_ID,
-                      !!data.ACT_IND
-                    )
-                  }
+                  onClick={() => handleRejectClick(data.USER_ID, data.LOGN_ID)}
                 >
                   Reject
                   <CloseCircleTwoTone />

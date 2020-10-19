@@ -11,11 +11,11 @@ const Login = (props) => {
     validateLoginCredentialsBegin(values.userName, values.password);
   };
 
+  if (isError && !loading)
+    message.error('Invalid User Credentials. Please try again', 3);
+
   return (
     <>
-      {isError &&
-        !loading &&
-        message.error('Invalid User Credentials. Please try again', 3)}
       <Form
         name='normal_login'
         className='login-form'

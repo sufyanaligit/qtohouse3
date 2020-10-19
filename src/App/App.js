@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import IdleTimer from 'react-idle-timer';
 import HomePage from '../components/HomePage';
 import HeaderTitle from '../components/HeaderTitle';
 import Footer from '../components/Footer';
@@ -15,21 +16,73 @@ import Register from '../components/Register';
 import PendingApprovals from '../components/PendingApprovals';
 import UserProfile from '../components/UserProfile';
 import NotAuthorized from '../components/NotAuthorized';
-
+import IdleTimeOutModal from '../components/IdleTimeOutModal';
 import '../antd.css';
 
 const App = (props) => {
   const { shouldShowLoginModal, getLoggedInUserInfoBegin, isRoleAdmin } = props;
+
   const isSessionValid = !!localStorage.getItem('QTOUserId');
+  const [timeout] = useState(10000 * 5 * 1); // 5 Min timeout session
+  const [showModal, setShowModal] = useState(false);
+  const [isTimedOut, setTimeout] = useState(false);
+  let idleTimer;
 
   useEffect(() => {
     if (isSessionValid)
       getLoggedInUserInfoBegin(localStorage.getItem('QTOUserId'));
   }, [getLoggedInUserInfoBegin, isSessionValid]);
+
+  const onAction = (e) => {
+    setTimeout(false);
+  };
+
+  const onActive = (e) => {
+    setTimeout(false);
+  };
+
+  const onIdle = (e) => {
+    if (isTimedOut) {
+      setShowModal(true);
+    } else {
+      idleTimer.reset();
+      setTimeout(true);
+    }
+  };
+
+  const handleClose = (e) => {
+    setShowModal(false);
+  };
+
+  const handleLogout = (e) => {
+    setShowModal(false);
+    const { clearUserSession } = props;
+    clearUserSession();
+  };
   return (
     <>
       {shouldShowLoginModal && (
         <LoginModal modalStatus={true} login={<LoginForm />} />
+      )}
+      {isSessionValid && (
+        <IdleTimer
+          ref={(ref) => {
+            idleTimer = ref;
+          }}
+          element={document}
+          onActive={onActive}
+          onIdle={(e) => onIdle(e)}
+          onAction={onAction}
+          debounce={250}
+          timeout={timeout}
+        />
+      )}
+      {showModal && (
+        <IdleTimeOutModal
+          showModal={showModal}
+          handleClose={handleClose}
+          handleLogout={handleLogout}
+        />
       )}
       <HeaderTitle />
       <Switch>

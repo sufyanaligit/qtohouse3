@@ -70,7 +70,7 @@ function* getPendingUserApprovals() {
 function* approvePendingStatus({ payload }) {
   try {
     yield put(projectActions.approvePendingStatus.pending);
-    const response = yield call(API.approvePendingStatus, payload);
+    yield call(API.approvePendingStatus, payload);
     yield put(projectActions.approvePendingStatus.success(payload));
   } catch (error) {
     yield put(projectActions.approvePendingStatus.error(error));

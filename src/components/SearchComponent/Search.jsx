@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import {
   Form,
   Row,
@@ -21,7 +22,16 @@ const SearchComponent = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    const searchRequest = {
+      projectName: values.projectName,
+      location: values.location,
+      sortBy: values.sortBy,
+      dateFrom: moment(values.dateRange[0]).format('YYYY-MM-DD'),
+      dateTo: moment(values.dateRange[1]).format('YYYY-MM-DD'),
+      bidFrom: values.bidFrom,
+      bidTo: values.bidTo,
+    };
+    console.log('Received values of form: ', searchRequest);
   };
 
   const handleChange = (value) => {
@@ -75,8 +85,9 @@ const SearchComponent = () => {
                   message: 'Input something!',
                 },
               ]}
+              initialValue='bid_date-DESC'
             >
-              <Select defaultValue='bid_date-DESC' onChange={handleChange}>
+              <Select onChange={handleChange}>
                 <Option value='bid_date-DESC'>
                   Bid Date (Newest to Oldest)
                 </Option>
