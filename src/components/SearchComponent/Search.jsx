@@ -17,19 +17,24 @@ import './Search.scss';
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-const SearchComponent = () => {
+const SearchComponent = (props) => {
   const [expand, setExpand] = useState(false);
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
+    debugger;
+    const { project_type } = props;
     const searchRequest = {
       projectName: values.projectName,
       location: values.location,
       sortBy: values.sortBy,
-      dateFrom: moment(values.dateRange[0]).format('YYYY-MM-DD'),
-      dateTo: moment(values.dateRange[1]).format('YYYY-MM-DD'),
+      dateFrom:
+        values.dateRange && moment(values.dateRange[0]).format('YYYY-MM-DD'),
+      dateTo:
+        values.dateRange && moment(values.dateRange[1]).format('YYYY-MM-DD'),
       bidFrom: values.bidFrom,
       bidTo: values.bidTo,
+      project_type,
     };
     console.log('Received values of form: ', searchRequest);
   };
@@ -133,10 +138,10 @@ const SearchComponent = () => {
                       ]}
                     >
                       <InputNumber
-                        min={1}
+                        min={0}
                         step={0.1}
                         max={1000}
-                        placeholder='Any'
+                        placeholder='Bid From'
                       />
                     </Form.Item>
                     <Form.Item
@@ -153,7 +158,7 @@ const SearchComponent = () => {
                         min={1}
                         step={0.1}
                         max={1000}
-                        placeholder='Any'
+                        placeholder='Bid To'
                       />
                     </Form.Item>
                   </Row>

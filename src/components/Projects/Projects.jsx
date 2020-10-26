@@ -26,7 +26,7 @@ const Projects = (props) => {
   return (
     <Tabs onChange={callback} type='card' centered size='large'>
       <TabPane tab='CURRENT PROJECTS' key='1'>
-        <Search />
+        <Search project_type='current' />
         <CurrentProjects data={currentProjects} isLoading={isLoading} />
       </TabPane>
       <TabPane tab='FEATURED PROJECTS' key='2'>

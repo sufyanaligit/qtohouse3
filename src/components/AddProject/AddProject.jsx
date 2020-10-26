@@ -330,7 +330,6 @@ const AddProject = (props) => {
           <Select placeholder='Please select project type'>
             <Option value='current'>Current</Option>
             <Option value='feature'>Feature</Option>
-            <Option value='all'>All</Option>
           </Select>
         </Form.Item>
         <Form.Item

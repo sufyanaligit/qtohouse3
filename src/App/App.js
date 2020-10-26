@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { message } from 'antd';
 import { Switch, Route } from 'react-router-dom';
 import IdleTimer from 'react-idle-timer';
 import HomePage from '../components/HomePage';
@@ -20,10 +21,15 @@ import IdleTimeOutModal from '../components/IdleTimeOutModal';
 import '../antd.css';
 
 const App = (props) => {
-  const { shouldShowLoginModal, getLoggedInUserInfoBegin, isRoleAdmin } = props;
+  const {
+    shouldShowLoginModal,
+    getLoggedInUserInfoBegin,
+    isRoleAdmin,
+    isError,
+  } = props;
 
   const isSessionValid = !!localStorage.getItem('QTOUserId');
-  const [timeout] = useState(10000 * 5 * 1); // 5 Min timeout session
+  const [timeout] = useState(120000); // 5 Min timeout session
   const [showModal, setShowModal] = useState(false);
   const [isTimedOut, setTimeout] = useState(false);
   let idleTimer;
@@ -61,6 +67,11 @@ const App = (props) => {
   };
   return (
     <>
+      {isError &&
+        message.error(
+          'There is something wrong with the network request. Please try again',
+          5
+        )}
       {shouldShowLoginModal && (
         <LoginModal modalStatus={true} login={<LoginForm />} />
       )}
@@ -117,7 +128,9 @@ const App = (props) => {
         <Route
           exact
           path='/userProfile'
-          render={(props) => <UserProfile {...props} />}
+          render={(props) => {
+            return isRoleAdmin ? <UserProfile {...props} /> : <NotAuthorized />;
+          }}
         />
         <Route
           exact

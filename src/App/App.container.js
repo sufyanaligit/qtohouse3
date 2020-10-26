@@ -3,6 +3,7 @@ import App from './App';
 import {
   getLoginModalStatus,
   getLoggedInUserRole,
+  getApplicationErrorStatus,
 } from '../store/selectors/application.selectors';
 import {
   getLoggedInUserInfoBegin,
@@ -12,7 +13,8 @@ import {
 const mapStateToProps = (state) => {
   const shouldShowLoginModal = getLoginModalStatus(state);
   const isRoleAdmin = getLoggedInUserRole(state);
-  return { shouldShowLoginModal, isRoleAdmin };
+  const isError = getApplicationErrorStatus(state);
+  return { shouldShowLoginModal, isRoleAdmin, isError };
 };
 
 const mapDispatchToProps = {

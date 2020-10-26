@@ -1,5 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
+// const BASE_URL = 'http://qtohousemvcwebdev.qto.house';
 const BASE_URL = 'http://qtohousemvcweb.qto.house';
 
 const API = {
@@ -54,6 +55,14 @@ const API = {
       .then((res) => {
         return res.data;
       });
+  },
+  verifyCode: (request) => {
+    debugger;
+    return axios
+      .get(
+        `${BASE_URL}/userauth/VerifyRegistrationCode?loginId=${request.userName}&verificationCode=${request.code}"`
+      )
+      .then((res) => res.data);
   },
 };
 

@@ -1,4 +1,4 @@
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 import createSelector from '../../utils/reselect';
 
 export const getProjects = (state) => {
@@ -41,4 +41,13 @@ export const getUserApprovalList = createSelector(getProjects, (projects) =>
 
 export const getLoggedInUserRole = createSelector(getProjects, (projects) =>
   projects.getIn(['userInfo', 'isRoleAdmin'] || false)
+);
+
+export const getCurrentUserDetails = createSelector(getProjects, (projects) =>
+  projects.getIn(['userInfo', 'loggedInUserDetails'] || Map())
+);
+
+export const getApplicationErrorStatus = createSelector(
+  getProjects,
+  (projects) => projects.getIn(['applicationError', 'error'])
 );

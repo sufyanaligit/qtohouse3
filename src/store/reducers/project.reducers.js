@@ -52,7 +52,10 @@ export default (
     }
 
     case ACTIONS.GET_CURRENT_PROJECTS_LIST.ERROR: {
-      return state.setIn(['currentProjects', 'loading'], false);
+      return state
+        .setIn(['currentProjects', 'loading'], false)
+        .setIn(['applicationErrors', 'error'], true)
+        .setIn(['applicationErrors', 'message'], action.error.message);
     }
     case ACTIONS.GET_CURRENT_PROJECTS_DETAILS.PENDING: {
       return state.setIn(
@@ -102,7 +105,9 @@ export default (
         .setIn(
           ['userInfo', 'isLoggedIn'],
           error.MessageCode === 1 ? true : false
-        );
+        )
+        .setIn(['applicationErrors', 'error'], true)
+        .setIn(['applicationErrors', 'message'], error.message);
     }
     case ACTIONS.VALIDATE_USER_SESSION.PENDING: {
       return state.setIn(['userInfo', 'loading'], true);
@@ -142,7 +147,10 @@ export default (
         .setIn(['pendingApprovals', 'pendingUserList'], pendingApprovalList);
     }
     case ACTIONS.GET_USER_PENDING_APPROVAL.ERROR: {
-      return state.setIn(['pendingApprovals', 'loading'], false);
+      return state
+        .setIn(['pendingApprovals', 'loading'], false)
+        .setIn(['applicationErrors', 'error'], true)
+        .setIn(['applicationErrors', 'message'], action.error);
     }
 
     case ACTIONS.APPROVE_PENDING_STATUS.PENDING: {
@@ -163,7 +171,8 @@ export default (
         (item) => {
           return item
             .set('APPR_IND', true)
-            .set('ACT_IND', !!data.approveIndicator);
+            .set('ACT_IND', !!data.approveIndicator)
+            .set('IS_PNDG_APPR', !!data.approveIndicator);
         }
       );
 
@@ -175,9 +184,11 @@ export default (
         );
     }
     case ACTIONS.APPROVE_PENDING_STATUS.ERROR: {
-      return state.setIn(['pendingApprovals', 'loading'], false);
+      return state
+        .setIn(['pendingApprovals', 'loading'], false)
+        .setIn(['applicationErrors', 'error'], true)
+        .setIn(['applicationErrors', 'message'], action.error);
     }
-
     default:
       return state;
   }

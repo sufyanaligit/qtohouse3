@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Divider, Select, message } from 'antd';
+import { Form, Input, Button, Divider, message } from 'antd';
 import { useHistory } from 'react-router-dom';
 import API from '../../store/services';
 import './UserProfile.scss';
-
-const { Option } = Select;
 
 const formItemLayout = {
   labelCol: {
@@ -23,11 +21,12 @@ const UserProfile = (props) => {
   const [isUserNameAlreadyExists, setUserNameStatus] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
+  const { userProfile } = props;
 
   const onFinish = (values) => {
     // const { registerUserBegin } = props;
     const userRegistration = values;
-    userRegistration.isEdit = 0;
+    userRegistration.isEdit = 1;
     userRegistration.adminIndicator = 0;
     userRegistration.approveIndicator = 0;
     setLoading(true);
@@ -68,16 +67,16 @@ const UserProfile = (props) => {
         form={form}
         name='userRegistrationForm'
         onFinish={onFinish}
-        // initialValues={{
-        //   firstName: 'Bilal',
-        //   middleName: 'ur',
-        //   lastName: 'Rehman',
-        //   loginId: 'BilalurRehman_27',
-        //   email: 'bilal@gmail.com',
-        //   password: 'BilalurRehman_27',
-        //   confirm: 'BilalurRehman_27',
-        //   company: 'QTO House',
-        // }}
+        initialValues={{
+          firstName: userProfile.FRST_NME,
+          middleName: userProfile.MIDL_NME,
+          lastName: userProfile.LAST_NME,
+          loginId: userProfile.LOGN_ID,
+          email: userProfile.EMAIL_ID,
+          // password: 'BilalurRehman_27',
+          // confirm: 'BilalurRehman_27',
+          company: userProfile.CMPY,
+        }}
         scrollToFirstError={true}
       >
         <h1 style={{ textAlign: 'center' }}>User Profile</h1>
@@ -85,37 +84,37 @@ const UserProfile = (props) => {
         <Form.Item
           name={'firstName'}
           label='First Name'
-          rules={[{ required: true }]}
+          // rules={[{ required: true }]}
         >
-          <Input />
+          <Input disabled={true} />
         </Form.Item>
         <Form.Item
           name='lastName'
           label='Last Name'
-          rules={[{ required: true }]}
+          // rules={[{ required: true }]}
         >
-          <Input />
+          <Input disabled={true} />
         </Form.Item>
         <Form.Item
           name='middleName'
           label='Middle Name'
-          rules={[{ required: true }]}
+          // rules={[{ required: tue }]}
         >
-          <Input />
+          <Input disabled={true} />
         </Form.Item>
         <Form.Item
           name='loginId'
           label='User Name'
-          rules={[{ required: true }]}
+          // rules={[{ required: true }]}
         >
-          <Input />
+          <Input disabled={true} />
         </Form.Item>
         <Form.Item
           name='email'
           label='Email'
-          rules={[{ type: 'email', required: true }]}
+          // rules={[{ type: 'email', required: true }]}
         >
-          <Input />
+          <Input disabled={true} />
         </Form.Item>
         <Form.Item
           name='password'
@@ -157,20 +156,20 @@ const UserProfile = (props) => {
         <Form.Item
           name='company'
           label='Company'
-          rules={[
-            {
-              required: true,
-              message: 'Please input your Company Name!',
-            },
-          ]}
+          // rules={[
+          //   {
+          //     required: true,
+          //     message: 'Please input your Company Name!',
+          //   },
+          // ]}
         >
-          <Input />
+          <Input disabled={true} />
         </Form.Item>
-        <Form.Item name='role' label='Role' initialValue='customer'>
+        {/* <Form.Item name='role' label='Role' initialValue='customer'>
           <Select disabled style={{ width: 120 }}>
             <Option value='customer'>Customer</Option>
           </Select>
-        </Form.Item>
+        </Form.Item> */}
         {/* <Form.Item name='introduction' label='Introduction'>
           <Input.TextArea />
         </Form.Item> */}

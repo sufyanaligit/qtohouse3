@@ -179,7 +179,7 @@ const PendingApprovals = (props) => {
       render: (data) => {
         return (
           <Select style={{ width: 120 }} defaultValue='customer'>
-            <Option value='customer'>Customer</Option>
+            <Option value='2'>Customer</Option>
           </Select>
         );
       },
@@ -207,7 +207,7 @@ const PendingApprovals = (props) => {
       render: (data) => {
         return (
           <>
-            {data.APPR_IND === true ? (
+            {data.IS_PNDG_APPR === true ? (
               ''
             ) : (
               <>
