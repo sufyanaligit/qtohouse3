@@ -41,9 +41,9 @@ export const DEFAULT_SEARCH_CRITERIA = {
   sortBy: 'bid_date-DESC',
   dateFrom: '',
   dateTo: '',
-  bidFrom: '',
-  bidTo: '',
-  project_type: '',
+  bidFrom: 0,
+  bidTo: 0,
+  project_type: 'current',
   pageNo: 1,
 };
 
