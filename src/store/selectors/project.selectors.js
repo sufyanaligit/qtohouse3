@@ -80,3 +80,7 @@ export const getFeatureProjectsCount = createSelector(
     return projects.getIn(['featureProjects', 'featureProjectsCount'] || 0);
   }
 );
+
+export const getSearchPayload = createSelector(getProjects, (projects) => {
+  return projects.get('searchCriteria');
+});

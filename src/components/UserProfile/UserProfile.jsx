@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Divider, message } from 'antd';
-import { useHistory } from 'react-router-dom';
 import API from '../../store/services';
 import './UserProfile.scss';
 
@@ -16,9 +15,7 @@ const formItemLayout = {
 };
 
 const UserProfile = (props) => {
-  const history = useHistory();
   const [isRegistrationSuccessful, setUserRegistrationStatus] = useState(false);
-  const [isUserNameAlreadyExists, setUserNameStatus] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const { userProfile } = props;
@@ -29,21 +26,21 @@ const UserProfile = (props) => {
     userRegistration.isEdit = 1;
     userRegistration.adminIndicator = 0;
     userRegistration.approveIndicator = 0;
+    userRegistration.activeIndicator = 1;
     setLoading(true);
     API.registerUser(userRegistration).then((response) => {
       const messageCode = response.data.MessageCode;
       if (messageCode === 3) {
         setUserRegistrationStatus(false);
-        setUserNameStatus(true);
+
         setLoading(false);
         setTimeout(() => {
           setUserRegistrationStatus(false);
-          setUserNameStatus(false);
+
           setLoading(false);
         }, 1000);
       } else {
         setUserRegistrationStatus(true);
-        setUserNameStatus(false);
         setLoading(false);
       }
     });
@@ -51,15 +48,9 @@ const UserProfile = (props) => {
 
   if (isRegistrationSuccessful) {
     form.resetFields();
-    message.info(
-      'Registration successful. An admin will soon approve your request',
-      3
-    );
-    history.push('/');
+    message.info('Password updated successfully', 3);
   }
-  if (isUserNameAlreadyExists) {
-    message.info('UserName already exists. Please enter a different name', 3);
-  }
+
   return (
     <div className='register-container'>
       <Form

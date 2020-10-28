@@ -149,7 +149,6 @@ const AddProject = (props) => {
   }
 
   if (loading) {
-    debugger;
     resetFields();
     message.success('Project added successfully', 3);
   }

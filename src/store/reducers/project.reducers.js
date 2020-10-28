@@ -1,5 +1,8 @@
 import { fromJS } from 'immutable';
-import ACTIONS, { PROJECT_TYPE } from '../qto.constants';
+import ACTIONS, {
+  PROJECT_TYPE,
+  DEFAULT_SEARCH_CRITERIA,
+} from '../qto.constants';
 
 export default (
   state = fromJS({
@@ -10,6 +13,7 @@ export default (
     isLoginModal: false,
     userInfo: {},
     pendingApprovals: {},
+    searchCriteria: DEFAULT_SEARCH_CRITERIA,
   }),
   action
 ) => {

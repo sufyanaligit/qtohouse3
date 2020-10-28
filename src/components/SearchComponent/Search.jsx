@@ -22,7 +22,6 @@ const SearchComponent = (props) => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    debugger;
     const { project_type } = props;
     const searchRequest = {
       projectName: values.projectName,
@@ -35,6 +34,7 @@ const SearchComponent = (props) => {
       bidFrom: values.bidFrom,
       bidTo: values.bidTo,
       project_type,
+      pageNo: 1,
     };
     console.log('Received values of form: ', searchRequest);
   };
@@ -132,7 +132,6 @@ const SearchComponent = (props) => {
                       label='Bid From'
                       rules={[
                         {
-                          required: true,
                           message: 'Please input Bid From!',
                         },
                       ]}
@@ -144,12 +143,12 @@ const SearchComponent = (props) => {
                         placeholder='Bid From'
                       />
                     </Form.Item>
+                    &nbsp;
                     <Form.Item
                       name='bidTo'
                       label='Bid To'
                       rules={[
                         {
-                          required: true,
                           message: 'Please input Bid To!',
                         },
                       ]}

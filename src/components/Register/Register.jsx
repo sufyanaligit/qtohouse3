@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Divider, message } from 'antd';
-import { useHistory } from 'react-router-dom';
 import VerifyCode from './VerifyCode';
 import API from '../../store/services';
 import './Register.scss';
@@ -17,8 +16,6 @@ const formItemLayout = {
 };
 
 const Register = (props) => {
-  const history = useHistory();
-  const { userName } = props;
   const [isRegistrationSuccessful, setUserRegistrationStatus] = useState(false);
   const [isUserNameAlreadyExists, setUserNameStatus] = useState(false);
   const [
@@ -26,11 +23,12 @@ const Register = (props) => {
     setIsEmailVerificationCodeSent,
   ] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loggedInUserName, setLoggedInUserName] = useState('');
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    // const { registerUserBegin } = props;
     const userRegistration = values;
+    setLoggedInUserName(values.loginId);
     userRegistration.isEdit = 0;
     userRegistration.adminIndicator = 0;
     userRegistration.approveIndicator = 0;
@@ -62,11 +60,6 @@ const Register = (props) => {
   };
 
   if (isEmailVerificationCodeSent) {
-    // form.resetFields();
-    // message.info(
-    //   'Registration successful. An admin will soon approve your request',
-    //   3
-    // );
     message.info(
       'A verification code has been sent to your email address. Please enter that code to complete registration',
       5
@@ -78,23 +71,23 @@ const Register = (props) => {
   return (
     <div className='register-container'>
       {isEmailVerificationCodeSent ? (
-        <VerifyCode userName={userName} />
+        <VerifyCode userName={loggedInUserName} />
       ) : (
         <Form
           {...formItemLayout}
           form={form}
           name='userRegistrationForm'
           onFinish={onFinish}
-          initialValues={{
-            firstName: 'Bilal',
-            middleName: 'ur',
-            lastName: 'Rehman',
-            loginId: 'BilalurRehman_27',
-            email: 'bilal@gmail.com',
-            password: 'BilalurRehman_27',
-            confirm: 'BilalurRehman_27',
-            company: 'QTO House',
-          }}
+          // initialValues={{
+          //   firstName: 'Bilal',
+          //   middleName: 'ur',
+          //   lastName: 'Rehman',
+          //   loginId: 'BilalurRehman_27',
+          //   email: 'bilal_ur_rehman@outlook.com',
+          //   password: 'BilalurRehman_27',
+          //   confirm: 'BilalurRehman_27',
+          //   company: 'QTO House',
+          // }}
           scrollToFirstError={true}
         >
           <h1 style={{ textAlign: 'center' }}>Registration</h1>

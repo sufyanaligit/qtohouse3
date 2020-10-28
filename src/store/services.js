@@ -1,11 +1,12 @@
 import axios from 'axios';
 import qs from 'qs';
-// const BASE_URL = 'http://qtohousemvcwebdev.qto.house';
-const BASE_URL = 'http://qtohousemvcweb.qto.house';
+const BASE_URL = 'http://qtohousemvcwebdev.qto.house';
+// const BASE_URL = 'http://qtohousemvcweb.qto.house';
 
 const API = {
-  getCurrentProjects: () => {
-    return axios.get(`${BASE_URL}/Qtohouse/GetProject`);
+  getProjects: (searchPayload) => {
+    debugger;
+    return axios.post(`${BASE_URL}/Qtohouse/GetProject`, searchPayload);
   },
   getCurrentProjectDetails: (id) => {
     return axios.get(`${BASE_URL}/Qtohouse/GetProjectDetail?id=${id}`);
@@ -57,10 +58,9 @@ const API = {
       });
   },
   verifyCode: (request) => {
-    debugger;
     return axios
       .get(
-        `${BASE_URL}/userauth/VerifyRegistrationCode?loginId=${request.userName}&verificationCode=${request.code}"`
+        `${BASE_URL}/userauth/VerifyRegistrationCode?loginId=${request.userName}&verificationCode=${request.code}`
       )
       .then((res) => res.data);
   },

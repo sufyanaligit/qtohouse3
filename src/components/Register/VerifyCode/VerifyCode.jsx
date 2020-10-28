@@ -1,5 +1,6 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
+import { useHistory } from 'react-router-dom';
 import API from '../../../store/services';
 
 const formItemLayout = {
@@ -34,6 +35,7 @@ const tailFormItemLayout = {
 };
 
 const VerifyCode = (props) => {
+  const history = useHistory();
   const [form] = Form.useForm();
   const { userName } = props;
   const onFinish = (values) => {
@@ -44,7 +46,20 @@ const VerifyCode = (props) => {
     };
 
     API.verifyCode(verificationCode).then((response) => {
-      debugger;
+      if (response.MessageCode === 1) {
+        message.success(
+          'Registration successful. An admin will soon approve your request',
+          5
+        );
+        setTimeout(() => {
+          history.push('/');
+        }, 3000);
+      } else {
+        message.error(
+          'You have either entered an invalid code or something went wrong at our end. Please try again',
+          5
+        );
+      }
     });
   };
 
@@ -72,7 +87,12 @@ const VerifyCode = (props) => {
           },
         ]}
       >
-        <Input addonBefore={prefixSelector} />
+        <Input
+          addonBefore={prefixSelector}
+          style={{
+            width: '20%',
+          }}
+        />
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type='primary' htmlType='submit'>

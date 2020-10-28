@@ -225,12 +225,14 @@ const HeaderTitle = (props) => {
                           </>
                         )}
 
-                        <NavLink
-                          className={classNames('thm-btn gold-btn-bg')}
-                          to='/register'
-                        >
-                          Register
-                        </NavLink>
+                        {!isLoggedIn && (
+                          <NavLink
+                            className={classNames('thm-btn gold-btn-bg')}
+                            to='/register'
+                          >
+                            Register
+                          </NavLink>
+                        )}
                       </ul>
                     </nav>
                   </div>

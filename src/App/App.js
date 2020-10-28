@@ -26,6 +26,7 @@ const App = (props) => {
     getLoggedInUserInfoBegin,
     isRoleAdmin,
     isError,
+    isLoggedIn,
   } = props;
 
   const isSessionValid = !!localStorage.getItem('QTOUserId');
@@ -129,7 +130,7 @@ const App = (props) => {
           exact
           path='/userProfile'
           render={(props) => {
-            return isRoleAdmin ? <UserProfile {...props} /> : <NotAuthorized />;
+            return isLoggedIn ? <UserProfile {...props} /> : <NotAuthorized />;
           }}
         />
         <Route

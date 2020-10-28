@@ -1,4 +1,5 @@
-import { all, call, put, takeEvery } from 'redux-saga/effects';
+import { all, call, put, takeEvery, select } from 'redux-saga/effects';
+import { getSearchPayload } from '../selectors/project.selectors';
 import ACTIONS from '../qto.constants';
 import { projectActions } from '../actions';
 import API from '../services';
@@ -7,7 +8,8 @@ import API from '../services';
 function* getProjects() {
   try {
     yield put(projectActions.getCurrentProjectsList.pending);
-    const response = yield call(API.getCurrentProjects);
+    const searchPayload = yield select(getSearchPayload);
+    const response = yield call(API.getProjects, searchPayload);
     yield put(projectActions.getCurrentProjectsList.success(response.data));
     yield put(projectActions.getFeaturedProjectsList.success(response.data));
     yield put(projectActions.getAllProjectsList.success(response.data));

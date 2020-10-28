@@ -35,6 +35,17 @@ export const FETCH_STATUS = {
   SUCCESS: 'SUCCESS',
   ERROR: 'ERROR',
 };
+export const DEFAULT_SEARCH_CRITERIA = {
+  projectName: '',
+  location: '',
+  sortBy: 'bid_date-DESC',
+  dateFrom: '',
+  dateTo: '',
+  bidFrom: '',
+  bidTo: '',
+  project_type: '',
+  pageNo: 1,
+};
 
 export default {
   ...FILTER_ACTIONS,
