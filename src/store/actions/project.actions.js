@@ -18,19 +18,26 @@ export const getCurrentProjectsList = {
 };
 
 export const getFeaturedProjectsList = {
+  pending: {
+    type: ACTIONS.GET_FEATURED_PROJECTS_LIST.PENDING,
+    status: FETCH_STATUS.LOADING,
+  },
   success: (data) => ({
     type: ACTIONS.GET_FEATURED_PROJECTS_LIST.SUCCESS,
     data,
     status: FETCH_STATUS.SUCCESS,
   }),
+  error: (error) => ({
+    type: ACTIONS.GET_FEATURED_PROJECTS_LIST.ERROR,
+    error,
+    status: FETCH_STATUS.ERROR,
+  }),
 };
 
-export const getAllProjectsList = {
-  success: (data) => ({
-    type: ACTIONS.GET_ALL_PROJECTS_LIST.SUCCESS,
-    data,
-    status: FETCH_STATUS.SUCCESS,
-  }),
+export const getAllProjectsList = () => {
+  return {
+    type: ACTIONS.GET_ALL_PROJECTS_LIST,
+  };
 };
 
 //Project Details
@@ -131,11 +138,47 @@ export const approvePendingStatus = {
   }),
 };
 
-export const getProjectsListBegin = () => {
+export const performLazyLoadSearch = {
+  pending: (selectedTab) => ({
+    type: ACTIONS.PERFORM_LAZY_LOAD_SEARCH.PENDING,
+    selectedTab,
+    status: FETCH_STATUS.LOADING,
+  }),
+  success: (data, payload, selectedTab) => ({
+    type: ACTIONS.PERFORM_LAZY_LOAD_SEARCH.SUCCESS,
+    data,
+    payload,
+    selectedTab,
+    status: FETCH_STATUS.SUCCESS,
+  }),
+  error: (error, selectedTab) => ({
+    type: ACTIONS.PERFORM_LAZY_LOAD_SEARCH.ERROR,
+    error,
+    selectedTab,
+    status: FETCH_STATUS.ERROR,
+  }),
+};
+
+export const getCurrentProjectsBegin = (searchPayload) => {
   return {
     type: ACTIONS.GET_CURRENT_PROJECTS_LIST_BEGIN,
+    payload: searchPayload,
   };
 };
+export const performLazyLoadSearchBegin = (searchPayload) => {
+  return {
+    type: ACTIONS.PERFORM_LAZY_LOAD_SEARCH_BEGIN,
+    payload: searchPayload,
+  };
+};
+
+export const getFeatureProjectsBegin = (searchPayload) => {
+  return {
+    type: ACTIONS.GET_FEATURED_PROJECTS_LIST_BEGIN,
+    payload: searchPayload,
+  };
+};
+
 export const getCurrentProjectDetailsBegin = (id) => {
   return {
     type: ACTIONS.GET_CURRENT_PROJECTS_DETAILS_BEGIN,
@@ -156,6 +199,7 @@ export const setIsLoginState = (loginState) => {
     payload: loginState,
   };
 };
+
 export const clearUserSession = (userId) => {
   return {
     type: ACTIONS.CLEAR_USER_SESSION,
@@ -182,9 +226,31 @@ export const getUserPendingApprovalListBegin = () => {
     type: ACTIONS.GET_USER_PENDING_APPROVAL_BEGIN,
   };
 };
+
 export const approvePendingStatusBegin = (data) => {
   return {
     type: ACTIONS.APPROVE_PENDING_STATUS_BEGIN,
     payload: data,
+  };
+};
+
+export const setSearchPayload = (searchPayload, selectedTab) => {
+  return {
+    type: ACTIONS.SET_SEARCH_PAYLOAD,
+    payload: { searchPayload, selectedTab },
+  };
+};
+
+export const setSelectedTab = (selectedTab) => {
+  return {
+    type: ACTIONS.SET_SELECTED_TAB,
+    payload: selectedTab,
+  };
+};
+
+export const resetSearchPayload = (selectedTab) => {
+  return {
+    type: ACTIONS.RESET_SEARCH_PAYLOAD,
+    selectedTab,
   };
 };

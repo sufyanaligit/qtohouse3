@@ -8,7 +8,7 @@ import {
   getLoggedInStatus,
   getLoggedInUserName,
   getIsAdminLoggedIn,
-} from '../../store/selectors/application.selectors';
+} from '../../store/selectors/userInfo.selectors';
 
 const mapStateToProps = (state) => {
   const isLoggedIn = getLoggedInStatus(state);

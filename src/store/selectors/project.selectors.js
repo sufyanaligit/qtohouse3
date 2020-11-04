@@ -6,24 +6,21 @@ export const getProjects = (state) => {
   return projects || List();
 };
 
+export const getSelectedTab = createSelector(getProjects, (projects) => {
+  return projects.get('selectedTab');
+});
+
 export const getFeaturedProjects = createSelector(getProjects, (projects) => {
-  return projects.getIn(['featureProjects', 'data']) || List();
+  return projects.getIn(['featuredProjects', 'data']) || [];
 });
 
 export const getCurrentProjects = createSelector(getProjects, (projects) => {
-  return projects.getIn(['currentProjects', 'data']) || List();
+  return projects.getIn(['currentProjects', 'data']) || [];
 });
 
 export const getAllProjects = createSelector(getProjects, (projects) => {
-  return projects.getIn(['allProjects', 'data']) || List();
+  return projects.getIn(['allProjects', 'data']) || [];
 });
-
-// export const getCurrentProjects = createSelector(
-//   getCurrentProjects,
-//   (currentProjectsList) => {
-//     return currentProjectsList.get('data') || List();
-//   }
-// );
 
 export const getCurrentProjectStatus = createSelector(
   getProjects,
@@ -35,7 +32,7 @@ export const getCurrentProjectStatus = createSelector(
 export const getFeaturedProjectStatus = createSelector(
   getProjects,
   (featuredProjectsList) => {
-    return featuredProjectsList.getIn(['featureProjects', 'loading']);
+    return featuredProjectsList.getIn(['featuredProjects', 'loading']);
   }
 );
 
@@ -77,10 +74,22 @@ export const getCurrentProjectsCount = createSelector(
 export const getFeatureProjectsCount = createSelector(
   getProjects,
   (projects) => {
-    return projects.getIn(['featureProjects', 'featureProjectsCount'] || 0);
+    return projects.getIn(['featuredProjects', 'featureProjectsCount'] || 0);
   }
 );
 
-export const getSearchPayload = createSelector(getProjects, (projects) => {
-  return projects.get('searchCriteria');
-});
+export const getSearchPayload = createSelector(
+  getProjects,
+  getSelectedTab,
+  (projects, selectedTab) => {
+    return projects.getIn([selectedTab, 'searchCriteria']);
+  }
+);
+
+export const getSelectedTabTotalRecords = createSelector(
+  getProjects,
+  getSelectedTab,
+  (projects, selectedTab) => {
+    return projects.getIn([selectedTab, `${selectedTab}Count`]);
+  }
+);

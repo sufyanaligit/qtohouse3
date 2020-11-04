@@ -4,7 +4,7 @@ import { validateLoginCredentialsBegin } from '../../store/actions/project.actio
 import {
   getLoginLoadingStatus,
   getLoggedInErrorStatus,
-} from '../../store/selectors/application.selectors';
+} from '../../store/selectors/userInfo.selectors';
 
 const mapStateToProps = (state) => {
   const loading = !!getLoginLoadingStatus(state);

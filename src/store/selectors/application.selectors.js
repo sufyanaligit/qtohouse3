@@ -1,34 +1,10 @@
-import { List, Map } from 'immutable';
+import { List } from 'immutable';
 import createSelector from '../../utils/reselect';
 
 export const getProjects = (state) => {
   const { projects } = state;
   return projects || List();
 };
-
-export const getLoginModalStatus = createSelector(getProjects, (projects) => {
-  return projects.get('isLoginModal');
-});
-
-export const getLoginLoadingStatus = createSelector(getProjects, (projects) =>
-  projects.getIn(['userInfo', 'loading'])
-);
-
-export const getLoggedInStatus = createSelector(getProjects, (projects) =>
-  projects.getIn(['userInfo', 'isLoggedIn'])
-);
-
-export const getLoggedInErrorStatus = createSelector(getProjects, (projects) =>
-  projects.getIn(['userInfo', 'error'])
-);
-
-export const getLoggedInUserName = createSelector(getProjects, (projects) =>
-  projects.getIn(['userInfo', 'userName'])
-);
-
-export const getIsAdminLoggedIn = createSelector(getProjects, (projects) =>
-  projects.getIn(['userInfo', 'isRoleAdmin'])
-);
 
 export const getUserApprovalLoadingStatus = createSelector(
   getProjects,
@@ -39,15 +15,9 @@ export const getUserApprovalList = createSelector(getProjects, (projects) =>
   projects.getIn(['pendingApprovals', 'pendingUserList'])
 );
 
-export const getLoggedInUserRole = createSelector(getProjects, (projects) =>
-  projects.getIn(['userInfo', 'isRoleAdmin'] || false)
-);
-
-export const getCurrentUserDetails = createSelector(getProjects, (projects) =>
-  projects.getIn(['userInfo', 'loggedInUserDetails'] || Map())
-);
-
 export const getApplicationErrorStatus = createSelector(
   getProjects,
-  (projects) => projects.getIn(['applicationError', 'error'])
+  (projects) => {
+    return projects.getIn(['applicationError', 'error']);
+  }
 );

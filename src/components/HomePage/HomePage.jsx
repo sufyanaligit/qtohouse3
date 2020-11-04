@@ -9,15 +9,16 @@ import FourStageProcess from '../FourStageProcess';
 
 const HomePage = (props) => {
   const {
-    getProjectsListBegin,
+    getCurrentProjectsBegin,
     currentProjectsCount,
     featureProjectsCount,
     loading,
   } = props;
 
   useEffect(() => {
-    getProjectsListBegin();
-  }, [getProjectsListBegin]);
+    getCurrentProjectsBegin();
+  }, [getCurrentProjectsBegin]);
+
   return (
     <>
       {loading && <Loader />}

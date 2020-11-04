@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import App from './App';
 import {
-  getLoginModalStatus,
   getLoggedInUserRole,
-  getApplicationErrorStatus,
   getLoggedInStatus,
-} from '../store/selectors/application.selectors';
+  getLoginModalStatus,
+} from '../store/selectors/userInfo.selectors';
+import { getApplicationErrorStatus } from '../store/selectors/application.selectors';
 import {
   getLoggedInUserInfoBegin,
   clearUserSession,

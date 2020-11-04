@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import HomePage from './HomePage';
-import { getProjectsListBegin } from '../../store/actions/project.actions';
+import { getCurrentProjectsBegin } from '../../store/actions/project.actions';
 import {
   getCurrentProjectsCount,
   getFeatureProjectsCount,
@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
   return { currentProjectsCount, featureProjectsCount, loading };
 };
 const mapDispatchToProps = {
-  getProjectsListBegin,
+  getCurrentProjectsBegin,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

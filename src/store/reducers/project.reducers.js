@@ -1,58 +1,59 @@
-import { fromJS } from 'immutable';
-import ACTIONS, {
-  PROJECT_TYPE,
-  DEFAULT_SEARCH_CRITERIA,
-} from '../qto.constants';
+import { fromJS, List } from 'immutable';
+import ACTIONS, { DEFAULT_SEARCH_CRITERIA } from '../qto.constants';
+import { getSelectedTabValue } from '../../utils/utils';
 
 export default (
   state = fromJS({
-    currentProjects: {},
+    currentProjects: {
+      searchCriteria: DEFAULT_SEARCH_CRITERIA,
+    },
     allProjects: {},
-    featureProjects: {},
+    featuredProjects: {
+      searchCriteria: DEFAULT_SEARCH_CRITERIA,
+    },
     loading: false,
     isLoginModal: false,
-    userInfo: {},
     pendingApprovals: {},
-    searchCriteria: DEFAULT_SEARCH_CRITERIA,
+    selectedTab: 'currentProjects',
   }),
   action
 ) => {
   switch (action.type) {
     case ACTIONS.GET_CURRENT_PROJECTS_LIST.PENDING: {
-      return state.setIn(
-        ['currentProjects', 'loading'],
-        action.status === 'LOADING' ? true : false
-      );
+      return state.setIn(['currentProjects', 'loading'], true);
     }
     case ACTIONS.GET_CURRENT_PROJECTS_LIST.SUCCESS: {
-      const currentProjects = action.data.filter(
-        (item) => item.PRJT_TYPE.toLowerCase() === PROJECT_TYPE.CURRENT
-      );
-
+      const currentProjectsCount = action.data.TotalRecords;
       return state
         .setIn(['currentProjects', 'loading'], false)
-        .setIn(['currentProjects', 'data'], currentProjects)
+        .setIn(['currentProjects', 'data'], action.data.ProjectList)
         .setIn(
           ['currentProjects', 'currentProjectsCount'],
-          currentProjects.length
+          currentProjectsCount
         );
+    }
+    case ACTIONS.GET_FEATURED_PROJECTS_LIST.PENDING: {
+      return state.setIn(['featuredProjects', 'loading'], true);
     }
     case ACTIONS.GET_FEATURED_PROJECTS_LIST.SUCCESS: {
-      const featureProjects = action.data.filter(
-        (item) => item.PRJT_TYPE.toLowerCase() === PROJECT_TYPE.FEATURED
-      );
+      const featuredProjectsCount = action.data.TotalRecords;
       return state
-        .setIn(['featureProjects', 'loading'], false)
-        .setIn(['featureProjects', 'data'], featureProjects)
+        .setIn(['featuredProjects', 'loading'], false)
+        .setIn(['featuredProjects', 'data'], action.data.ProjectList)
         .setIn(
-          ['featureProjects', 'featureProjectsCount'],
-          featureProjects.length
+          ['featuredProjects', 'featuredProjectsCount'],
+          featuredProjectsCount
         );
     }
-    case ACTIONS.GET_ALL_PROJECTS_LIST.SUCCESS: {
+    case ACTIONS.GET_ALL_PROJECTS_LIST: {
+      const currentProjects = state.getIn(['currentProjects', 'data']) || [];
+      const featuredProjects = state.getIn(['featuredProjects', 'data']) || [];
+      const allProjects = currentProjects.concat(featuredProjects);
+
       return state
         .setIn(['allProjects', 'loading'], false)
-        .setIn(['allProjects', 'data'], action.data);
+        .setIn(['allProjects', 'data'], allProjects)
+        .setIn(['allProjects', 'allProjectsCount'], allProjects.length);
     }
 
     case ACTIONS.GET_CURRENT_PROJECTS_LIST.ERROR: {
@@ -78,66 +79,7 @@ export default (
     case ACTIONS.ADD_PROJECT.SUCCESS: {
       return state.set('loading', false);
     }
-    case ACTIONS.SET_LOGIN_STATE_BEGIN: {
-      return state
-        .set('isLoginModal', action.payload)
-        .setIn(['userInfo', 'error'], false);
-    }
-    case ACTIONS.VALIDATE_LOGIN.PENDING: {
-      return state.setIn(['userInfo', 'loading'], true);
-    }
-    case ACTIONS.VALIDATE_LOGIN.SUCCESS: {
-      const { data } = action;
-      localStorage.setItem('QTOUserId', data.LoginID);
-      return state
-        .setIn(['userInfo', 'loading'], false)
-        .setIn(
-          ['userInfo', 'isLoggedIn'],
-          data.MessageCode === 1 ? true : false
-        )
-        .setIn(['userInfo', 'isRoleAdmin'], data.AdminInd)
-        .setIn(['userInfo', 'userName'], data.LoginID)
-        .setIn(['userInfo', 'error'], false)
-        .set('isLoginModal', false);
-    }
-    case ACTIONS.VALIDATE_LOGIN.ERROR: {
-      const { error } = action;
-      localStorage.setItem('QTOUserToken', '');
-      return state
-        .setIn(['userInfo', 'loading'], false)
-        .setIn(['userInfo', 'error'], true)
-        .setIn(
-          ['userInfo', 'isLoggedIn'],
-          error.MessageCode === 1 ? true : false
-        )
-        .setIn(['applicationErrors', 'error'], true)
-        .setIn(['applicationErrors', 'message'], error.message);
-    }
-    case ACTIONS.VALIDATE_USER_SESSION.PENDING: {
-      return state.setIn(['userInfo', 'loading'], true);
-    }
-    case ACTIONS.VALIDATE_USER_SESSION.SUCCESS: {
-      const { data } = action;
-      return state
-        .setIn(['userInfo', 'loading'], false)
-        .setIn(['userInfo', 'isLoggedIn'], true)
-        .setIn(['userInfo', 'isRoleAdmin'], data.ADMN_IND)
-        .setIn(['userInfo', 'userName'], data.LOGN_ID)
-        .setIn(['userInfo', 'error'], false)
-        .setIn(['userInfo', 'loggedInUserDetails'], data)
-        .set('isLoginModal', false);
-    }
-    case ACTIONS.VALIDATE_USER_SESSION.ERROR: {
-      return state
-        .setIn(['userInfo', 'loading'], false)
-        .setIn(['userInfo', 'isLoggedIn'], false)
-        .setIn(['userInfo', 'error'], true)
-        .set('isLoginModal', false);
-    }
-    case ACTIONS.CLEAR_USER_SESSION: {
-      localStorage.removeItem('QTOUserId');
-      return state.set('userInfo', {});
-    }
+
     case ACTIONS.GET_USER_PENDING_APPROVAL.PENDING: {
       return state.setIn(['pendingApprovals', 'loading'], true);
     }
@@ -175,8 +117,8 @@ export default (
         (item) => {
           return item
             .set('APPR_IND', true)
-            .set('ACT_IND', !!data.approveIndicator)
-            .set('IS_PNDG_APPR', !!data.approveIndicator);
+            .set('ACT_IND', !!data.activeIndicator)
+            .set('IS_PNDG_APPR', true);
         }
       );
 
@@ -192,6 +134,51 @@ export default (
         .setIn(['pendingApprovals', 'loading'], false)
         .setIn(['applicationErrors', 'error'], true)
         .setIn(['applicationErrors', 'message'], action.error);
+    }
+    case ACTIONS.SET_SEARCH_PAYLOAD: {
+      const { payload } = action;
+      return state.setIn(
+        [payload.selectedTab, 'searchCriteria'],
+        fromJS(payload.searchPayload)
+      );
+    }
+    case ACTIONS.SET_SELECTED_TAB: {
+      const { payload } = action;
+      return state.set('selectedTab', payload);
+    }
+    case ACTIONS.PERFORM_LAZY_LOAD_SEARCH.PENDING: {
+      const { selectedTab } = action;
+      return state.setIn([selectedTab, 'loading'], true);
+    }
+    case ACTIONS.PERFORM_LAZY_LOAD_SEARCH.SUCCESS: {
+      const { data, payload, selectedTab } = action;
+      const totalCount = data.TotalRecords;
+      const previousCurrentProjects =
+        state.getIn([selectedTab, 'data']) || List();
+      const currentProjects = previousCurrentProjects.concat(data.ProjectList);
+      return state
+        .setIn([selectedTab, 'loading'], false)
+        .setIn([selectedTab, 'data'], currentProjects)
+        .setIn([selectedTab, 'searchCriteria'], fromJS(payload))
+        .setIn([selectedTab, `${selectedTab}Count`], totalCount);
+    }
+    case ACTIONS.PERFORM_LAZY_LOAD_SEARCH.ERROR: {
+      const { error, selectedTab } = action;
+      return state
+        .setIn([selectedTab, 'loading'], false)
+        .setIn(['applicationErrors', 'error'], true)
+        .setIn(['applicationErrors', 'message'], error.message);
+    }
+
+    case ACTIONS.RESET_SEARCH_PAYLOAD: {
+      const { selectedTab } = action;
+      const currentTab = getSelectedTabValue(selectedTab);
+      const searchPayload = DEFAULT_SEARCH_CRITERIA;
+      searchPayload.project_type = currentTab;
+      return state.setIn(
+        [selectedTab, 'searchCriteria'],
+        fromJS(searchPayload)
+      );
     }
     default:
       return state;

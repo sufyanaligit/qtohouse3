@@ -8,6 +8,7 @@ import {
   Spin,
   Tooltip,
   Select,
+  Checkbox,
 } from 'antd';
 import Highlighter from 'react-highlight-words';
 import {
@@ -133,6 +134,19 @@ const PendingApprovals = (props) => {
     approvePendingStatusBegin(data);
   };
 
+  const onChange = (e, userId, loginId) => {
+    console.log(`checked = ${e.target.checked}`);
+    const { approvePendingStatusBegin } = props;
+    const data = {
+      isEdit: 1,
+      adminIndicator: 0,
+      approveIndicator: 0,
+      userId,
+      loginId,
+      activeIndicator: 1,
+    };
+    approvePendingStatusBegin(data);
+  };
   const columns = [
     {
       title: 'First Name',
@@ -186,16 +200,25 @@ const PendingApprovals = (props) => {
     },
     {
       title: 'Active',
-      dataIndex: 'ACT_IND',
+      dataIndex: '',
       key: 'status',
-      render: (activeIndicator) => {
-        return activeIndicator === true ? (
+      render: (data) => {
+        const { ACT_IND, IS_PNDG_APPR } = data;
+
+        return ACT_IND === true ? (
           <Tooltip title='active'>
-            <CheckCircleTwoTone twoToneColor='#52c41a' />
+            <Checkbox
+              disabled={!IS_PNDG_APPR}
+              checked={ACT_IND}
+              onChange={(e) => onChange(e, data.USER_ID, data.LOGN_ID)}
+            ></Checkbox>
           </Tooltip>
         ) : (
           <Tooltip title='inactive'>
-            <CloseCircleTwoTone twoToneColor='#eb2f96' />
+            <Checkbox
+              disabled={!IS_PNDG_APPR}
+              onChange={(e) => onChange(e, data.USER_ID, data.LOGN_ID)}
+            ></Checkbox>
           </Tooltip>
         );
       },

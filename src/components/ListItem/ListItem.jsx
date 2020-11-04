@@ -9,24 +9,24 @@ import {
 import InfiniteScroll from 'react-infinite-scroller';
 
 const ListItem = (props) => {
-  const { data, isLoading, isAdminLoggedIn } = props;
-  //TODO: To be used later
-  // const [setData] = useState(data);
-  const [loading, setLoading] = useState(isLoading);
+  const { data, isLoading, isAdminLoggedIn, totalRecords } = props;
   const [hasMore, setHasMore] = useState(true);
   const history = useHistory();
 
   const handleInfiniteOnLoad = () => {
-    //setLoading(true);
-    if (data.length > 14) {
-      message.warning('Infinite List loaded all');
-      setLoading(false);
-      setHasMore(false);
-      return;
-    } else {
-      //  getProjectsListBegin()
-      setHasMore(true);
-    }
+    setTimeout(() => {
+      const { performLazyLoadSearchBegin } = props;
+      let { searchPayload } = props;
+      if (data.length >= totalRecords) {
+        message.warning('Infinite List loaded all');
+        setHasMore(false);
+      } else {
+        let pageNo = searchPayload.get('pageNo');
+        searchPayload = searchPayload.set('pageNo', ++pageNo).toJS();
+        performLazyLoadSearchBegin(searchPayload);
+        setHasMore(true);
+      }
+    }, 1000);
   };
 
   const handleOnClickProjectDetails = (path) => {
@@ -36,19 +36,23 @@ const ListItem = (props) => {
   const handleOnClickEditProject = (project_id) => {
     history.push(`editProject/${project_id}`);
   };
+
   return (
     <InfiniteScroll
-      initialLoad={true}
-      pageStart={0}
+      initialLoad={false}
+      pageStart={1}
       loadMore={handleInfiniteOnLoad}
       hasMore={hasMore}
       useWindow={false}
+      loader={
+        isLoading &&
+        hasMore && (
+          <div className='demo-loading-container'>
+            <Spin size='large' />
+          </div>
+        )
+      }
     >
-      {loading && hasMore && (
-        <div className='demo-loading-container'>
-          <Spin />
-        </div>
-      )}
       <List
         itemLayout='vertical'
         size='large'

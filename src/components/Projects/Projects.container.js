@@ -1,21 +1,29 @@
 import { connect } from 'react-redux';
 import Projects from './Projects';
-import { getProjectsListBegin } from '../../store/actions/project.actions';
+import {
+  getCurrentProjectsBegin,
+  getFeatureProjectsBegin,
+  setSelectedTab,
+  getAllProjectsList,
+} from '../../store/actions/project.actions';
 import {
   getCurrentProjects,
   getFeaturedProjects,
   getAllProjects,
-  getCurrentProjectStatus,
+  getSelectedTab,
 } from '../../store/selectors/project.selectors';
 
 const mapStateToProps = (state) => {
   const currentProjects = getCurrentProjects(state);
   const featuredProjects = getFeaturedProjects(state);
   const allProjects = getAllProjects(state);
-  const isLoading = !!getCurrentProjectStatus(state);
-  return { currentProjects, featuredProjects, allProjects, isLoading };
+  const currentSelectedTab = getSelectedTab(state);
+  return { currentProjects, featuredProjects, allProjects, currentSelectedTab };
 };
 const mapDispatchToProps = {
-  getProjectsListBegin,
+  getCurrentProjectsBegin,
+  getFeatureProjectsBegin,
+  setSelectedTab,
+  getAllProjectsList,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Projects);

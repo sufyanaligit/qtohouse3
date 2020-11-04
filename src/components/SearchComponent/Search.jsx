@@ -22,21 +22,30 @@ const SearchComponent = (props) => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    const { project_type } = props;
-    const searchRequest = {
-      projectName: values.projectName,
-      location: values.location,
-      sortBy: values.sortBy,
-      dateFrom:
-        values.dateRange && moment(values.dateRange[0]).format('YYYY-MM-DD'),
-      dateTo:
-        values.dateRange && moment(values.dateRange[1]).format('YYYY-MM-DD'),
-      bidFrom: values.bidFrom,
-      bidTo: values.bidTo,
+    const {
       project_type,
+      getCurrentProjectsBegin,
+      setSearchPayload,
+      selectedTab,
+    } = props;
+
+    const searchRequest = {
+      projectName: values.projectName ? values.projectName : '',
+      location: values.location ? values.location : '',
+      sortBy: values.sortBy,
+      dateFrom: values.dateRange
+        ? moment(values.dateRange[0]).format('YYYY-MM-DD')
+        : '',
+      dateTo: values.dateRange
+        ? moment(values.dateRange[1]).format('YYYY-MM-DD')
+        : '',
+      bidFrom: values.bidFrom ? values.bidFrom : 0,
+      bidTo: values.bidTo ? values.bidTo : 0,
+      project_type: project_type ? project_type : '',
       pageNo: 1,
     };
-    console.log('Received values of form: ', searchRequest);
+    setSearchPayload(searchRequest, selectedTab);
+    getCurrentProjectsBegin(searchRequest);
   };
 
   const handleChange = (value) => {
@@ -174,6 +183,8 @@ const SearchComponent = (props) => {
             <Button
               style={{ margin: '0 8px' }}
               onClick={() => {
+                const { resetSearchPayload, selectedTab } = props;
+                resetSearchPayload(selectedTab);
                 form.resetFields();
               }}
             >

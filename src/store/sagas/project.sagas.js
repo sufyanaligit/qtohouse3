@@ -1,20 +1,37 @@
 import { all, call, put, takeEvery, select } from 'redux-saga/effects';
-import { getSearchPayload } from '../selectors/project.selectors';
-import ACTIONS from '../qto.constants';
+import {
+  getSearchPayload,
+  getSelectedTab,
+} from '../selectors/project.selectors';
+
+import ACTIONS, { PROJECT_TYPE } from '../qto.constants';
 import { projectActions } from '../actions';
 import API from '../services';
 
 //const delay = (time) => new Promise((resolve) => setTimeout(resolve, time));
-function* getProjects() {
+function* getCurrentProjects({ payload }) {
   try {
     yield put(projectActions.getCurrentProjectsList.pending);
-    const searchPayload = yield select(getSearchPayload);
+    const searchPayload = payload ? payload : yield select(getSearchPayload);
     const response = yield call(API.getProjects, searchPayload);
     yield put(projectActions.getCurrentProjectsList.success(response.data));
-    yield put(projectActions.getFeaturedProjectsList.success(response.data));
-    yield put(projectActions.getAllProjectsList.success(response.data));
+    // yield put(projectActions.getFeaturedProjectsList.success(response.data));
+    //yield put(projectActions.getAllProjectsList.success(response.data));
   } catch (error) {
     yield put(projectActions.getCurrentProjectsList.error(error));
+  }
+}
+function* getFeaturedProjects({ payload }) {
+  try {
+    yield put(projectActions.getFeaturedProjectsList.pending);
+    let searchPayload = payload ? payload : yield select(getSearchPayload);
+    searchPayload = searchPayload.set('project_type', PROJECT_TYPE.FEATURED);
+    const response = yield call(API.getProjects, searchPayload);
+    //yield put(projectActions.getFeaturedProjectsList.success(response.data));
+    yield put(projectActions.getFeaturedProjectsList.success(response.data));
+    //yield put(projectActions.getAllProjectsList.success(response.data));
+  } catch (error) {
+    yield put(projectActions.getFeaturedProjectsList.error(error));
   }
 }
 
@@ -79,9 +96,28 @@ function* approvePendingStatus({ payload }) {
   }
 }
 
+function* performLazyLoadSearch({ payload }) {
+  const selectedTab = yield select(getSelectedTab);
+  try {
+    yield put(projectActions.performLazyLoadSearch.pending(selectedTab));
+    const searchPayload = payload;
+    const response = yield call(API.getProjects, searchPayload);
+    yield put(
+      projectActions.performLazyLoadSearch.success(
+        response.data,
+        payload,
+        selectedTab
+      )
+    );
+  } catch (error) {
+    yield put(projectActions.performLazyLoadSearch.error(error, selectedTab));
+  }
+}
+
 export default function* rootSaga() {
   yield all([
-    takeEvery(ACTIONS.GET_CURRENT_PROJECTS_LIST_BEGIN, getProjects),
+    takeEvery(ACTIONS.GET_CURRENT_PROJECTS_LIST_BEGIN, getCurrentProjects),
+    takeEvery(ACTIONS.GET_FEATURED_PROJECTS_LIST_BEGIN, getFeaturedProjects),
     takeEvery(
       ACTIONS.GET_CURRENT_PROJECTS_DETAILS_BEGIN,
       getCurrentProjectDetails
@@ -91,5 +127,6 @@ export default function* rootSaga() {
     takeEvery(ACTIONS.VALIDATE_USER_SESSION_BEGIN, validateUserSession),
     takeEvery(ACTIONS.GET_USER_PENDING_APPROVAL_BEGIN, getPendingUserApprovals),
     takeEvery(ACTIONS.APPROVE_PENDING_STATUS_BEGIN, approvePendingStatus),
+    takeEvery(ACTIONS.PERFORM_LAZY_LOAD_SEARCH_BEGIN, performLazyLoadSearch),
   ]);
 }

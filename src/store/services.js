@@ -5,8 +5,7 @@ const BASE_URL = 'http://qtohousemvcwebdev.qto.house';
 
 const API = {
   getProjects: (searchPayload) => {
-    debugger;
-    const data = { projectObj: JSON.stringify(searchPayload.toJS()) };
+    const data = { projectObj: JSON.stringify(searchPayload) };
     return axios.post(`${BASE_URL}/Qtohouse/GetProject`, qs.stringify(data));
   },
   getCurrentProjectDetails: (id) => {

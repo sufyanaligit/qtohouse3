@@ -1,40 +1,63 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tabs } from 'antd';
 import CurrentProjects from '../CurrentProjects';
 import FeaturedProjects from '../FeaturedProjects';
 import Search from '../SearchComponent';
 import AllProjects from '../AllProjects';
+import { TABS } from '../../store/qto.constants';
 
 const { TabPane } = Tabs;
 
 const Projects = (props) => {
+  const [selectedTab, setSelectedProjectTab] = useState('currentProjects');
   const {
-    getProjectsListBegin,
-    isLoading,
+    getCurrentProjectsBegin,
+    getFeatureProjectsBegin,
+    getAllProjectsList,
     currentProjects,
     featuredProjects,
     allProjects,
+    currentSelectedTab,
   } = props;
 
   useEffect(() => {
-    getProjectsListBegin();
-  }, [getProjectsListBegin]);
+    if (!currentProjects.length && selectedTab === TABS.CURRENT_PROJECTS)
+      getCurrentProjectsBegin();
+    if (!featuredProjects.length && selectedTab === TABS.FEATURED_PROJECTS)
+      getFeatureProjectsBegin();
+    if (selectedTab === TABS.ALL_PROJECTS) getAllProjectsList();
+  }, [
+    currentProjects.length,
+    featuredProjects.length,
+    getCurrentProjectsBegin,
+    getFeatureProjectsBegin,
+    getAllProjectsList,
+    selectedTab,
+  ]);
 
   const callback = (key) => {
-    console.log(key);
+    const { setSelectedTab } = props;
+    setSelectedProjectTab(key);
+    setSelectedTab(key);
   };
   return (
-    <Tabs onChange={callback} type='card' centered size='large'>
-      <TabPane tab='CURRENT PROJECTS' key='1'>
+    <Tabs
+      activeKey={currentSelectedTab}
+      onChange={callback}
+      type='card'
+      centered
+      size='large'
+    >
+      <TabPane tab='CURRENT PROJECTS' key='currentProjects'>
         <Search project_type='current' />
-        <CurrentProjects data={currentProjects} isLoading={isLoading} />
+        <CurrentProjects data={currentProjects} />
       </TabPane>
-      <TabPane tab='FEATURED PROJECTS' key='2'>
-        <FeaturedProjects data={featuredProjects} isLoading={isLoading} />
-        {/* <h1>FeaturedProjects to be displayed here</h1> */}
+      <TabPane tab='FEATURED PROJECTS' key='featuredProjects'>
+        <Search project_type='feature' />
+        <FeaturedProjects data={featuredProjects} />
       </TabPane>
-      <TabPane tab='ALL PROJECTS' key='3'>
-        <AllProjects data={allProjects} isLoading={isLoading} />
+      <TabPane tab='ALL PROJECTS' key='allProjects'>
+        <AllProjects data={allProjects} />
       </TabPane>
     </Tabs>
   );
