@@ -4,6 +4,7 @@ import {
   getCurrentProjectsBegin,
   setSearchPayload,
   resetSearchPayload,
+  getAllProjectsList,
 } from '../../store/actions/project.actions';
 import { getSelectedTab } from '../../store/selectors/project.selectors';
 
@@ -15,5 +16,6 @@ const mapDispatchToProps = {
   getCurrentProjectsBegin,
   setSearchPayload,
   resetSearchPayload,
+  getAllProjectsList,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

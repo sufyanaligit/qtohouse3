@@ -46,7 +46,7 @@ export const FETCH_STATUS = {
   SUCCESS: 'SUCCESS',
   ERROR: 'ERROR',
 };
-export const DEFAULT_SEARCH_CRITERIA = {
+export const DEFAULT_SEARCH_CURRENT_CRITERIA = {
   projectName: '',
   location: '',
   sortBy: 'bid_date-DESC',
@@ -55,6 +55,28 @@ export const DEFAULT_SEARCH_CRITERIA = {
   bidFrom: 0,
   bidTo: 0,
   project_type: 'current',
+  pageNo: 1,
+};
+export const DEFAULT_SEARCH_FEATURED_CRITERIA = {
+  projectName: '',
+  location: '',
+  sortBy: 'bid_date-DESC',
+  dateFrom: '',
+  dateTo: '',
+  bidFrom: 0,
+  bidTo: 0,
+  project_type: 'feature',
+  pageNo: 1,
+};
+export const DEFAULT_SEARCH_ALL_CRITERIA = {
+  projectName: '',
+  location: '',
+  sortBy: 'bid_date-DESC',
+  dateFrom: '',
+  dateTo: '',
+  bidFrom: 0,
+  bidTo: 0,
+  project_type: 'allProjects',
   pageNo: 1,
 };
 

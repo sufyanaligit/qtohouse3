@@ -1,15 +1,19 @@
 import { fromJS, List } from 'immutable';
-import ACTIONS, { DEFAULT_SEARCH_CRITERIA } from '../qto.constants';
+import ACTIONS, {
+  DEFAULT_SEARCH_CURRENT_CRITERIA,
+  DEFAULT_SEARCH_FEATURED_CRITERIA,
+  DEFAULT_SEARCH_ALL_CRITERIA,
+} from '../qto.constants';
 import { getSelectedTabValue } from '../../utils/utils';
 
 export default (
   state = fromJS({
     currentProjects: {
-      searchCriteria: DEFAULT_SEARCH_CRITERIA,
+      searchCriteria: DEFAULT_SEARCH_CURRENT_CRITERIA,
     },
-    allProjects: {},
+    allProjects: { searchCriteria: DEFAULT_SEARCH_ALL_CRITERIA },
     featuredProjects: {
-      searchCriteria: DEFAULT_SEARCH_CRITERIA,
+      searchCriteria: DEFAULT_SEARCH_FEATURED_CRITERIA,
     },
     loading: false,
     isLoginModal: false,
@@ -46,14 +50,29 @@ export default (
         );
     }
     case ACTIONS.GET_ALL_PROJECTS_LIST: {
+      const payload = state.getIn(['allProjects', 'searchCriteria']);
       const currentProjects = state.getIn(['currentProjects', 'data']) || [];
       const featuredProjects = state.getIn(['featuredProjects', 'data']) || [];
-      const allProjects = currentProjects.concat(featuredProjects);
+      const allProjects = fromJS(currentProjects.concat(featuredProjects));
+      const filteredProjects = allProjects.filter((item, index) => {
+        return item
+          .get('NME')
+          .toLowerCase()
+          .indexOf(payload.get('projectName').toLowerCase()) !== -1
+          ? item.get('NME')
+          : '' &&
+            item
+              .get('LOC')
+              .toLowerCase()
+              .indexOf(payload.get('location').toLowerCase()) !== -1
+          ? item.get('LOC')
+          : '';
+      });
 
       return state
         .setIn(['allProjects', 'loading'], false)
-        .setIn(['allProjects', 'data'], allProjects)
-        .setIn(['allProjects', 'allProjectsCount'], allProjects.length);
+        .setIn(['allProjects', 'data'], filteredProjects.toJS())
+        .setIn(['allProjects', 'allProjectsCount'], allProjects.size);
     }
 
     case ACTIONS.GET_CURRENT_PROJECTS_LIST.ERROR: {
@@ -173,7 +192,7 @@ export default (
     case ACTIONS.RESET_SEARCH_PAYLOAD: {
       const { selectedTab } = action;
       const currentTab = getSelectedTabValue(selectedTab);
-      const searchPayload = DEFAULT_SEARCH_CRITERIA;
+      const searchPayload = DEFAULT_SEARCH_CURRENT_CRITERIA;
       searchPayload.project_type = currentTab;
       return state.setIn(
         [selectedTab, 'searchCriteria'],

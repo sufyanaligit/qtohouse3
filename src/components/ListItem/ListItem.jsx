@@ -18,7 +18,7 @@ const ListItem = (props) => {
       const { performLazyLoadSearchBegin } = props;
       let { searchPayload } = props;
       if (data.length >= totalRecords) {
-        message.warning('Infinite List loaded all');
+        message.warning('Reached at the end', 2);
         setHasMore(false);
       } else {
         let pageNo = searchPayload.get('pageNo');

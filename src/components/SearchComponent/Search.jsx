@@ -12,6 +12,7 @@ import {
   InputNumber,
 } from 'antd';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { TABS } from '../../store/qto.constants';
 import './Search.scss';
 
 const { Option } = Select;
@@ -25,6 +26,7 @@ const SearchComponent = (props) => {
     const {
       project_type,
       getCurrentProjectsBegin,
+      getAllProjectsList,
       setSearchPayload,
       selectedTab,
     } = props;
@@ -45,7 +47,11 @@ const SearchComponent = (props) => {
       pageNo: 1,
     };
     setSearchPayload(searchRequest, selectedTab);
-    getCurrentProjectsBegin(searchRequest);
+    if (selectedTab === TABS.ALL_PROJECTS) {
+      getAllProjectsList();
+    } else {
+      getCurrentProjectsBegin(searchRequest);
+    }
   };
 
   const handleChange = (value) => {

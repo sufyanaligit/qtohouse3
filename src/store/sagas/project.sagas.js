@@ -15,8 +15,6 @@ function* getCurrentProjects({ payload }) {
     const searchPayload = payload ? payload : yield select(getSearchPayload);
     const response = yield call(API.getProjects, searchPayload);
     yield put(projectActions.getCurrentProjectsList.success(response.data));
-    // yield put(projectActions.getFeaturedProjectsList.success(response.data));
-    //yield put(projectActions.getAllProjectsList.success(response.data));
   } catch (error) {
     yield put(projectActions.getCurrentProjectsList.error(error));
   }
@@ -27,9 +25,7 @@ function* getFeaturedProjects({ payload }) {
     let searchPayload = payload ? payload : yield select(getSearchPayload);
     searchPayload = searchPayload.set('project_type', PROJECT_TYPE.FEATURED);
     const response = yield call(API.getProjects, searchPayload);
-    //yield put(projectActions.getFeaturedProjectsList.success(response.data));
     yield put(projectActions.getFeaturedProjectsList.success(response.data));
-    //yield put(projectActions.getAllProjectsList.success(response.data));
   } catch (error) {
     yield put(projectActions.getFeaturedProjectsList.error(error));
   }
