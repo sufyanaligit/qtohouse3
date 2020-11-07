@@ -18,6 +18,7 @@ import {
 } from '@ant-design/icons';
 import { isObjectEmpty } from '../../utils/utils';
 import Loader from '../Loader';
+import UploadImage from '../UploadImage';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -521,7 +522,9 @@ const AddProject = (props) => {
             }}
           </Form.List>
         </Form.Item>
-
+        <Form.Item label='Upload Image'>
+          <UploadImage />
+        </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type='primary' htmlType='submit' loading={loading}>
             Register

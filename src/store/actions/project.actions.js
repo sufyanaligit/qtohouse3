@@ -254,3 +254,10 @@ export const resetSearchPayload = (selectedTab) => {
     selectedTab,
   };
 };
+
+export const uploadImage = (data) => {
+  return {
+    type: ACTIONS.UPLOAD_IMAGE,
+    data,
+  };
+};

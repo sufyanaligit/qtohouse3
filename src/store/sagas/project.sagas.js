@@ -110,6 +110,13 @@ function* performLazyLoadSearch({ payload }) {
   }
 }
 
+function* uploadImage(data) {
+  try {
+    const searchPayload = data;
+    const response = yield call(API.uploadImage, searchPayload);
+  } catch (error) {}
+}
+
 export default function* rootSaga() {
   yield all([
     takeEvery(ACTIONS.GET_CURRENT_PROJECTS_LIST_BEGIN, getCurrentProjects),
@@ -124,5 +131,6 @@ export default function* rootSaga() {
     takeEvery(ACTIONS.GET_USER_PENDING_APPROVAL_BEGIN, getPendingUserApprovals),
     takeEvery(ACTIONS.APPROVE_PENDING_STATUS_BEGIN, approvePendingStatus),
     takeEvery(ACTIONS.PERFORM_LAZY_LOAD_SEARCH_BEGIN, performLazyLoadSearch),
+    takeEvery(ACTIONS.UPLOAD_IMAGE, uploadImage),
   ]);
 }

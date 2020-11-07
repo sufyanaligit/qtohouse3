@@ -64,6 +64,24 @@ const API = {
       )
       .then((res) => res.data);
   },
+  uploadImage: (file) => {
+    debugger;
+    let data = new FormData();
+    const fileBlob = new Blob([JSON.stringify({})], {
+      type: 'application/json',
+    });
+    data.append('file', fileBlob, file.data.name);
+
+    return axios
+      .post(`${BASE_URL}/uploadImage`, data, {
+        headers: {
+          accept: 'application/json',
+          'Accept-Language': 'en-US,en;q=0.8',
+          'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
+        },
+      })
+      .then((res) => res.data);
+  },
 };
 
 export default API;
