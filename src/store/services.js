@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
-const BASE_URL = 'http://qtohousemvcwebdev.qto.house';
-// const BASE_URL = 'http://qtohousemvcweb.qto.house';
+//const BASE_URL = 'http://localhost/DFW.WEBFRONTEND';
+const BASE_URL = 'http://qtohousemvcweb.qto.house';
 
 const API = {
   getProjects: (searchPayload) => {
@@ -64,16 +64,13 @@ const API = {
       )
       .then((res) => res.data);
   },
-  uploadImage: (file) => {
+  uploadImage: (fileObj) => {
     debugger;
-    let data = new FormData();
-    const fileBlob = new Blob([JSON.stringify({})], {
-      type: 'application/json',
-    });
-    data.append('file', fileBlob, file.data.name);
+    let data = new FormData();    
+    data.append(fileObj.data.name,fileObj.data);
 
     return axios
-      .post(`${BASE_URL}/uploadImage`, data, {
+      .post(`${BASE_URL}/Qtohouse/UploadImage`, data, {
         headers: {
           accept: 'application/json',
           'Accept-Language': 'en-US,en;q=0.8',
