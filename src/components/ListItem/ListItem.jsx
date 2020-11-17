@@ -36,7 +36,6 @@ const ListItem = (props) => {
   const handleOnClickEditProject = (project_id) => {
     history.push(`editProject/${project_id}`);
   };
-
   return (
     <InfiniteScroll
       initialLoad={false}
@@ -60,7 +59,9 @@ const ListItem = (props) => {
         renderItem={(item) => (
           <List.Item
             key={item.title}
-            extra={<img width={272} alt='logo' src={item.LOGO_URL} />}
+            extra={
+              <img width={272} alt='logo' src={`http://${item.LOGO_URL}`} />
+            }
           >
             <List.Item.Meta
               title={
