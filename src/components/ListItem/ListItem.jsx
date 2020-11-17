@@ -60,13 +60,7 @@ const ListItem = (props) => {
         renderItem={(item) => (
           <List.Item
             key={item.title}
-            extra={
-              <img
-                width={272}
-                alt='logo'
-                src='https://embed.widencdn.net/img/lendlease/oizi70yizs/x650px/1000%20South%20Clark_0001_PL.jpeg?u=94eilc'
-              />
-            }
+            extra={<img width={272} alt='logo' src={item.LOGO_URL} />}
           >
             <List.Item.Meta
               title={
