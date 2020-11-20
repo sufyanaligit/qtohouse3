@@ -143,7 +143,7 @@ const PendingApprovals = (props) => {
       approveIndicator: 0,
       userId,
       loginId,
-      activeIndicator: 1,
+      activeIndicator: +e.target.checked,
     };
     approvePendingStatusBegin(data);
   };
@@ -217,6 +217,7 @@ const PendingApprovals = (props) => {
           <Tooltip title='inactive'>
             <Checkbox
               disabled={!IS_PNDG_APPR}
+              checked={ACT_IND}
               onChange={(e) => onChange(e, data.USER_ID, data.LOGN_ID)}
             ></Checkbox>
           </Tooltip>
