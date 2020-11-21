@@ -105,7 +105,7 @@ const AddProject = (props) => {
 
   const setFields = (projectDetails) => {
     const csiDivisions = [];
-    projectDetails.CsiDivision.map((value) => {
+    projectDetails?.CsiDivision?.map((value) => {
       const csiDivision = {
         division_id: value.CSI_DVSN_ID,
         divNo: value.DVSN_NO,
@@ -166,31 +166,31 @@ const AddProject = (props) => {
         form={form}
         name='addProject'
         onFinish={onFinish}
-        // initialValues={{
-        //   name: projectDetails.PRJT_NME && projectDetails.PRJT_NME,
-        //   description: 'Testing the scenario 3',
-        //   borough: 'Test',
-        //   city: 'Lahore',
-        //   state: 'Punjab',
-        //   location: 'Location',
-        //   bidAmount: '12',
-        //   bidDate: moment(new Date()),
-        //   completionTime: moment(new Date()),
-        //   projectType: 'feature',
-        //   solicitation: 'Test',
-        //   bidFrom: '1',
-        //   bidTo: '2',
-        //   biddingMethod: 'Bidding Method',
-        //   biddingLocation: 'Bidding Location',
-        //   bidPhase: 'Bid Phase',
-        //   liquidatedDamages: 'Liquidated Damages',
-        //   preBidMeeting: 'Pre Bid Meeting',
-        //   notes: 'Notes',
-        //   csiDivisions: [
-        //     { divNo: '1', divName: 'Testing' },
-        //     { divNo: 2, divName: 'Testing 3' },
-        //   ],
-        // }}
+        initialValues={{
+          name: projectDetails.PRJT_NME && projectDetails.PRJT_NME,
+          description: 'Testing the scenario 3',
+          borough: 'Test',
+          city: 'Lahore',
+          state: 'Punjab',
+          location: 'Location',
+          bidAmount: '12',
+          bidDate: moment(new Date()),
+          completionTime: moment(new Date()),
+          projectType: 'feature',
+          solicitation: 'Test',
+          bidFrom: '1',
+          bidTo: '2',
+          biddingMethod: 'Bidding Method',
+          biddingLocation: 'Bidding Location',
+          bidPhase: 'Bid Phase',
+          liquidatedDamages: 'Liquidated Damages',
+          preBidMeeting: 'Pre Bid Meeting',
+          notes: 'Notes',
+          csiDivisions: [
+            { divNo: '1', divName: 'Testing' },
+            { divNo: 2, divName: 'Testing 3' },
+          ],
+        }}
         scrollToFirstError={true}
       >
         <Form.Item
