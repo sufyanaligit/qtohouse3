@@ -52,8 +52,7 @@ const Projects = (props) => {
         <Search project_type='current' />
         <CurrentProjects data={currentProjects} />
       </TabPane>
-      <TabPane tab='FEATURED PROJECTS' key='featuredProjects'>
-        <Search project_type='feature' />
+      <TabPane tab='FEATURED PROJECTS' key='featuredProjects'>        
         <FeaturedProjects data={featuredProjects} />
       </TabPane>
       <TabPane tab='ALL PROJECTS' key='allProjects'>

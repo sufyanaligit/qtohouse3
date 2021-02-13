@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
-//const BASE_URL = 'http://localhost/DFW.WEBFRONTEND';
-const BASE_URL = 'http://qtohousemvcwebdev.qto.house';
+const BASE_URL = 'http://localhost/DFW.WEBFRONTEND';
+// const BASE_URL = 'http://qtohousemvcwebdev.qto.house';
 
 const API = {
   getProjects: (searchPayload) => {

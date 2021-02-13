@@ -106,7 +106,7 @@ const Footer = (props) => {
             </div>
           </div>
           <div className='copyright text-center w-100'>
-            <p className='mb-0'>© 2020 QTO HOUSE - ALL RIGHTS RESERVED. </p>
+            <p className='mb-0'>© 2021 QTO HOUSE - ALL RIGHTS RESERVED. </p>
           </div>
         </div>
       </div>

@@ -126,7 +126,7 @@ export default (
       const list = fromJS(state.getIn(['pendingApprovals', 'pendingUserList']));
 
       const pendingApprovalList = list.update(
-        list.findIndex((item) => {
+        list.findIndex((item, index) => {
           return (
             item.get('ADMN_IND') === false &&
             item.get('APPR_IND') === false &&
@@ -136,7 +136,7 @@ export default (
         (item) => {
           return item
             .set('APPR_IND', true)
-            .set('ACT_IND', !!data.activeIndicator)
+            .set('ACT_IND', !!data.activeIndicator === false ? false : true)
             .set('IS_PNDG_APPR', true);
         }
       );
