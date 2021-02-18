@@ -143,16 +143,16 @@ const HeaderTitle = (props) => {
                 <div className='row'>
                   <div className='col-md-12 col-sm-12 col-lg-5'>
                     <form className='header-search position-relative'>
-                      <input type='text' placeholder='Search projects' />
+                      {/* <input type='text' placeholder='Search projects' />
                       <button type='submit'>
                         <i className='fas fa-search'></i>
-                      </button>
+                      </button> */}
                     </form>
                   </div>
                   <div className='col-md-12 col-sm-12 col-lg-7'>
                     <nav>
-                      <ul className='d-inline-flex mb-0 list-unstyled'>
-                        <li>
+                      <ul className='d-inline-flex mb-0 list-unstyled' style={{fontWeight:'bold'}}>
+                        <li style={{color:'rgb(224, 153, 0)'}}>
                           <NavLink
                             className='nav-link'
                             activeClassName='active'
@@ -161,7 +161,7 @@ const HeaderTitle = (props) => {
                             Projects
                           </NavLink>
                         </li>
-                        <li>
+                        {/* <li>
                           <NavLink
                             className='nav-link'
                             activeClassName='active'
@@ -178,13 +178,13 @@ const HeaderTitle = (props) => {
                           >
                             Sample Projects
                           </NavLink>
-                        </li>
+                        </li> */}
                         {/* <li>
                           <a href={() => false} title="">
                             Coverage Area
                           </a>
                         </li> */}
-                        <li>
+                        <li style={{color:'rgb(224, 153, 0)'}}>
                           <NavLink
                             className='nav-link'
                             activeClassName='active'
@@ -193,7 +193,7 @@ const HeaderTitle = (props) => {
                             About Us
                           </NavLink>
                         </li>
-                        <li>
+                        <li style={{color:'rgb(224, 153, 0)'}}>
                           <NavLink
                             className='nav-link'
                             activeClassName='active'
@@ -204,7 +204,7 @@ const HeaderTitle = (props) => {
                         </li>
                         {isAdminLoggedIn && (
                           <>
-                            <li>
+                            <li style={{color:'rgb(224, 153, 0)'}}>
                               <NavLink
                                 className='nav-link'
                                 activeClassName='active'
@@ -213,7 +213,7 @@ const HeaderTitle = (props) => {
                                 Add Project
                               </NavLink>
                             </li>
-                            <li>
+                            <li style={{color:'rgb(224, 153, 0)'}}>
                               <NavLink
                                 className='nav-link'
                                 activeClassName='active'

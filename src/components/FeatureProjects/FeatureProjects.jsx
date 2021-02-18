@@ -8,7 +8,7 @@ const FeatureProjects = (props) => {
       <div className='quantitytakseoff w-100 shape-left-pattern position-relative'>
         <div className='container'>
           <div className='sec-title position-relative text-center w-100'>
-            <h2 className='mb-0'>
+            <h2 className='mb-0' style={{color:'rgb(224, 153, 0)'}}>
               <strong>Feature Projects</strong>
             </h2>
           </div>

@@ -6,7 +6,7 @@ const ListYourSelf = (props) => {
       <div className='listyourself w-100 pb-80 position-relative'>
         <div className='container'>
           <div className='sec-title position-relative text-center w-100'>
-            <h2 className='mb-0'>
+            <h2 className='mb-0' style={{color:'rgb(224, 153, 0)'}}>
               <strong>List Yourself</strong> With Us
             </h2>
           </div>

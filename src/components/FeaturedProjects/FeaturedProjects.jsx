@@ -5,18 +5,19 @@ import './FeaturedProjects.scss';
 
 const FeaturedProjects = (props) => {  
 
+  
   return (
     
   <div className='current-projects-container'>
     <div className='demo-infinite-container'>
-      <div className='content-wrapper ng-scope render-active' bind-tab-content>
+      <div className='content-wrapper ng-scope render-active' bind-tab-content="true">
         <section className='content-tiles grid'>
             <div className='container'>
               <div className='grid-row'>
                 <div className='grid-item grid-item-1-3' show-item-mobile=''>
                     <div className='grid-item-inner' showonmobile='true' content-tile-clickable='true'>
-                    <div class='grid-item-content'>
-                        <div class='grid-item-content-wrapper bottom left'>
+                    <div className='grid-item-content'>
+                        <div className='grid-item-content-wrapper bottom left'>
                           <h2 style={{color:'#e09900'}}>Bedford Park Boulevard Station</h2>                                                  
                         </div>
                       </div>

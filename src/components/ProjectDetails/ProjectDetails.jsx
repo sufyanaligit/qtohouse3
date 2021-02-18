@@ -20,9 +20,10 @@ const ProjectDetails = (props) => {
       </div>
     );
   return (
-    <div className='project-details-container'>
-      <h1>Project Details</h1>
-      <div>
+    <div className='project-details-container' >
+      <h1 style={{fontFamily:'Open Sans,sans-serif', color:'rgb(224, 153, 0)', fontSize:'large', fontWeight:'bold'}}>Project Details</h1>
+      <div >
+
         <Descriptions
           column={2}
           bordered
@@ -30,35 +31,35 @@ const ProjectDetails = (props) => {
           size={'medium'}
           // extra={<Button type="primary">Edit</Button>}
         >
-          <Descriptions.Item label='Solicitation'>
+          <Descriptions.Item label='Solicitation' style={{fontFamily:'Open Sans,sans-serif', color:'rgb(224, 153, 0)', fontSize:'14px'}}>
             {projectDetails.SLTN}
           </Descriptions.Item>
-          <Descriptions.Item label='Bid Range'>
+          <Descriptions.Item label='Bid Range' style={{fontFamily:'Open Sans,sans-serif', color:'rgb(224, 153, 0)', fontSize:'14px'}}>
             {`$${projectDetails.BID_FROM}K-$${projectDetails.BID_TO}M`}
           </Descriptions.Item>
-          <Descriptions.Item label='Bidding Method'>
+          <Descriptions.Item label='Bidding Method' style={{fontFamily:'Open Sans,sans-serif', color:'rgb(224, 153, 0)', fontSize:'14px'}}>
             {projectDetails.BID_MTHD}
           </Descriptions.Item>
-          <Descriptions.Item label='Location'>
+          <Descriptions.Item label='Location' style={{fontFamily:'Open Sans,sans-serif', color:'rgb(224, 153, 0)', fontSize:'14px'}}>
             {projectDetails.LOC}
           </Descriptions.Item>
-          <Descriptions.Item label='Bid Phase'>
+          <Descriptions.Item label='Bid Phase' style={{fontFamily:'Open Sans,sans-serif', color:'rgb(224, 153, 0)', fontSize:'14px'}}>
             {projectDetails.BID_PHAS}
           </Descriptions.Item>
-          <Descriptions.Item label='Completion Time'>
+          <Descriptions.Item label='Completion Time' style={{fontFamily:'Open Sans,sans-serif', color:'rgb(224, 153, 0)', fontSize:'14px'}}>
             {moment(projectDetails.CMPL_DTE).format('MMM-DD-YYYY')}
           </Descriptions.Item>
-          <Descriptions.Item label='Liquidated Damages'>
+          <Descriptions.Item label='Liquidated Damages' style={{fontFamily:'Open Sans,sans-serif', color:'rgb(224, 153, 0)', fontSize:'14px'}}>
             {projectDetails.LQUD_DMGS}
           </Descriptions.Item>
-          <Descriptions.Item label='Pre-bid Meeting'>
+          <Descriptions.Item label='Pre-bid Meeting' style={{fontFamily:'Open Sans,sans-serif', color:'rgb(224, 153, 0)', fontSize:'14px'}}>
             {projectDetails.PRE_BID_METG}
           </Descriptions.Item>
-          <Descriptions.Item label='Notes'>
+          <Descriptions.Item label='Notes' style={{fontFamily:'Open Sans,sans-serif', color:'rgb(224, 153, 0)', fontSize:'14px'}}>
             {projectDetails.NOTE}
           </Descriptions.Item>
 
-          <Descriptions.Item label='CSI Division'>
+          <Descriptions.Item label='CSI Division' style={{fontFamily:'Open Sans,sans-serif', color:'rgb(224, 153, 0)', fontSize:'14px'}}>
             {projectDetails.CsiDivision &&
               projectDetails.CsiDivision.map((csiDivision, index) => {
                 return (
