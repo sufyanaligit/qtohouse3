@@ -1,12 +1,12 @@
 {
-  "name": "qto-app",
+  "name": "qtohouse3",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "antd": "^4.6.2",
+    "antd": "4.6.2",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "form-data": "^3.0.0",
